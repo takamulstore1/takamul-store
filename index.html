@@ -655,6 +655,14 @@
             padding: 10px;
         }
 
+        .product-card .product-image-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+            background: #f8fafc;
+        }
+
         .product-card:hover .product-image-wrapper img {
             transform: scale(1.03);
         }
@@ -861,13 +869,29 @@
             align-items: center;
         }
 
-        .cart-item img {
+        .cart-item .cart-item-media {
             width: 60px;
             height: 60px;
-            object-fit: contain;
-            border-radius: 8px;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item .cart-item-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item .cart-item-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .cart-item-info {
@@ -1978,12 +2002,30 @@
             return hexColor;
         }
 
+        // دالة للتحقق إذا كان الرابط فيديو - محسنة
+        function isVideoUrl(url) {
+            if (!url) return false;
+            const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.m4v'];
+            const urlLower = url.toLowerCase();
+            // التحقق من امتداد الملف
+            for (const ext of videoExtensions) {
+                if (urlLower.endsWith(ext)) {
+                    return true;
+                }
+            }
+            // التحقق من وجود كلمة video في الرابط
+            if (urlLower.includes('video') || urlLower.includes('mp4') || urlLower.includes('webm')) {
+                return true;
+            }
+            return false;
+        }
+
         // ============================================================
         // بيانات المنتجات (محدثة مع مقاسات وألوان)
         // ============================================================
         const allProducts = [
             // ===== ملابس =====
-            { id: 1, name: "تيشرت قطني رجالي", price: 250, oldPrice: 350, discount: "29%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://g.top4top.io/p_38726i9uw0.jpg", freeShipping: true, description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c"] },
+            { id: 1, name: "تيشرت قطني رجالي", price: 250, oldPrice: 350, discount: "29%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://a.top4top.io/m_3892lappb1.mp4", freeShipping: true, description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c"] },
             { id: 2, name: "تيشرت رياضي", price: 200, oldPrice: 280, discount: "28%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.5, reviews: 95, image: "https://i.imgpeek.com/sCYts4cTeWgc", freeShipping: true, description: "تيشرت رياضي خفيف الوزن.", sizes: ["S", "M", "L", "XL"], colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] },
             { id: 3, name: "بنطلون جينز رجالي", price: 450, oldPrice: 600, discount: "25%", category: "ملابس", subcategory: "بناطيل", rating: 4.6, reviews: 80, image: "https://i.imgpeek.com/bGy-kKIf0exu", freeShipping: false, description: "بنطلون جينز متين وعصري.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#1a1a2e", "#2c3e50", "#34495e"] },
             { id: 4, name: "بنطلون كارجو", price: 380, oldPrice: 500, discount: "24%", category: "ملابس", subcategory: "بناطيل", rating: 4.4, reviews: 60, image: "https://i.imgpeek.com/Q9gbPNzoH_j8", freeShipping: true, description: "بنطلون كارجو عملي ومريح.", sizes: ["M", "L", "XL", "XXL"], colors: ["#5d4037", "#33691e", "#3e2723"] },
@@ -2307,10 +2349,25 @@
                         `<span class="free-shipping">🚚 التوصيل على حسب المحافظه</span>` : '';
                     const primeBadge = product.rating >= 4.8 ? `<span class="prime-badge">⭐ Prime</span>` : '';
 
+                    const isVideo = isVideoUrl(product.image);
+                    let mediaHTML = '';
+                    if (isVideo) {
+                        mediaHTML = `
+                            <video autoplay muted loop playsinline>
+                                <source src="${product.image}" type="video/mp4">
+                                متصفحك لا يدعم عرض الفيديو
+                            </video>
+                        `;
+                    } else {
+                        mediaHTML = `
+                            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x220?text=Takamul'">
+                        `;
+                    }
+
                     container.innerHTML += `
                         <div class="product-card" onclick="openProductDetails(${product.id})">
                             <div class="product-image-wrapper">
-                                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x220?text=Takamul'">
+                                ${mediaHTML}
                                 ${discountBadge}
                             </div>
                             <div class="product-info">
@@ -2461,7 +2518,8 @@
 
             const colorName = color ? getColorName(color) : 'غير محدد';
 
-            const existingIndex = cart.findIndex(item => item.id === productId && item.selectedSize === size && item.selectedColor === colorName);
+            const existingIndex = cart.findIndex(item => item.id === productId && item.selectedSize === size && item
+                .selectedColor === colorName);
             if (existingIndex !== -1) {
                 cart[existingIndex].quantity++;
             } else {
@@ -2533,9 +2591,25 @@
                 const colorDisplay = item.selectedColor && item.selectedColor !== 'غير محدد' ?
                     ` | 🎨 لون: ${item.selectedColor}` : '';
 
+                const isVideo = isVideoUrl(item.image);
+                let mediaHTML = '';
+                if (isVideo) {
+                    mediaHTML = `
+                        <video autoplay muted loop playsinline>
+                            <source src="${item.image}" type="video/mp4">
+                        </video>
+                    `;
+                } else {
+                    mediaHTML = `
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/60x60?text=Takamul'">
+                    `;
+                }
+
                 cartItems.innerHTML += `
                     <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/60x60?text=Takamul'">
+                        <div class="cart-item-media">
+                            ${mediaHTML}
+                        </div>
                         <div class="cart-item-info">
                             <h4>${item.name}</h4>
                             <div class="cart-item-size">${sizeDisplay} ${colorDisplay}</div>
@@ -2553,7 +2627,8 @@
         }
 
         function changeQuantity(id, change, size, color) {
-            const index = cart.findIndex(item => item.id === id && item.selectedSize === size && item.selectedColor === color);
+            const index = cart.findIndex(item => item.id === id && item.selectedSize === size && item.selectedColor ===
+            color);
             if (index === -1) return;
             cart[index].quantity += change;
             if (cart[index].quantity <= 0) cart.splice(index, 1);
@@ -2563,7 +2638,8 @@
         }
 
         function removeFromCart(id, size, color) {
-            const index = cart.findIndex(item => item.id === id && item.selectedSize === size && item.selectedColor === color);
+            const index = cart.findIndex(item => item.id === id && item.selectedSize === size && item.selectedColor ===
+            color);
             if (index === -1) return;
             cart.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(cart));
@@ -2610,8 +2686,10 @@
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
                 totalItems += item.quantity;
-                const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ? ` (مقاس: ${item.selectedSize})` : '';
-                const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ? ` (لون: ${item.selectedColor})` : '';
+                const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ? ` (مقاس: ${item.selectedSize})` :
+                    '';
+                const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
+                    ` (لون: ${item.selectedColor})` : '';
                 msg += `${index + 1}. ${item.name}${sizeInfo}${colorInfo}\n`;
                 msg += `   الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n\n`;
             });
@@ -2677,15 +2755,26 @@
                     <div style="margin-top:25px;border-top:1px solid #e2e8f0;padding-top:20px;">
                         <h3 style="font-size:18px;font-weight:800;margin-bottom:12px;">🛍️ <span style="color:#059669;">منتجات مشابهة</span></h3>
                         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;">
-                            ${similarProducts.map(p => `
-                                <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);cursor:pointer;transition:0.3s;border:1px solid #e2e8f0;" onclick="openProductDetails(${p.id})">
-                                    <img src="${p.image}" alt="${p.name}" style="width:100%;height:130px;object-fit:contain;background:#f8fafc;padding:8px;" onerror="this.src='https://via.placeholder.com/150x130?text=Takamul'">
-                                    <div style="padding:10px 12px 14px;">
-                                        <h4 style="font-size:13px;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:36px;">${p.name}</h4>
-                                        <span style="font-weight:800;font-size:16px;color:#1a1a2e;">${p.price} ج.م</span>
+                            ${similarProducts.map(p => {
+                                const isSimilarVideo = isVideoUrl(p.image);
+                                let similarMedia = '';
+                                if (isSimilarVideo) {
+                                    similarMedia = `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"><source src="${p.image}" type="video/mp4"></video>`;
+                                } else {
+                                    similarMedia = `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.src='https://via.placeholder.com/150x130?text=Takamul'">`;
+                                }
+                                return `
+                                    <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);cursor:pointer;transition:0.3s;border:1px solid #e2e8f0;" onclick="openProductDetails(${p.id})">
+                                        <div style="width:100%;height:130px;background:#f8fafc;display:flex;align-items:center;justify-content:center;padding:8px;">
+                                            ${similarMedia}
+                                        </div>
+                                        <div style="padding:10px 12px 14px;">
+                                            <h4 style="font-size:13px;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:36px;">${p.name}</h4>
+                                            <span style="font-weight:800;font-size:16px;color:#1a1a2e;">${p.price} ج.م</span>
+                                        </div>
                                     </div>
-                                </div>
-                            `).join('')}
+                                `;
+                            }).join('')}
                         </div>
                     </div>`;
             }
@@ -2735,11 +2824,26 @@
                 </div>
             ` : '';
 
+            const isVideo = isVideoUrl(product.image);
+            let mediaHTML = '';
+            if (isVideo) {
+                mediaHTML = `
+                    <video controls autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;padding:15px;">
+                        <source src="${product.image}" type="video/mp4">
+                        متصفحك لا يدعم عرض الفيديو
+                    </video>
+                `;
+            } else {
+                mediaHTML = `
+                    <img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:15px;" onerror="this.src='https://via.placeholder.com/400x300?text=Takamul'">
+                `;
+            }
+
             content.innerHTML = `
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
                     <div>
                         <div style="background:#f8fafc;border-radius:12px;overflow:hidden;height:300px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;">
-                            <img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:15px;" onerror="this.src='https://via.placeholder.com/400x300?text=Takamul'">
+                            ${mediaHTML}
                         </div>
                     </div>
                     <div>
@@ -2816,7 +2920,8 @@
             const colorName = selectedColor ? getColorName(selectedColor) : 'غير محدد';
             const size = selectedSize || 'غير محدد';
 
-            const existingIndex = cart.findIndex(item => item.id === productId && item.selectedSize === size && item.selectedColor === colorName);
+            const existingIndex = cart.findIndex(item => item.id === productId && item.selectedSize === size && item
+                .selectedColor === colorName);
             if (existingIndex !== -1) {
                 cart[existingIndex].quantity++;
             } else {
@@ -2890,7 +2995,8 @@
                 contactSubmitBtn.disabled = true;
                 contactSubmitBtn.textContent = '⏳ جاري الإرسال...';
 
-                const firstName = document.querySelector('input[name="fi-sender-firstName"]').value.trim() || 'غير مدخل';
+                const firstName = document.querySelector('input[name="fi-sender-firstName"]').value.trim() ||
+                'غير مدخل';
                 const lastName = document.querySelector('input[name="fi-sender-lastName"]').value.trim() || '';
                 const phone = document.querySelector('input[name="fi-sender-phone"]').value.trim() || '';
                 const address = document.querySelector('input[name="fi-sender-address"]').value.trim() || '';
@@ -2918,9 +3024,12 @@
                     const itemTotal = item.price * item.quantity;
                     total += itemTotal;
                     totalItems += item.quantity;
-                    const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ? ` (مقاس: ${item.selectedSize})` : '';
-                    const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ? ` (لون: ${item.selectedColor})` : '';
-                    productsList += `${index + 1}. ${item.name}${sizeInfo}${colorInfo} | الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n`;
+                    const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ?
+                        ` (مقاس: ${item.selectedSize})` : '';
+                    const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
+                        ` (لون: ${item.selectedColor})` : '';
+                    productsList +=
+                        `${index + 1}. ${item.name}${sizeInfo}${colorInfo} | الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n`;
                 });
 
                 sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems)
@@ -2967,9 +3076,16 @@
             document.getElementById('productDetailsModal')?.addEventListener('click', function(e) {
                 if (e.target === this) closeProductDetails();
             });
+
+            // محاولة تشغيل الفيديو يدوياً بعد تحميل الصفحة
+            setTimeout(() => {
+                document.querySelectorAll('video').forEach(video => {
+                    video.play().catch(() => {});
+                });
+            }, 1000);
         });
 
-        console.log('✅ متجر Takamul يعمل مع المقاسات والألوان!');
+        console.log('✅ متجر Takamul يعمل مع المقاسات والألوان والفيديو!');
         console.log('📦 عدد المنتجات:', allProducts.length);
     </script>
 </body>
