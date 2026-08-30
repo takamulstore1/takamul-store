@@ -657,6 +657,7 @@
             object-fit: contain;
             transition: 0.5s;
             padding: 10px;
+            cursor: pointer;
         }
 
         .product-card .product-image-wrapper video {
@@ -665,6 +666,7 @@
             object-fit: contain;
             padding: 10px;
             background: #f8fafc;
+            cursor: pointer;
         }
 
         .product-card:hover .product-image-wrapper img {
@@ -682,6 +684,49 @@
             font-size: 11px;
             font-weight: bold;
             z-index: 5;
+        }
+
+        /* ===== زر تشغيل الفيديو ===== */
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(5, 150, 105, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .video-play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(5, 150, 105, 1);
+        }
+
+        .product-card .product-image-wrapper .media-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .product-card .product-info {
@@ -781,6 +826,88 @@
             font-weight: 700;
             display: block;
             margin-top: 2px;
+        }
+
+        /* ===== مودال عرض الصورة/الفيديو ===== */
+        .media-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(8px);
+            padding: 20px;
+        }
+
+        .media-modal.open {
+            display: flex;
+        }
+
+        .media-modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+            background: transparent;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .media-modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .media-modal-content video {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            background: #000;
+        }
+
+        .media-modal-close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 10001;
+            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .media-modal-close:hover {
+            transform: rotate(90deg);
+            background: rgba(220, 38, 38, 0.7);
+            border-color: #dc2626;
+        }
+
+        .media-modal .media-label {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 20px;
+            border-radius: 20px;
+            z-index: 10001;
+            text-align: center;
+            max-width: 80%;
         }
 
         /* ===== سلة التسوق ===== */
@@ -1560,6 +1687,119 @@
             display: block;
         }
 
+        /* ===== منتجات ذات صلة ===== */
+        .related-products-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .related-products-section .section-title-sm {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+
+        .related-products-section .section-title-sm span {
+            color: #059669;
+        }
+
+        .related-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .related-product-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .related-product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: #059669;
+        }
+
+        .related-product-card .related-img {
+            height: 120px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .related-product-card .related-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .related-product-card .related-img video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .related-product-card .related-info {
+            padding: 10px 12px 14px;
+        }
+
+        .related-product-card .related-info h4 {
+            font-size: 13px;
+            color: #1a1a2e;
+            font-weight: 600;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 36px;
+        }
+
+        .related-product-card .related-info .related-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-top: 4px;
+        }
+
+        .related-product-card .related-info .related-price .old {
+            font-size: 12px;
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-weight: 400;
+            margin-right: 6px;
+        }
+
+        .related-product-card .related-info .add-small-btn {
+            width: 100%;
+            margin-top: 6px;
+            padding: 6px;
+            background: #059669;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .related-product-card .related-info .add-small-btn:hover {
+            background: #047857;
+        }
+
         /* ===== التجاوب ===== */
         @media(max-width: 992px) {
             #productsContainer {
@@ -1583,6 +1823,9 @@
             }
             .privacy-modal-content {
                 max-width: 95%;
+            }
+            .related-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
         }
 
@@ -1688,6 +1931,19 @@
                 min-height: 200px !important;
                 font-size: 12px !important;
             }
+            .related-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            .related-product-card .related-img {
+                height: 100px;
+            }
+            .media-modal-close {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 30px;
+            }
         }
 
         @media(max-width: 480px) {
@@ -1723,6 +1979,14 @@
             .order-message-container {
                 min-height: 180px !important;
                 font-size: 12px !important;
+            }
+            .related-products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+            .video-play-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
             }
         }
 
@@ -1972,6 +2236,19 @@
 
         <main id="productsContainer"></main>
 
+        <!-- ===== مودال عرض الصورة/الفيديو ===== -->
+        <div id="mediaModal" class="media-modal" onclick="closeMediaModal()">
+            <div class="media-modal-close" onclick="closeMediaModal()">✕</div>
+            <div class="media-modal-content" onclick="event.stopPropagation()">
+                <img id="modalImage" src="" alt="" style="display:none;">
+                <video id="modalVideo" controls style="display:none;" autoplay>
+                    <source id="modalVideoSource" src="" type="video/mp4">
+                    متصفحك لا يدعم عرض الفيديو
+                </video>
+            </div>
+            <div class="media-label" id="mediaLabel">📸 اضغط خارج الصورة للإغلاق</div>
+        </div>
+
         <!-- ===== سلة التسوق ===== -->
         <div class="overlay" id="overlay" onclick="toggleCart()"></div>
         <aside class="cart-sidebar" id="cartSidebar">
@@ -2126,7 +2403,7 @@
 
         <!-- ===== صفحة تفاصيل المنتج ===== -->
         <div id="productDetailsModal" class="privacy-modal">
-            <div class="privacy-modal-content" style="max-width:950px;max-height:95vh;overflow-y:auto;">
+            <div class="privacy-modal-content" style="max-width:980px;max-height:95vh;overflow-y:auto;">
                 <div class="privacy-modal-header">
                     <h2>📦 <span>تفاصيل</span> المنتج</h2>
                     <button onclick="closeProductDetails()">✕</button>
@@ -2260,12 +2537,12 @@
         }
 
         // ============================================================
-        // بيانات المنتجات (مختصرة للتوفير - ضع منتجاتك كاملة هنا)
+        // بيانات المنتجات (مع الصورة والفيديو معاً)
         // ============================================================
         const allProducts = [
                     // ===== ملابس =====
      // ===== القسم الأول: ملابس (id: 1 إلى 150) =====
-{ id: 1, name: "تيشرت قطني رجالي كلاسيك", price: 250, oldPrice: 350, discount: "29%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://a.top4top.io/m_3892lappb1.mp4", freeShipping: true, description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c", "#f39c12"] },
+            { id: 1, name: "تيشرت قطني رجالي كلاسيك", price: 250, oldPrice: 350, discount: "29%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://i.imgpeek.com/sCYts4cTeWgc", video: "https://a.top4top.io/m_3892lappb1.mp4", freeShipping: true, description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c", "#f39c12"] },
 { id: 2, name: "تيشرت رياضي قطني", price: 200, oldPrice: 280, discount: "28%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.5, reviews: 95, image: "https://i.imgpeek.com/sCYts4cTeWgc", freeShipping: true, description: "تيشرت رياضي خفيف الوزن.", sizes: ["S", "M", "L", "XL"], colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] },
 { id: 3, name: "تيشرت بولو أنيق", price: 300, oldPrice: 420, discount: "29%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.6, reviews: 85, image: "https://i.imgur.com/5HpQ8Jk.jpg", freeShipping: true, description: "تيشرت بولو أنيق ومناسب للمناسبات.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"] },
 { id: 4, name: "تيشرت كم طويل شتوي", price: 280, oldPrice: 380, discount: "26%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.5, reviews: 78, image: "https://i.imgur.com/4GvH3Wq.jpg", freeShipping: true, description: "تيشرت كم طويل مناسب للشتاء.", sizes: ["S", "M", "L", "XL"], colors: ["#1a1a2e", "#2c3e50", "#5d4037"] },
@@ -3184,6 +3461,7 @@
 { id: 899, name: "سماعة جري لاسلكية قطنية 2", price: 320, oldPrice: 440, discount: "27%", category: "رياضة", subcategory: "جري", rating: 4.7, reviews: 170, image: "https://i.imgur.com/7YpQ8Mn.jpg", freeShipping: true, description: "سماعة جري لاسلكية قطنية.", sizes: [], colors: ["#1a1a2e", "#2c3e50"] },
 { id: 900, name: "زجاجة ماء رياضية قطنية 2", price: 90, oldPrice: 130, discount: "31%", category: "رياضة", subcategory: "جري", rating: 4.4, reviews: 220, image: "https://i.imgur.com/3GpQ8Rj.jpg", freeShipping: true, description: "زجاجة ماء رياضية قطنية.", sizes: [], colors: ["#2c3e50", "#3498db", "#e74c3c"] },
         ];
+
         // ============================================================
         // المتغيرات العامة
         // ============================================================
@@ -3196,6 +3474,46 @@
 
         let selectedSizes = {};
         let selectedColors = {};
+
+        // ============================================================
+        // دوال عرض الصورة/الفيديو في مودال منفصل
+        // ============================================================
+        function openMediaModal(src, isVideo = false, label = '') {
+            const modal = document.getElementById('mediaModal');
+            const img = document.getElementById('modalImage');
+            const video = document.getElementById('modalVideo');
+            const videoSource = document.getElementById('modalVideoSource');
+            const labelEl = document.getElementById('mediaLabel');
+
+            img.style.display = 'none';
+            video.style.display = 'none';
+            video.pause();
+
+            if (isVideo) {
+                videoSource.src = src;
+                video.load();
+                video.style.display = 'block';
+                video.play().catch(() => {});
+                labelEl.textContent = label || '🎬 فيديو المنتج - اضغط خارج الفيديو للإغلاق';
+            } else {
+                img.src = src;
+                img.style.display = 'block';
+                labelEl.textContent = label || '📸 صورة المنتج - اضغط خارج الصورة للإغلاق';
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMediaModal() {
+            const modal = document.getElementById('mediaModal');
+            const video = document.getElementById('modalVideo');
+            if (video) {
+                video.pause();
+            }
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
         // ============================================================
         // دوال المصادقة
@@ -3457,26 +3775,50 @@
                         `<span class="free-shipping">🚚 التوصيل على حسب المحافظه</span>` : '';
                     const primeBadge = product.rating >= 4.8 ? `<span class="prime-badge">⭐ Prime</span>` : '';
 
-                    const isVideo = isVideoUrl(product.image);
+                    const hasVideo = product.video && product.video.trim() !== '';
+                    const hasImage = product.image && product.image.trim() !== '';
+
                     let mediaHTML = '';
-                    if (isVideo) {
-                        mediaHTML = `
-                            <video autoplay muted loop playsinline>
-                                <source src="${product.image}" type="video/mp4">
-                                متصفحك لا يدعم عرض الفيديو
+                    let mediaBadge = '';
+
+                    if (hasVideo) {
+                        mediaHTML += `
+                            <video muted loop playsinline onclick="event.stopPropagation(); openMediaModal('${product.video}', true, '🎬 فيديو المنتج - ${product.name}')">
+                                <source src="${product.video}" type="video/mp4">
                             </video>
                         `;
-                    } else {
+                        mediaBadge += `<span class="media-badge"><i class="fas fa-video"></i> فيديو</span>`;
+                    }
+
+                    if (hasImage) {
+                        if (hasVideo) {
+                            mediaHTML += `
+                                <img src="${product.image}" alt="${product.name}" onclick="event.stopPropagation(); openMediaModal('${product.image}', false, '📸 صورة المنتج - ${product.name}')" style="position:absolute;bottom:0;right:0;width:50%;height:50%;object-fit:cover;border-radius:8px;border:2px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,0.2);cursor:pointer;">
+                            `;
+                        } else {
+                            mediaHTML += `
+                                <img src="${product.image}" alt="${product.name}" onclick="event.stopPropagation(); openMediaModal('${product.image}', false, '📸 صورة المنتج - ${product.name}')" onerror="this.src='https://via.placeholder.com/300x220?text=Takamul'">
+                            `;
+                            mediaBadge += `<span class="media-badge"><i class="fas fa-image"></i> صورة</span>`;
+                        }
+                    }
+
+                    // إذا لم يكن هناك صورة ولا فيديو
+                    if (!hasImage && !hasVideo) {
                         mediaHTML = `
-                            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x220?text=Takamul'">
+                            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:14px;background:#f8fafc;">
+                                <i class="fas fa-image" style="font-size:40px;opacity:0.3;"></i>
+                            </div>
                         `;
                     }
 
                     container.innerHTML += `
                         <div class="product-card" onclick="openProductDetails(${product.id})">
-                            <div class="product-image-wrapper">
+                            <div class="product-image-wrapper" style="position:relative;">
                                 ${mediaHTML}
                                 ${discountBadge}
+                                ${mediaBadge}
+                                ${hasVideo ? `<div class="video-play-btn"><i class="fas fa-play"></i></div>` : ''}
                             </div>
                             <div class="product-info">
                                 <h3>${product.name}</h3>
@@ -3492,6 +3834,14 @@
                             </div>
                         </div>`;
                 });
+
+                // تشغيل الفيديوهات تلقائياً (muted)
+                setTimeout(() => {
+                    document.querySelectorAll('.product-image-wrapper video').forEach(v => {
+                        v.play().catch(() => {});
+                    });
+                }, 500);
+
             }, 300);
         }
 
@@ -3654,17 +4004,21 @@
                 const colorDisplay = item.selectedColor && item.selectedColor !== 'غير محدد' ?
                     ` | 🎨 لون: ${item.selectedColor}` : '';
 
-                const isVideo = isVideoUrl(item.image);
+                const hasImage = item.image && item.image.trim() !== '';
                 let mediaHTML = '';
-                if (isVideo) {
+                if (hasImage) {
+                    mediaHTML = `
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/60x60?text=Takamul'">
+                    `;
+                } else if (item.video) {
                     mediaHTML = `
                         <video autoplay muted loop playsinline>
-                            <source src="${item.image}" type="video/mp4">
+                            <source src="${item.video}" type="video/mp4">
                         </video>
                     `;
                 } else {
                     mediaHTML = `
-                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/60x60?text=Takamul'">
+                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:20px;"><i class="fas fa-image"></i></div>
                     `;
                 }
 
@@ -4074,7 +4428,7 @@
         }
 
         // ============================================================
-        // صفحة تفاصيل المنتج (مع مقاسات وألوان)
+        // صفحة تفاصيل المنتج (مع مقاسات وألوان ومنتجات ذات صلة)
         // ============================================================
         function openProductDetails(productId) {
             const product = allProducts.find(p => p.id === productId);
@@ -4135,26 +4489,105 @@
                 </div>
             ` : '';
 
-            const isVideo = isVideoUrl(product.image);
-            let mediaHTML = '';
-            if (isVideo) {
-                mediaHTML = `
-                    <video controls autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;padding:15px;">
-                        <source src="${product.image}" type="video/mp4">
-                        متصفحك لا يدعم عرض الفيديو
-                    </video>
-                `;
+            // ===== عرض الصورة والفيديو معاً في التفاصيل =====
+            const hasVideo = product.video && product.video.trim() !== '';
+            const hasImage = product.image && product.image.trim() !== '';
+
+            let detailMediaHTML = '';
+            if (hasVideo || hasImage) {
+                detailMediaHTML += `<div style="display:grid;grid-template-columns:${hasVideo && hasImage ? '1fr 1fr' : '1fr'};gap:12px;height:280px;">`;
+
+                if (hasVideo) {
+                    detailMediaHTML += `
+                        <div style="background:#000;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;cursor:pointer;position:relative;" onclick="event.stopPropagation(); openMediaModal('${product.video}', true, '🎬 فيديو المنتج - ${product.name}')">
+                            <video muted loop playsinline style="width:100%;height:100%;object-fit:contain;padding:10px;" onclick="event.stopPropagation(); openMediaModal('${product.video}', true, '🎬 فيديو المنتج - ${product.name}')">
+                                <source src="${product.video}" type="video/mp4">
+                            </video>
+                            <div class="video-play-btn" style="position:absolute;width:50px;height:50px;font-size:22px;pointer-events:none;">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:2px 12px;border-radius:12px;font-size:11px;z-index:5;"><i class="fas fa-video"></i> فيديو</span>
+                        </div>
+                    `;
+                }
+
+                if (hasImage) {
+                    detailMediaHTML += `
+                        <div style="background:#f8fafc;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;cursor:pointer;" onclick="event.stopPropagation(); openMediaModal('${product.image}', false, '📸 صورة المنتج - ${product.name}')">
+                            <img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onclick="event.stopPropagation(); openMediaModal('${product.image}', false, '📸 صورة المنتج - ${product.name}')" onerror="this.src='https://via.placeholder.com/400x300?text=Takamul'">
+                            <span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:2px 12px;border-radius:12px;font-size:11px;z-index:5;${hasVideo ? 'display:none;' : ''}"><i class="fas fa-image"></i> صورة</span>
+                        </div>
+                    `;
+                }
+
+                detailMediaHTML += `</div>`;
             } else {
-                mediaHTML = `
-                    <img src="${product.image}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:15px;" onerror="this.src='https://via.placeholder.com/400x300?text=Takamul'">
+                detailMediaHTML = `
+                    <div style="background:#f8fafc;border-radius:12px;height:280px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;color:#aaa;">
+                        <i class="fas fa-image" style="font-size:50px;opacity:0.3;"></i>
+                    </div>
+                `;
+            }
+
+            // ===== الحصول على منتجات ذات صلة =====
+            const relatedProducts = allProducts
+                .filter(p => p.id !== productId && (p.category === product.category || p.subcategory === product.category))
+                .slice(0, 15);
+
+            let relatedHTML = '';
+            if (relatedProducts.length > 0) {
+                relatedHTML = `
+                    <div class="related-products-section">
+                        <div class="section-title-sm">🔄 <span>منتجات ذات صلة</span> من نفس القسم</div>
+                        <div class="related-products-grid">
+                            ${relatedProducts.map(p => {
+                                const hasVideoRel = p.video && p.video.trim() !== '';
+                                const hasImageRel = p.image && p.image.trim() !== '';
+                                let mediaRelated = '';
+                                if (hasVideoRel) {
+                                    mediaRelated = `
+                                        <video muted loop playsinline onclick="event.stopPropagation(); openMediaModal('${p.video}', true, '🎬 فيديو المنتج - ${p.name}')">
+                                            <source src="${p.video}" type="video/mp4">
+                                        </video>
+                                    `;
+                                } else if (hasImageRel) {
+                                    mediaRelated = `
+                                        <img src="${p.image}" alt="${p.name}" onclick="event.stopPropagation(); openMediaModal('${p.image}', false, '📸 صورة المنتج - ${p.name}')" onerror="this.src='https://via.placeholder.com/180x120?text=Takamul'">
+                                    `;
+                                } else {
+                                    mediaRelated = `
+                                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#ccc;"><i class="fas fa-image" style="font-size:30px;opacity:0.3;"></i></div>
+                                    `;
+                                }
+                                return `
+                                    <div class="related-product-card" onclick="openProductDetails(${p.id})">
+                                        <div class="related-img">
+                                            ${mediaRelated}
+                                        </div>
+                                        <div class="related-info">
+                                            <h4>${p.name}</h4>
+                                            <div class="related-price">
+                                                ${p.price} ج.م
+                                                ${p.oldPrice ? `<span class="old">${p.oldPrice} ج.م</span>` : ''}
+                                            </div>
+                                            <button class="add-small-btn" onclick="event.stopPropagation(); openProductDetails(${p.id})">🛒 اختيار</button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
                 `;
             }
 
             content.innerHTML = `
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
                     <div>
-                        <div style="background:#f8fafc;border-radius:12px;overflow:hidden;height:300px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;">
-                            ${mediaHTML}
+                        ${detailMediaHTML}
+                        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+                            ${hasVideo ? `<span style="background:#059669;color:#fff;padding:3px 12px;border-radius:12px;font-size:11px;"><i class="fas fa-video"></i> فيديو</span>` : ''}
+                            ${hasImage ? `<span style="background:#3b82f6;color:#fff;padding:3px 12px;border-radius:12px;font-size:11px;"><i class="fas fa-image"></i> صورة</span>` : ''}
+                            <span style="background:#f1f5f9;color:#1a1a2e;padding:3px 12px;border-radius:12px;font-size:11px;">👆 اضغط على الصورة/الفيديو للتكبير</span>
                         </div>
                     </div>
                     <div>
@@ -4178,10 +4611,18 @@
                         <button class="add-to-cart-btn" onclick="addToCartWithSizeFromDetails(${product.id})" style="width:100%;padding:14px;background:linear-gradient(135deg,#059669,#047857);border:none;color:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:17px;transition:0.3s;margin-top:10px;">🛒 إضافة إلى العربة</button>
                     </div>
                 </div>
+                ${relatedHTML}
             `;
 
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
+
+            // تشغيل الفيديوهات
+            setTimeout(() => {
+                document.querySelectorAll('#productDetailsContent video, .related-products-grid video').forEach(v => {
+                    v.play().catch(() => {});
+                });
+            }, 500);
         }
 
         function selectSize(productId, size) {
@@ -4284,6 +4725,13 @@
                 if (e.target === this) closeProductDetails();
             });
 
+            // إغلاق مودال الصورة بالضغط على ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMediaModal();
+                }
+            });
+
             setTimeout(() => {
                 document.querySelectorAll('video').forEach(video => {
                     video.play().catch(() => {});
@@ -4291,7 +4739,7 @@
             }, 1000);
         });
 
-        console.log('✅ متجر sun Store يعمل مع المقاسات والألوان والفيديو وإنستا باي!');
+        console.log('✅ متجر sun Store يعمل مع الصورة والفيديو معاً وعرضهم في مودال منفصل!');
         console.log('📦 عدد المنتجات:', allProducts.length);
     </script>
 </body>
