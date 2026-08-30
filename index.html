@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
@@ -20,7 +23,8 @@
     </script>
 
     <!-- Forminit SDK -->
-    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+    <script src="https://forminit.com/sdk/v1/forminit.js">
+    </script>
 
     <style>
         /* ===== BASES ===== */
@@ -993,7 +997,7 @@
         .checkout-btn {
             width: 100%;
             border: none;
-            background: linear-gradient(135deg, #059669, #047857);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #ffffff;
             padding: 14px;
             border-radius: 10px;
@@ -1005,7 +1009,7 @@
 
         .checkout-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.35);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35);
         }
 
         .clear-cart-btn {
@@ -1023,6 +1027,192 @@
 
         .clear-cart-btn:hover {
             background: #e2e8f0;
+        }
+
+        /* ===== إنستا باي - رفع الصورة ===== */
+        .instapay-section {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #059669;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 10px 0 15px;
+            text-align: center;
+        }
+
+        .instapay-section .instapay-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a1a2e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .instapay-section .instapay-title i {
+            color: #059669;
+            font-size: 28px;
+        }
+
+        .instapay-section .instapay-number {
+            font-size: 22px;
+            font-weight: 800;
+            color: #059669;
+            background: #ffffff;
+            padding: 8px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 8px 0;
+            border: 2px dashed #059669;
+            direction: ltr;
+            letter-spacing: 2px;
+        }
+
+        .instapay-section .instapay-number i {
+            margin: 0 8px;
+            color: #059669;
+        }
+
+        .instapay-section .copy-btn {
+            background: #059669;
+            color: #fff;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .instapay-section .copy-btn:hover {
+            background: #047857;
+            transform: scale(1.05);
+        }
+
+        .instapay-section .instapay-hint {
+            color: #334155;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .instapay-section .instapay-hint i {
+            color: #059669;
+        }
+
+        /* ===== رفع الصورة ===== */
+        .upload-section {
+            background: #f8fafc;
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 12px 0;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .upload-section:hover {
+            border-color: #059669;
+            background: #f0fdf4;
+        }
+
+        .upload-section .upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .upload-section .upload-label i {
+            font-size: 40px;
+            color: #059669;
+        }
+
+        .upload-section .upload-label span {
+            font-size: 14px;
+        }
+
+        .upload-section input[type="file"] {
+            display: none;
+        }
+
+        .upload-section .file-name {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #059669;
+            font-weight: 600;
+            display: none;
+        }
+
+        .upload-section .file-name.show {
+            display: block;
+        }
+
+        .upload-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            display: none;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .upload-preview.show {
+            display: block;
+        }
+
+        .upload-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .payment-note {
+            background: #fff8e1;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #78350f;
+            text-align: right;
+        }
+
+        .payment-note i {
+            color: #f59e0b;
+        }
+
+        /* ===== عرض الصورة في الرسالة ===== */
+        .order-message-container {
+            background: #f1f5f9;
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            min-height: 250px;
+            max-height: 400px;
+            overflow: auto;
+            grid-column: 1 / -1;
+        }
+
+        .order-message-container img {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 10px 0;
         }
 
         /* ===== الإشعارات ===== */
@@ -1074,8 +1264,8 @@
 
         .privacy-modal-content {
             width: 90%;
-            max-width: 520px;
-            max-height: 90vh;
+            max-width: 620px;
+            max-height: 95vh;
             overflow: auto;
             background: #ffffff;
             border-radius: 16px;
@@ -1197,18 +1387,6 @@
 
         .forminit-contact-section .status-msg.error {
             color: #dc2626;
-        }
-
-        .order-message-textarea {
-            background: #f1f5f9 !important;
-            color: #1a1a2e !important;
-            font-size: 13px !important;
-            line-height: 1.8 !important;
-            direction: ltr !important;
-            text-align: left !important;
-            font-family: 'Courier New', monospace !important;
-            min-height: 180px !important;
-            resize: vertical !important;
         }
 
         /* ===== زر العودة ===== */
@@ -1403,6 +1581,9 @@
             .amazon-hero p {
                 font-size: 17px;
             }
+            .privacy-modal-content {
+                max-width: 95%;
+            }
         }
 
         @media(max-width: 768px) {
@@ -1499,6 +1680,14 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+            .privacy-modal-content {
+                max-width: 98%;
+                max-height: 98vh;
+            }
+            .order-message-container {
+                min-height: 200px !important;
+                font-size: 12px !important;
+            }
         }
 
         @media(max-width: 480px) {
@@ -1531,8 +1720,8 @@
             .amazon-hero h1 {
                 font-size: 20px;
             }
-            .order-message-textarea {
-                min-height: 150px !important;
+            .order-message-container {
+                min-height: 180px !important;
                 font-size: 12px !important;
             }
         }
@@ -1801,7 +1990,7 @@
                     <h3>الإجمالي</h3>
                     <h2><span id="cartTotal">0</span> ج.م</h2>
                 </div>
-                <button class="checkout-btn" onclick="checkout()">إتمام الشراء ✅</button>
+                <button class="checkout-btn" onclick="checkout()">📧 طلب عبر البريد الإلكتروني</button>
                 <button class="clear-cart-btn" onclick="clearCart()">🗑️ تفريغ العربة</button>
             </div>
         </aside>
@@ -1853,7 +2042,7 @@
             </div>
         </div>
 
-        <!-- ===== مودال الدفع ===== -->
+        <!-- ===== مودال الدفع مع رفع الصورة وعرضها ===== -->
         <div id="checkoutModal" class="privacy-modal">
             <div class="privacy-modal-content">
                 <div class="privacy-modal-header">
@@ -1862,6 +2051,48 @@
                 </div>
                 <div class="privacy-modal-body">
                     <div class="checkout-box">
+
+                        <!-- ===== قسم إنستا باي مع رفع الصورة ===== -->
+                        <div class="instapay-section">
+                            <div class="instapay-title">
+                                <i class="fas fa-mobile-alt"></i>
+                                الدفع عبر إنستا باي
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <p style="color:#334155;font-size:14px;margin-bottom:6px;">📱 قم بتحويل المبلغ إلى الرقم التالي:</p>
+                            <div class="instapay-number">
+                                <i class="fas fa-phone"></i> 01550533369
+                            </div>
+                            <button class="copy-btn" onclick="copyInstapayNumber()">
+                                <i class="fas fa-copy"></i> نسخ الرقم
+                            </button>
+
+                            <!-- ===== رفع الصورة ===== -->
+                            <div class="upload-section">
+                                <label class="upload-label" for="paymentImage">
+                                    <i class="fas fa-upload"></i>
+                                    <span>📸 اضغط لرفع صورة إيصال التحويل</span>
+                                    <span style="font-size:12px;color:#94a3b8;">(jpg, png, pdf) - ستظهر في الرسالة</span>
+                                </label>
+                                <input type="file" id="paymentImage" name="fi-file-receipt" accept="image/*,application/pdf" onchange="previewImage(event)">
+                                <div class="file-name" id="fileName">✅ تم اختيار: <span id="fileNameText"></span></div>
+                                <div class="upload-preview" id="imagePreview">
+                                    <img id="previewImg" src="" alt="صورة الإيصال">
+                                </div>
+                            </div>
+
+                            <div class="instapay-hint">
+                                <i class="fas fa-info-circle"></i> بعد التحويل، ارفع صورة الإيصال وستظهر في ملخص الطلب
+                            </div>
+                            <div class="payment-note">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>ملاحظة:</strong> سيتم تأكيد طلبك بعد التحقق من إيصال الدفع.
+                            </div>
+                        </div>
+
+                        <hr style="border:1px solid #e2e8f0;margin:15px 0;">
+
+                        <!-- ===== نموذج البريد الإلكتروني مع عرض الصورة ===== -->
                         <div class="forminit-contact-section">
                             <form id="contactForm" enctype="multipart/form-data">
                                 <div class="form-grid">
@@ -1870,12 +2101,24 @@
                                     <input type="text" name="fi-sender-phone" placeholder="رقم الهاتف" required>
                                     <input type="text" name="fi-sender-address" placeholder="العنوان" required>
                                     <input type="email" name="fi-sender-email" placeholder="البريد الإلكتروني" required class="full-width">
-                                    <textarea name="fi-text-message" placeholder="رسالتك..." rows="8" class="full-width order-message-textarea" id="orderMessage" readonly></textarea>
-                                    <button type="submit" class="submit-btn" id="contactSubmitBtn">📧 تأكيد وإرسال الطلب</button>
+
+                                    <!-- حقول مخفية -->
+                                    <input type="hidden" name="fi-sender-fullName" id="hiddenFullName">
+                                    <input type="hidden" name="order_total" id="hiddenOrderTotal">
+                                    <input type="hidden" name="instapay_number" value="01550533369">
+                                    <input type="hidden" name="fi-text-message" id="hiddenOrderMessage">
+
+                                    <!-- عرض الصورة في الرسالة -->
+                                    <div class="order-message-container" id="orderMessageContainer">
+                                        <div id="orderMessage">🛒 لا توجد منتجات في العربة</div>
+                                    </div>
+
+                                    <button type="submit" class="submit-btn" id="contactSubmitBtn">📧 تأكيد وإرسال الطلب مع الإيصال</button>
                                     <p id="contactStatus" class="status-msg"></p>
                                 </div>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -1965,7 +2208,7 @@
 
         // ===== Forminit =====
         const forminit = new Forminit();
-        const FORM_ID = "a7sl4csi99s";
+        const FORM_ID = "xxdqj8abktj";
         const REDIRECT_URL = "https://forminit.com/thank-you";
 
         // ===== خريطة أسماء الألوان بالعربية =====
@@ -1988,7 +2231,6 @@
             '#3498db': 'أزرق فاتح'
         };
 
-        // دالة للحصول على اسم اللون بالعربية
         function getColorName(hexColor) {
             if (colorNames[hexColor]) {
                 return colorNames[hexColor];
@@ -2002,18 +2244,15 @@
             return hexColor;
         }
 
-        // دالة للتحقق إذا كان الرابط فيديو - محسنة
         function isVideoUrl(url) {
             if (!url) return false;
             const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.m4v'];
             const urlLower = url.toLowerCase();
-            // التحقق من امتداد الملف
             for (const ext of videoExtensions) {
                 if (urlLower.endsWith(ext)) {
                     return true;
                 }
             }
-            // التحقق من وجود كلمة video في الرابط
             if (urlLower.includes('video') || urlLower.includes('mp4') || urlLower.includes('webm')) {
                 return true;
             }
@@ -2021,11 +2260,10 @@
         }
 
         // ============================================================
-        // بيانات المنتجات (محدثة مع مقاسات وألوان - تم إصلاح التكرارات)
+        // بيانات المنتجات (مختصرة للتوفير - ضع منتجاتك كاملة هنا)
         // ============================================================
         const allProducts = [
-
-            // ===== ملابس =====
+                    // ===== ملابس =====
      // ===== القسم الأول: ملابس (id: 1 إلى 150) =====
 { id: 1, name: "تيشرت قطني رجالي كلاسيك", price: 250, oldPrice: 350, discount: "29%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://a.top4top.io/m_3892lappb1.mp4", freeShipping: true, description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", sizes: ["S", "M", "L", "XL", "XXL"], colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c", "#f39c12"] },
 { id: 2, name: "تيشرت رياضي قطني", price: 200, oldPrice: 280, discount: "28%", category: "ملابس", subcategory: "تيشيرتات", rating: 4.5, reviews: 95, image: "https://i.imgpeek.com/sCYts4cTeWgc", freeShipping: true, description: "تيشرت رياضي خفيف الوزن.", sizes: ["S", "M", "L", "XL"], colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] },
@@ -2946,7 +3184,6 @@
 { id: 899, name: "سماعة جري لاسلكية قطنية 2", price: 320, oldPrice: 440, discount: "27%", category: "رياضة", subcategory: "جري", rating: 4.7, reviews: 170, image: "https://i.imgur.com/7YpQ8Mn.jpg", freeShipping: true, description: "سماعة جري لاسلكية قطنية.", sizes: [], colors: ["#1a1a2e", "#2c3e50"] },
 { id: 900, name: "زجاجة ماء رياضية قطنية 2", price: 90, oldPrice: 130, discount: "31%", category: "رياضة", subcategory: "جري", rating: 4.4, reviews: 220, image: "https://i.imgur.com/3GpQ8Rj.jpg", freeShipping: true, description: "زجاجة ماء رياضية قطنية.", sizes: [], colors: ["#2c3e50", "#3498db", "#e74c3c"] },
         ];
-
         // ============================================================
         // المتغيرات العامة
         // ============================================================
@@ -2954,8 +3191,9 @@
         let currentCategory = 'all';
         let currentSubcategory = null;
         let currentDetailProductId = null;
+        let uploadedImageBase64 = null;
+        let uploadedImageName = null;
 
-        // تخزين المقاسات المختارة لكل منتج
         let selectedSizes = {};
         let selectedColors = {};
 
@@ -3268,57 +3506,13 @@
                 'منزل': 'منزل ومطبخ',
                 'جمال': 'جمال وعناية',
                 'أطفال': 'أطفال',
-                'رياضة': 'رياضة',
-                'تيشيرتات': 'تيشيرتات',
-                'بناطيل': 'بناطيل',
-                'جواكت': 'جواكت',
-                'بدل': 'بدل',
-                'ملابس حريمي': 'ملابس حريمي',
-                'أحذية': 'أحذية',
-                'إكسسوارات': 'إكسسوارات',
-                'هواتف': 'هواتف',
-                'لابتوب': 'لابتوب',
-                'تابلت': 'تابلت',
-                'شاشات': 'شاشات',
-                'سماعات': 'سماعات',
-                'طابعات': 'طابعات',
-                'ملحقات كمبيوتر': 'ملحقات كمبيوتر',
-                'موازين': 'موازين',
-                'مطبخ': 'مطبخ',
-                'أثاث': 'أثاث',
-                'ديكور': 'ديكور',
-                'أجهزة منزلية': 'أجهزة منزلية',
-                'أدوات تنظيف': 'أدوات تنظيف',
-                'إضاءة': 'إضاءة',
-                'عطور': 'عطور',
-                'مكياج': 'مكياج',
-                'عناية بشرة': 'عناية بشرة',
-                'عناية شعر': 'عناية شعر',
-                'أدوات تجميل': 'أدوات تجميل',
-                'ملابس أطفال': 'ملابس أطفال',
-                'ألعاب': 'ألعاب',
-                'مستلزمات رضاعة': 'مستلزمات رضاعة',
-                'عربات أطفال': 'عربات أطفال',
-                'أثاث أطفال': 'أثاث أطفال',
-                'ملابس رياضية': 'ملابس رياضية',
-                'أحذية رياضية': 'أحذية رياضية',
-                'معدات رياضية': 'معدات رياضية',
-                'كرة قدم': 'كرة قدم',
-                'جري': 'جري'
+                'رياضة': 'رياضة'
             };
             breadcrumb.textContent = categoryNames[category] || category;
 
             const select = document.getElementById('categorySelect');
             if (select) {
-                const mainCategories = ['ملابس', 'إلكترونيات', 'منزل', 'جمال', 'أطفال', 'رياضة'];
-                if (mainCategories.includes(category)) {
-                    select.value = category;
-                } else {
-                    const product = allProducts.find(p => p.subcategory === category);
-                    if (product) {
-                        select.value = product.category;
-                    }
-                }
+                select.value = category;
             }
 
             document.querySelectorAll('.amazon-nav .nav-item').forEach(el => {
@@ -3375,7 +3569,6 @@
             if (sidebar.classList.contains('open')) renderCart();
         }
 
-        // ===== دالة الإضافة إلى السلة مع المقاس =====
         function addToCartWithSize(productId, size, color) {
             const product = allProducts.find(p => p.id === productId);
             if (!product) return;
@@ -3527,31 +3720,87 @@
             }
         }
 
-        function checkout() {
-            if (cart.length === 0) {
-                showNotification("⚠️ عربتك فارغة!");
-                return;
+        // ============================================================
+        // إنستا باي دوال
+        // ============================================================
+        function copyInstapayNumber() {
+            const number = '01550533369';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(number)
+                    .then(() => {
+                        showNotification('✅ تم نسخ رقم إنستا باي: ' + number, 'success');
+                    })
+                    .catch(() => {
+                        fallbackCopy(number);
+                    });
+            } else {
+                fallbackCopy(number);
             }
-            if (document.getElementById('cartSidebar').classList.contains('open')) toggleCart();
-            document.getElementById('checkoutModal').classList.add('open');
-            setTimeout(updateOrderSummary, 200);
         }
 
-        function closeCheckoutModal() {
-            document.getElementById('checkoutModal').classList.remove('open');
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showNotification('✅ تم نسخ رقم إنستا باي: ' + text, 'success');
+            } catch (err) {
+                showNotification('⚠️ فشل النسخ، الرقم: ' + text, 'error');
+            }
+            document.body.removeChild(textarea);
         }
 
+        // ============================================================
+        // معاينة الصورة وتحويلها إلى Base64
+        // ============================================================
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const fileName = document.getElementById('fileName');
+            const fileNameText = document.getElementById('fileNameText');
+            const preview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+
+            fileNameText.textContent = file.name;
+            fileName.classList.add('show');
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                preview.classList.add('show');
+                uploadedImageBase64 = e.target.result;
+                uploadedImageName = file.name;
+                updateOrderSummary();
+            };
+            reader.readAsDataURL(file);
+
+            showNotification('✅ تم رفع صورة الإيصال: ' + file.name, 'success');
+        }
+
+        // ============================================================
+        // تحديث ملخص الطلب مع عرض الصورة
+        // ============================================================
         function updateOrderSummary() {
-            const textarea = document.getElementById('orderMessage');
-            if (!textarea) return;
+            const container = document.getElementById('orderMessage');
+            const hiddenInput = document.getElementById('hiddenOrderMessage');
+            if (!container) return;
+
             if (cart.length === 0) {
-                textarea.value = '🛒 لا توجد منتجات في العربة';
+                container.innerHTML = '🛒 لا توجد منتجات في العربة';
+                if (hiddenInput) hiddenInput.value = '🛒 لا توجد منتجات في العربة';
                 return;
             }
+
             let total = 0;
             let totalItems = 0;
-            let msg = '📋 Order Summary\n';
-            msg += '━'.repeat(35) + '\n\n';
+            let msgHTML = '📋 طلب جديد من sun Store<br>';
+            msgHTML += '━'.repeat(35) + '<br><br>';
+
             cart.forEach((item, index) => {
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
@@ -3560,16 +3809,62 @@
                     '';
                 const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
                     ` (لون: ${item.selectedColor})` : '';
-                msg += `${index + 1}. ${item.name}${sizeInfo}${colorInfo}\n`;
-                msg += `   الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n\n`;
+                msgHTML += `${index + 1}. ${item.name}${sizeInfo}${colorInfo}<br>`;
+                msgHTML += `   الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م<br><br>`;
             });
-            msg += '━'.repeat(35) + '\n';
-            msg += `📊 إجمالي القطع: ${totalItems} قطعة\n`;
-            msg += `💰 الإجمالي: ${total} ج.م\n`;
-            msg += '\n' + '━'.repeat(35) + '\n';
-            msg += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
-            msg += `🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}`;
-            textarea.value = msg;
+
+            msgHTML += '━'.repeat(35) + '<br>';
+            msgHTML += `📊 إجمالي القطع: ${totalItems} قطعة<br>`;
+            msgHTML += `💰 الإجمالي: ${total} ج.م<br>`;
+            msgHTML += '<br>' + '━'.repeat(35) + '<br>';
+            msgHTML += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}<br>`;
+            msgHTML += `🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}<br>`;
+            msgHTML += '<br>' + '━'.repeat(35) + '<br>';
+
+            // ===== عرض الصورة =====
+            if (uploadedImageBase64) {
+                msgHTML += '<br>📎 صورة إيصال التحويل:<br>';
+                msgHTML += `📁 اسم الملف: ${uploadedImageName || 'إيصال'}<br>`;
+                msgHTML += '<br>🖼️ الصورة:<br>';
+                msgHTML +=
+                    `<img src="${uploadedImageBase64}" alt="إيصال التحويل" style="max-width:100%;max-height:250px;border-radius:8px;border:1px solid #e2e8f0;margin:10px 0;" /><br>`;
+            } else {
+                msgHTML += '<br>⚠️ لم يتم رفع صورة الإيصال بعد<br>';
+            }
+
+            container.innerHTML = msgHTML;
+
+            // نسخ النص بدون HTML للحقل المخفي
+            if (hiddenInput) {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = msgHTML;
+                hiddenInput.value = tempDiv.textContent || tempDiv.innerText || '';
+            }
+        }
+
+        // ============================================================
+        // دوال الدفع والنماذج
+        // ============================================================
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification("⚠️ عربتك فارغة!");
+                return;
+            }
+            if (document.getElementById('cartSidebar').classList.contains('open')) toggleCart();
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('hiddenOrderTotal').value = total + ' ج.م';
+
+            const firstName = document.querySelector('input[name="fi-sender-firstName"]')?.value || '';
+            const lastName = document.querySelector('input[name="fi-sender-lastName"]')?.value || '';
+            document.getElementById('hiddenFullName').value = `${firstName} ${lastName}`.trim();
+
+            document.getElementById('checkoutModal').classList.add('open');
+            setTimeout(updateOrderSummary, 200);
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('open');
         }
 
         function showNotification(message, type = '') {
@@ -3600,6 +3895,185 @@
         }
 
         // ============================================================
+        // إرسال البريد الإلكتروني مع الصورة
+        // ============================================================
+        function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
+            let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
+            message += `👤 اسم العميل: ${name}\n`;
+            message += `📱 رقم الهاتف: ${phone}\n`;
+            message += `📍 العنوان: ${address}\n`;
+            message += `✉️ البريد الإلكتروني: ${email}\n\n`;
+            message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
+            message += `━`.repeat(35) + `\n`;
+            message += `📊 ملخص الطلب:\n`;
+            message += `• عدد القطع: ${totalItems} قطعة\n`;
+            message += `• الإجمالي: ${total} ج.م\n\n`;
+            message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
+            message += `🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}\n\n`;
+            message += `━`.repeat(35) + `\n`;
+
+            // ===== إضافة الصورة في البريد =====
+            if (imageBase64) {
+                message += `\n📎 صورة إيصال التحويل:\n`;
+                message += `📁 اسم الملف: ${imageName || 'إيصال'}\n`;
+                message += `\n📸 الصورة:\n`;
+                message +=
+                    `<img src="${imageBase64}" alt="إيصال التحويل" style="max-width:100%;max-height:300px;border:1px solid #ccc;border-radius:8px;" />\n`;
+            } else {
+                message += `\n⚠️ لم يتم رفع صورة الإيصال\n`;
+            }
+
+            return emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+                to_email: STORE_EMAIL,
+                from_name: name,
+                from_email: email,
+                message: message,
+                subject: "🛍️ طلب جديد من متجر sun Store مع إيصال الدفع",
+                phone: phone,
+                location: address,
+                total: total + " ج.م",
+                store_name: "sun Store",
+                year: new Date().getFullYear(),
+                attachment: imageBase64 || '',
+                attachment_name: imageName || 'receipt.jpg'
+            });
+        }
+
+        // ============================================================
+        // ربط نموذج Forminit مع رفع الصورة
+        // ============================================================
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contactStatus');
+        const contactSubmitBtn = document.getElementById('contactSubmitBtn');
+
+        if (contactForm && contactStatus) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                // التحقق من رفع صورة إنستا باي
+                const fileInput = document.getElementById('paymentImage');
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    showNotification('⚠️ يرجى رفع صورة إيصال التحويل', 'error');
+                    return;
+                }
+
+                contactStatus.textContent = '⏳ جاري الإرسال...';
+                contactStatus.className = 'status-msg';
+                contactSubmitBtn.disabled = true;
+                contactSubmitBtn.textContent = '⏳ جاري الإرسال...';
+
+                const firstName = document.querySelector('input[name="fi-sender-firstName"]').value.trim() || 'غير مدخل';
+                const lastName = document.querySelector('input[name="fi-sender-lastName"]').value.trim() || '';
+                const phone = document.querySelector('input[name="fi-sender-phone"]').value.trim() || '';
+                const address = document.querySelector('input[name="fi-sender-address"]').value.trim() || '';
+                const email = document.querySelector('input[name="fi-sender-email"]').value.trim() || '';
+
+                const fullName = `${firstName} ${lastName}`.trim() || 'غير مدخل';
+
+                // ===== إنشاء FormData وإضافة الصورة =====
+                const formData = new FormData(contactForm);
+                const file = fileInput.files[0];
+                let imageBase64 = null;
+                let imageName = file.name;
+
+                if (file) {
+                    formData.append('fi-file-receipt', file);
+                    formData.append('payment_receipt', file);
+
+                    imageBase64 = await new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    });
+                }
+
+                formData.append('fi-sender-fullName', fullName);
+
+                // الحصول على النص من الـ container
+                const messageContainer = document.getElementById('orderMessage');
+                if (messageContainer) {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = messageContainer.innerHTML;
+                    const textContent = tempDiv.textContent || tempDiv.innerText || '';
+                    formData.append('fi-text-message', textContent);
+                } else {
+                    const hiddenMsg = document.getElementById('hiddenOrderMessage');
+                    if (hiddenMsg) formData.append('fi-text-message', hiddenMsg.value);
+                }
+
+                let total = 0;
+                let totalItems = 0;
+                let productsList = '';
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    totalItems += item.quantity;
+                    const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ?
+                        ` (مقاس: ${item.selectedSize})` : '';
+                    const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
+                        ` (لون: ${item.selectedColor})` : '';
+                    productsList +=
+                        `${index + 1}. ${item.name}${sizeInfo}${colorInfo} | الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n`;
+                });
+
+                try {
+                    // ===== إرسال إلى Forminit =====
+                    const result = await forminit.submit(FORM_ID, formData, {
+                        redirect: REDIRECT_URL
+                    });
+
+                    contactSubmitBtn.disabled = false;
+                    contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب مع الإيصال';
+
+                    if (result.error) {
+                        contactStatus.textContent = '❌ ' + result.error.message;
+                        contactStatus.className = 'status-msg error';
+                        showNotification('❌ فشل الإرسال', 'error');
+                        return;
+                    }
+
+                    // ===== إرسال إيميل عبر EmailJS =====
+                    sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems, imageBase64,
+                            imageName)
+                        .then(() => console.log('✅ EmailJS sent'))
+                        .catch(err => console.error('❌ EmailJS error:', err));
+
+                    contactStatus.textContent = '✅ تم إرسال الطلب بنجاح مع صورة الإيصال!';
+                    contactStatus.className = 'status-msg success';
+                    showNotification('✅ تم إرسال الطلب بنجاح!', 'success');
+
+                    // ===== تفريغ العربة =====
+                    cart = [];
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateCartIconCount();
+                    renderCart();
+
+                    // ===== إعادة تعيين النموذج =====
+                    setTimeout(() => {
+                        closeCheckoutModal();
+                        contactForm.reset();
+                        document.getElementById('fileName').classList.remove('show');
+                        document.getElementById('imagePreview').classList.remove('show');
+                        document.getElementById('previewImg').src = '';
+                        uploadedImageBase64 = null;
+                        uploadedImageName = null;
+                        contactStatus.textContent = '';
+                        contactStatus.className = 'status-msg';
+                        document.getElementById('orderMessage').innerHTML = '🛒 لا توجد منتجات في العربة';
+                    }, 3000);
+
+                } catch (error) {
+                    contactSubmitBtn.disabled = false;
+                    contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب مع الإيصال';
+                    contactStatus.textContent = '❌ حدث خطأ: ' + error.message;
+                    contactStatus.className = 'status-msg error';
+                    showNotification('❌ فشل الإرسال', 'error');
+                    console.error('Forminit Error:', error);
+                }
+            });
+        }
+
+        // ============================================================
         // صفحة تفاصيل المنتج (مع مقاسات وألوان)
         // ============================================================
         function openProductDetails(productId) {
@@ -3614,39 +4088,6 @@
             }
             if (!selectedColors[productId]) {
                 selectedColors[productId] = null;
-            }
-
-            const similarProducts = allProducts.filter(p => p.id !== product.id && (p.category === product.category || p
-                .subcategory === product.subcategory)).slice(0, 4);
-
-            let similarHTML = '';
-            if (similarProducts.length > 0) {
-                similarHTML = `
-                    <div style="margin-top:25px;border-top:1px solid #e2e8f0;padding-top:20px;">
-                        <h3 style="font-size:18px;font-weight:800;margin-bottom:12px;">🛍️ <span style="color:#059669;">منتجات مشابهة</span></h3>
-                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;">
-                            ${similarProducts.map(p => {
-                                const isSimilarVideo = isVideoUrl(p.image);
-                                let similarMedia = '';
-                                if (isSimilarVideo) {
-                                    similarMedia = `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:contain;"><source src="${p.image}" type="video/mp4"></video>`;
-                                } else {
-                                    similarMedia = `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;" onerror="this.src='https://via.placeholder.com/150x130?text=Takamul'">`;
-                                }
-                                return `
-                                    <div style="background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);cursor:pointer;transition:0.3s;border:1px solid #e2e8f0;" onclick="openProductDetails(${p.id})">
-                                        <div style="width:100%;height:130px;background:#f8fafc;display:flex;align-items:center;justify-content:center;padding:8px;">
-                                            ${similarMedia}
-                                        </div>
-                                        <div style="padding:10px 12px 14px;">
-                                            <h4 style="font-size:13px;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;height:36px;">${p.name}</h4>
-                                            <span style="font-weight:800;font-size:16px;color:#1a1a2e;">${p.price} ج.م</span>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>`;
             }
 
             const stars = '⭐'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ? '⭐' : '');
@@ -3737,7 +4178,6 @@
                         <button class="add-to-cart-btn" onclick="addToCartWithSizeFromDetails(${product.id})" style="width:100%;padding:14px;background:linear-gradient(135deg,#059669,#047857);border:none;color:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:17px;transition:0.3s;margin-top:10px;">🛒 إضافة إلى العربة</button>
                     </div>
                 </div>
-                ${similarHTML}
             `;
 
             modal.classList.add('open');
@@ -3822,109 +4262,6 @@
         }
 
         // ============================================================
-        // Forminit
-        // ============================================================
-        async function sendOrderViaForminit(formData) {
-            try {
-                const result = await forminit.submit(FORM_ID, formData, { redirect: REDIRECT_URL });
-                if (result.error) return { success: false, error: result.error };
-                return { success: true, data: result };
-            } catch (error) {
-                return { success: false, error: error };
-            }
-        }
-
-        function sendOrderEmail(name, email, phone, address, total, productsList, totalItems) {
-            const message =
-                `🛍️ طلب جديد من متجر sun Store!\n\n👤 اسم العميل: ${name}\n📱 رقم الهاتف: ${phone}\n📍 العنوان: ${address}\n✉️ البريد الإلكتروني: ${email}\n\n📦 تفاصيل المنتجات:\n${productsList}\n\n📊 ملخص الطلب:\n• عدد القطع: ${totalItems} قطعة\n• الإجمالي: ${total} ج.م\n\n📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}`;
-
-            return emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-                to_email: STORE_EMAIL,
-                from_name: name,
-                from_email: email,
-                message: message,
-                subject: "🛍️ طلب جديد من متجر sun Store ",
-                phone: phone,
-                location: address,
-                total: total + " ج.م",
-                store_name: "sun Store",
-                year: new Date().getFullYear()
-            });
-        }
-
-        // ===== ربط نموذج Forminit =====
-        const contactForm = document.getElementById('contactForm');
-        const contactStatus = document.getElementById('contactStatus');
-        const contactSubmitBtn = document.getElementById('contactSubmitBtn');
-
-        if (contactForm && contactStatus) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                contactStatus.textContent = '⏳ جاري الإرسال...';
-                contactStatus.className = 'status-msg';
-                contactSubmitBtn.disabled = true;
-                contactSubmitBtn.textContent = '⏳ جاري الإرسال...';
-
-                const firstName = document.querySelector('input[name="fi-sender-firstName"]').value.trim() ||
-                    'غير مدخل';
-                const lastName = document.querySelector('input[name="fi-sender-lastName"]').value.trim() || '';
-                const phone = document.querySelector('input[name="fi-sender-phone"]').value.trim() || '';
-                const address = document.querySelector('input[name="fi-sender-address"]').value.trim() || '';
-                const email = document.querySelector('input[name="fi-sender-email"]').value.trim() || '';
-
-                const fullName = `${firstName} ${lastName}`.trim() || 'غير مدخل';
-
-                const formData = new FormData(contactForm);
-                const { data, error } = await forminit.submit(FORM_ID, formData, { redirect: REDIRECT_URL });
-
-                contactSubmitBtn.disabled = false;
-                contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب';
-
-                if (error) {
-                    contactStatus.textContent = '❌ ' + error.message;
-                    contactStatus.className = 'status-msg error';
-                    showNotification('❌ فشل الإرسال', 'error');
-                    return;
-                }
-
-                let total = 0,
-                    totalItems = 0,
-                    productsList = '';
-                cart.forEach((item, index) => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
-                    totalItems += item.quantity;
-                    const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ?
-                        ` (مقاس: ${item.selectedSize})` : '';
-                    const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
-                        ` (لون: ${item.selectedColor})` : '';
-                    productsList +=
-                        `${index + 1}. ${item.name}${sizeInfo}${colorInfo} | الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n`;
-                });
-
-                sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems)
-                    .then(() => console.log('✅ EmailJS sent'))
-                    .catch(err => console.error('❌ EmailJS error:', err));
-
-                contactStatus.textContent = '✅ تم إرسال الطلب بنجاح!';
-                contactStatus.className = 'status-msg success';
-                showNotification('✅ تم إرسال الطلب بنجاح!', 'success');
-
-                cart = [];
-                localStorage.setItem("cart", JSON.stringify(cart));
-                updateCartIconCount();
-                renderCart();
-
-                setTimeout(() => {
-                    closeCheckoutModal();
-                    contactForm.reset();
-                    contactStatus.textContent = '';
-                    contactStatus.className = 'status-msg';
-                }, 3000);
-            });
-        }
-
-        // ============================================================
         // أحداث DOM
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
@@ -3947,7 +4284,6 @@
                 if (e.target === this) closeProductDetails();
             });
 
-            // محاولة تشغيل الفيديو يدوياً بعد تحميل الصفحة
             setTimeout(() => {
                 document.querySelectorAll('video').forEach(video => {
                     video.play().catch(() => {});
@@ -3955,7 +4291,7 @@
             }, 1000);
         });
 
-        console.log('✅ متجر sun Store يعمل مع المقاسات والألوان والفيديو!');
+        console.log('✅ متجر sun Store يعمل مع المقاسات والألوان والفيديو وإنستا باي!');
         console.log('📦 عدد المنتجات:', allProducts.length);
     </script>
 </body>
