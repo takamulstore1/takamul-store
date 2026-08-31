@@ -2003,15 +2003,50 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #059669;
         }
+        /* ===== فيديو العرض الكامل ===== */
+section:has(video), section:has(iframe) {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+@media(max-width: 992px) {
+    section:has(video), section:has(iframe) {
+        min-height: 300px !important;
+    }
+}
+
+@media(max-width: 768px) {
+    section:has(video), section:has(iframe) {
+        min-height: 250px !important;
+    }
+}
+
+@media(max-width: 480px) {
+    section:has(video), section:has(iframe) {
+        min-height: 180px !important;
+    }
+}
     </style>
 </head>
 
 <body>
-
+<!-- ===== شريط الإعلانات المتحرك ===== -->
+<div style="background: linear-gradient(90deg, #0f172a, #059669, #0f172a); background-size: 200% 100%; animation: shimmer 4s ease-in-out infinite; color: #fff; padding: 10px 0; text-align: center; font-weight: 700; font-size: 16px; overflow: hidden; position: relative; z-index: 99999; border-bottom: 2px solid #34d399; direction: ltr;">
+    <marquee behavior="scroll" direction="left" scrollamount="6" style="color:#fff; font-size:17px;">
+        🎉 <span style="color:#34d399;">خصومات يوم الجمعة</span> - عروض لا تُفوت! 🎉 &nbsp;|&nbsp; 🔥 تخفيضات تصل إلى <span style="color:#fbbf24;">50%</span> 🔥 &nbsp;|&nbsp; 🛍️ تسوق الآن واستمتع بأفضل الأسعار 🛍️ &nbsp;|&nbsp; 🎁 عروض حصرية لفترة محدودة 🎁 &nbsp;|&nbsp; 🚚 توصيل مجاني على حسب المحافظه 🚚
+    </marquee>
+</div>
+<style>
+    @keyframes shimmer {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
     <!-- ===== شاشة تسجيل الدخول ===== -->
     <div id="loginScreen">
         <div class="login-box">
-            <img src="https://g.top4top.io/p_3889jf2jz1.png" alt="sun Store Logo" class="logo-img">
+            <img src="https://i.imgpeek.com/L3jbI_XDcIJK" alt="sun Store Logo" class="logo-img">
             <h2><span>sun</span> Store</h2>
             <p class="subtitle">🔐 تسجيل الدخول للوصول إلى المتجر</p>
 
@@ -2036,7 +2071,7 @@
     <!-- ===== شاشة التسجيل ===== -->
     <div id="registerScreen" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99998;backdrop-filter:blur(12px);justify-content:center;align-items:center;">
         <div class="login-box">
-            <img src="https://g.top4top.io/p_3889jf2jz1.png" alt="sun Store Logo" class="logo-img">
+            <img src="https://i.imgpeek.com/L3jbI_XDcIJK" alt="sun Store Logo" class="logo-img">
             <h2><span>📝</span> إنشاء حساب</h2>
             <p class="subtitle">سجل الآن للاستمتاع بتجربة التسوق</p>
 
@@ -2058,7 +2093,7 @@
     <!-- ===== شاشة إعادة تعيين كلمة المرور ===== -->
     <div id="resetPasswordScreen" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99998;backdrop-filter:blur(12px);justify-content:center;align-items:center;">
         <div class="login-box">
-            <img src="https://g.top4top.io/p_3889jf2jz1.png" alt="sun Store Logo" class="logo-img">
+            <img src="https://i.imgpeek.com/L3jbI_XDcIJK" alt="sun Store Logo" class="logo-img">
             <h2><span>🔑</span> إعادة تعيين</h2>
             <p class="subtitle">اختر إحدى الطرق التالية</p>
 
@@ -2095,7 +2130,7 @@
         <header class="amazon-header">
             <div class="amazon-header-top">
                 <a href="#" class="amazon-logo" onclick="filterProducts('all')">
-                    <img src="https://g.top4top.io/p_3889jf2jz1.png" alt="sun Store">
+                    <img src="https://i.imgpeek.com/L3jbI_XDcIJK" alt="sun Store">
                     <span>sun Store</span>
                 </a>
 
@@ -2208,14 +2243,21 @@
             </div>
         </nav>
 
-        <!-- ===== الهيرو ===== -->
-        <section class="amazon-hero">
-            <div class="hero-text">
-                <h1>أهلاً بك في <span>sun Store</span></h1>
-                <p>🛍️ أفضل العروض والمنتجات بأفضل الأسعار</p>
-            </div>
-        </section>
-
+<!-- ===== فيديو يوتيوب - عرض كامل ===== -->
+<section style="width:100%;height:auto;min-height:400px;background:#000;overflow:hidden;position:relative;aspect-ratio:16/9;">
+    <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline
+        style="width:100%;height:100%;object-fit:cover;display:block;"
+        src="https://a.top4top.io/m_3892lappb1.mp4">
+        متصفحك لا يدعم تشغيل الفيديو
+    </video>
+    <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 24px;border-radius:25px;font-size:15px;z-index:10;border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(4px);white-space:nowrap;">
+        🛍️ sun Store - أفضل العروض والمنتجات
+    </div>
+</section>
         <!-- ===== المنتجات ===== -->
         <div class="section-title">
             🛍️ <span>منتجاتنا</span>
@@ -2267,7 +2309,7 @@
                     <h3>الإجمالي</h3>
                     <h2><span id="cartTotal">0</span> ج.م</h2>
                 </div>
-                <button class="checkout-btn" onclick="checkout()">📧 طلب عبر البريد الإلكتروني</button>
+                <button class="checkout-btn" onclick="checkout()">📧 تأكيد الطلب </button>
                 <button class="clear-cart-btn" onclick="clearCart()">🗑️ تفريغ العربة</button>
             </div>
         </aside>
@@ -2329,21 +2371,61 @@
                 <div class="privacy-modal-body">
                     <div class="checkout-box">
 
-                        <!-- ===== قسم إنستا باي مع رفع الصورة ===== -->
-                        <div class="instapay-section">
-                            <div class="instapay-title">
-                                <i class="fas fa-mobile-alt"></i>
-                                الدفع عبر إنستا باي
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <p style="color:#334155;font-size:14px;margin-bottom:6px;">📱 قم بتحويل المبلغ إلى الرقم التالي:</p>
-                            <div class="instapay-number">
-                                <i class="fas fa-phone"></i> 01550533369
-                            </div>
-                            <button class="copy-btn" onclick="copyInstapayNumber()">
-                                <i class="fas fa-copy"></i> نسخ الرقم
-                            </button>
+                     <!-- ===== قسم إنستا باي مع رفع الصورة ===== -->
+<div class="instapay-section">
+    <div class="instapay-title">
+        <i class="fas fa-mobile-alt"></i>
+        الدفع عبر إنستا باي &amp; المحافظ الإلكترونية
+        <i class="fas fa-shield-alt"></i>
+    </div>
+    <p style="color:#334155;font-size:14px;margin-bottom:6px;">
+        📱 قم بتحويل مبلغ التوصيل إلى أحد الأرقام التالية:
+    </p>
 
+    <!-- رقم إنستا باي -->
+    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;">
+        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">🏦 إنستا باي</span>
+        <div class="instapay-number" style="font-size:20px;padding:6px 16px;">
+            <i class="fas fa-phone"></i> 01550533369
+        </div>
+        <button class="copy-btn" onclick="copyInstapayNumber('01550533369')" style="margin:2px 0 8px;">
+            <i class="fas fa-copy"></i> نسخ الرقم
+        </button>
+    </div>
+
+    <!-- رقم المحفظة الإلكترونية -->
+    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;border-top:1px dashed rgba(5,150,105,0.3);padding-top:8px;">
+        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">💳 محفظة إلكترونية</span>
+        <div class="instapay-number" style="font-size:20px;padding:6px 16px;border-color:#3b82f6;">
+            <i class="fas fa-wallet"></i> 01500945666
+        </div>
+        <button class="copy-btn" onclick="copyInstapayNumber('01500945666')" style="margin:2px 0 8px;background:#3b82f6;">
+            <i class="fas fa-copy"></i> نسخ الرقم
+        </button>
+    </div>
+
+    <!-- ===== رفع الصورة ===== -->
+    <div class="upload-section">
+        <label class="upload-label" for="paymentImage">
+            <i class="fas fa-upload"></i>
+            <span>📸 اضغط لرفع صورة إيصال التحويل</span>
+            <span style="font-size:12px;color:#94a3b8;">(jpg, png, pdf) - ستظهر في الرسالة</span>
+        </label>
+        <input type="file" id="paymentImage" name="fi-file-receipt" accept="image/*,application/pdf" onchange="previewImage(event)">
+        <div class="file-name" id="fileName">✅ تم اختيار: <span id="fileNameText"></span></div>
+        <div class="upload-preview" id="imagePreview">
+            <img id="previewImg" src="" alt="صورة الإيصال">
+        </div>
+    </div>
+
+    <div class="instapay-hint">
+        <i class="fas fa-info-circle"></i> بعد التحويل، ارفع صورة الإيصال وستظهر في ملخص الطلب
+    </div>
+    <div class="payment-note">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>ملاحظة:</strong> سيتم تأكيد طلبك بعد التحقق من إيصال الدفع.
+    </div>
+</div>
                             <!-- ===== رفع الصورة ===== -->
                             <div class="upload-section">
                                 <label class="upload-label" for="paymentImage">
@@ -2390,7 +2472,7 @@
                                         <div id="orderMessage">🛒 لا توجد منتجات في العربة</div>
                                     </div>
 
-                                    <button type="submit" class="submit-btn" id="contactSubmitBtn">📧 تأكيد وإرسال الطلب مع الإيصال</button>
+                                    <button type="submit" class="submit-btn" id="contactSubmitBtn">📧 تأكيد وإرسال الطلب </button>
                                     <p id="contactStatus" class="status-msg"></p>
                                 </div>
                             </form>
@@ -3624,40 +3706,37 @@
             }
         }
 
-        // ============================================================
-        // إنستا باي دوال
-        // ============================================================
-        function copyInstapayNumber() {
-            const number = '01550533369';
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(number)
-                    .then(() => {
-                        showNotification('✅ تم نسخ رقم إنستا باي: ' + number, 'success');
-                    })
-                    .catch(() => {
-                        fallbackCopy(number);
-                    });
-            } else {
+       // دالة نسخ الأرقام (تعمل مع أي رقم)
+function copyInstapayNumber(number) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(number)
+            .then(() => {
+                showNotification('✅ تم نسخ الرقم: ' + number, 'success');
+            })
+            .catch(() => {
                 fallbackCopy(number);
-            }
-        }
+            });
+    } else {
+        fallbackCopy(number);
+    }
+}
 
-        function fallbackCopy(text) {
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showNotification('✅ تم نسخ رقم إنستا باي: ' + text, 'success');
-            } catch (err) {
-                showNotification('⚠️ فشل النسخ، الرقم: ' + text, 'error');
-            }
-            document.body.removeChild(textarea);
-        }
-
+// دالة احتياطية للنسخ
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        showNotification('✅ تم نسخ الرقم: ' + text, 'success');
+    } catch (err) {
+        showNotification('⚠️ فشل النسخ، الرقم: ' + text, 'error');
+    }
+    document.body.removeChild(textarea);
+}
         // ============================================================
         // معاينة الصورة وتحويلها إلى Base64
         // ============================================================
