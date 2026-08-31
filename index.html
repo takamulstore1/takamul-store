@@ -368,7 +368,7 @@
             cursor: pointer;
             outline: none;
             border-right: 1px solid #ccc;
-            min-width: 80px;
+            min-width: 100px;
         }
 
         .amazon-search input {
@@ -454,101 +454,6 @@
 
         .amazon-header-actions .logout-btn:hover {
             background: #b91c1c;
-        }
-
-        /* ===== شريط التصنيفات ===== */
-        .amazon-nav {
-            background: #1e293b;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            overflow-x: auto;
-            height: 42px;
-            position: sticky;
-            top: 64px;
-            z-index: 999;
-        }
-
-        .amazon-nav::-webkit-scrollbar {
-            height: 0;
-        }
-
-        .amazon-nav .nav-item {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 4px;
-            transition: 0.3s;
-            white-space: nowrap;
-            cursor: pointer;
-            border: 1px solid transparent;
-            position: relative;
-        }
-
-        .amazon-nav .nav-item:hover {
-            border-color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .amazon-nav .nav-item.active {
-            color: #059669;
-            border-bottom: 2px solid #059669;
-        }
-
-        .amazon-nav .nav-item .arrow {
-            font-size: 10px;
-            margin-right: 4px;
-            transition: 0.3s;
-        }
-
-        .amazon-nav .nav-item:hover .arrow {
-            transform: rotate(180deg);
-        }
-
-        /* ===== القائمة المنسدلة ===== */
-        .submenu-dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: #fff;
-            min-width: 220px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 8px 0;
-            z-index: 1000;
-            border: 1px solid #e2e8f0;
-        }
-
-        .amazon-nav .nav-item:hover .submenu-dropdown {
-            display: block;
-        }
-
-        .submenu-dropdown a {
-            display: block;
-            padding: 10px 20px;
-            color: #1a1a2e;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.2s;
-            cursor: pointer;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .submenu-dropdown a:last-child {
-            border-bottom: none;
-        }
-
-        .submenu-dropdown a:hover {
-            background: #f0f2f5;
-            color: #059669;
-        }
-
-        .submenu-dropdown a .sub-icon {
-            margin-left: 8px;
         }
 
         /* ===== الهيرو ===== */
@@ -1841,15 +1746,6 @@
                 justify-content: center;
                 flex-wrap: wrap;
             }
-            .amazon-nav {
-                top: auto;
-                padding: 0 10px;
-                height: 38px;
-            }
-            .amazon-nav .nav-item {
-                font-size: 12px;
-                padding: 6px 10px;
-            }
             .amazon-hero {
                 height: 180px;
             }
@@ -1968,10 +1864,6 @@
             .product-card .discount-badge {
                 font-size: 9px;
                 padding: 2px 6px;
-            }
-            .amazon-nav .nav-item {
-                font-size: 11px;
-                padding: 4px 8px;
             }
             .amazon-hero h1 {
                 font-size: 20px;
@@ -2134,8 +2026,10 @@ section:has(video), section:has(iframe) {
                     <span>sun Store</span>
                 </a>
 
-                <div class="amazon-search">
-                    <select id="categorySelect" onchange="filterByCategorySelect()">
+                <!-- ===== خانة البحث الجديدة (قائمتين منسدلتين) ===== -->
+                <div class="amazon-search" style="display:flex; gap:5px;">
+                    <!-- القائمة المنسدلة للتصنيفات الرئيسية -->
+                    <select id="mainCategorySelect" onchange="updateSubcategories()" style="background:#f3f3f3;border:none;padding:0 10px;font-size:13px;color:#555;cursor:pointer;outline:none;border-right:1px solid #ccc;min-width:100px;text-align:center;">
                         <option value="all">الكل</option>
                         <option value="ملابس">👕 ملابس</option>
                         <option value="إلكترونيات">💻 إلكترونيات</option>
@@ -2144,8 +2038,14 @@ section:has(video), section:has(iframe) {
                         <option value="أطفال">🧸 أطفال</option>
                         <option value="رياضة">⚽ رياضة</option>
                     </select>
-                    <input type="text" id="searchInput" placeholder="ابحث عن أي منتج..." onkeyup="searchProducts()">
-                    <button onclick="searchProducts()">🔍</button>
+
+                    <!-- القائمة المنسدلة للتصنيفات الفرعية (تتغير حسب القسم الرئيسي) -->
+                    <select id="subCategorySelect" onchange="searchProducts()" style="background:#f3f3f3;border:none;padding:0 10px;font-size:13px;color:#555;cursor:pointer;outline:none;border-right:1px solid #ccc;min-width:120px;text-align:center;">
+                        <option value="">كل العناصر</option>
+                    </select>
+
+                    <input type="text" id="searchInput" placeholder="ابحث عن أي منتج..." onkeyup="searchProducts()" style="flex:1;border:none;outline:none;padding:0 15px;font-size:15px;color:#111;">
+                    <button onclick="searchProducts()" style="background:#059669;border:none;padding:0 20px;color:#fff;font-size:18px;cursor:pointer;transition:0.3s;">🔍</button>
                 </div>
 
                 <div class="amazon-header-actions">
@@ -2157,91 +2057,6 @@ section:has(video), section:has(iframe) {
                 </div>
             </div>
         </header>
-
-        <!-- ===== شريط التصنيفات ===== -->
-        <nav class="amazon-nav" id="categoriesBar">
-            <div class="nav-item active" data-category="all" onclick="filterProducts('all')">
-                ☰ الكل
-            </div>
-
-            <div class="nav-item" data-category="ملابس" onclick="filterProducts('ملابس')">
-                👕 ملابس
-                <span class="arrow">▼</span>
-                <div class="submenu-dropdown">
-                    <a onclick="filterProducts('تيشيرتات')">👕 تيشيرتات</a>
-                    <a onclick="filterProducts('بناطيل')">👖 بناطيل</a>
-                    <a onclick="filterProducts('جواكت')">🧥 جواكت</a>
-                    <a onclick="filterProducts('بدل')">🤵 بدل</a>
-                    <a onclick="filterProducts('ملابس حريمي')">👗 ملابس حريمي</a>
-                    <a onclick="filterProducts('أحذية')">👟 أحذية</a>
-                    <a onclick="filterProducts('إكسسوارات')">⌚ إكسسوارات</a>
-                </div>
-            </div>
-
-            <div class="nav-item" data-category="إلكترونيات" onclick="filterProducts('إلكترونيات')">
-                💻 إلكترونيات
-                <span class="arrow">▼</span>
-                <div class="submenu-dropdown">
-                    <a onclick="filterProducts('هواتف')">📱 هواتف</a>
-                    <a onclick="filterProducts('لابتوب')">💻 لابتوب</a>
-                    <a onclick="filterProducts('تابلت')">📟 تابلت</a>
-                    <a onclick="filterProducts('شاشات')">🖥️ شاشات</a>
-                    <a onclick="filterProducts('سماعات')">🎧 سماعات</a>
-                    <a onclick="filterProducts('طابعات')">🖨️ طابعات</a>
-                    <a onclick="filterProducts('ملحقات كمبيوتر')">🖱️ ملحقات كمبيوتر</a>
-                </div>
-            </div>
-
-            <div class="nav-item" data-category="منزل" onclick="filterProducts('منزل')">
-                🏠 منزل ومطبخ
-                <span class="arrow">▼</span>
-                <div class="submenu-dropdown">
-                    <a onclick="filterProducts('موازين')">⚖️ موازين</a>
-                    <a onclick="filterProducts('مطبخ')">🍳 مطبخ</a>
-                    <a onclick="filterProducts('أثاث')">🛋️ أثاث</a>
-                    <a onclick="filterProducts('ديكور')">🖼️ ديكور</a>
-                    <a onclick="filterProducts('أجهزة منزلية')">🔌 أجهزة منزلية</a>
-                    <a onclick="filterProducts('أدوات تنظيف')">🧹 أدوات تنظيف</a>
-                    <a onclick="filterProducts('إضاءة')">💡 إضاءة</a>
-                </div>
-            </div>
-
-            <div class="nav-item" data-category="جمال" onclick="filterProducts('جمال')">
-                💄 جمال وعناية
-                <span class="arrow">▼</span>
-                <div class="submenu-dropdown">
-                    <a onclick="filterProducts('عطور')">🌸 عطور</a>
-                    <a onclick="filterProducts('مكياج')">💄 مكياج</a>
-                    <a onclick="filterProducts('عناية بشرة')">🧴 عناية بشرة</a>
-                    <a onclick="filterProducts('عناية شعر')">💇 عناية شعر</a>
-                    <a onclick="filterProducts('أدوات تجميل')">🪞 أدوات تجميل</a>
-                </div>
-            </div>
-
-            <div class="nav-item" data-category="أطفال" onclick="filterProducts('أطفال')">
-                🧸 أطفال
-                <span class="arrow">▼</span>
-                <div class="submenu-dropdown">
-                    <a onclick="filterProducts('ملابس أطفال')">👕 ملابس أطفال</a>
-                    <a onclick="filterProducts('ألعاب')">🎮 ألعاب</a>
-                    <a onclick="filterProducts('مستلزمات رضاعة')">🍼 مستلزمات رضاعة</a>
-                    <a onclick="filterProducts('عربات أطفال')">🚼 عربات أطفال</a>
-                    <a onclick="filterProducts('أثاث أطفال')">🛏️ أثاث أطفال</a>
-                </div>
-            </div>
-
-            <div class="nav-item" data-category="رياضة" onclick="filterProducts('رياضة')">
-                ⚽ رياضة
-                <span class="arrow">▼</span>
-                <div class="submenu-dropdown">
-                    <a onclick="filterProducts('ملابس رياضية')">👕 ملابس رياضية</a>
-                    <a onclick="filterProducts('أحذية رياضية')">👟 أحذية رياضية</a>
-                    <a onclick="filterProducts('معدات رياضية')">🏋️ معدات رياضية</a>
-                    <a onclick="filterProducts('كرة قدم')">⚽ كرة قدم</a>
-                    <a onclick="filterProducts('جري')">🏃 مستلزمات جري</a>
-                </div>
-            </div>
-        </nav>
 
 <!-- ===== فيديو يوتيوب - عرض كامل ===== -->
 <section style="width:100%;height:auto;min-height:400px;background:#000;overflow:hidden;position:relative;aspect-ratio:16/9;">
@@ -3492,17 +3307,13 @@ section:has(video), section:has(iframe) {
             };
             breadcrumb.textContent = categoryNames[category] || category;
 
-            const select = document.getElementById('categorySelect');
-            if (select) {
-                select.value = category;
+            // تحديث القائمة الرئيسية
+            const mainSelect = document.getElementById('mainCategorySelect');
+            if (mainSelect) {
+                mainSelect.value = category;
             }
-
-            document.querySelectorAll('.amazon-nav .nav-item').forEach(el => {
-                el.classList.remove('active');
-                if (el.dataset.category === category) {
-                    el.classList.add('active');
-                }
-            });
+            // تحديث القائمة الفرعية
+            updateSubcategories();
 
             let filtered = allProducts;
             if (category !== 'all') {
@@ -3525,20 +3336,115 @@ section:has(video), section:has(iframe) {
             filterProducts(select.value);
         }
 
-        function searchProducts() {
-            const searchInput = document.getElementById('searchInput').value.trim().toLowerCase();
-            let filtered = allProducts;
+        // ===== دالة تحديث القائمة الفرعية حسب القسم الرئيسي =====
+        function updateSubcategories() {
+            const mainSelect = document.getElementById('mainCategorySelect');
+            const subSelect = document.getElementById('subCategorySelect');
+            const mainCategory = mainSelect.value;
 
-            if (currentCategory !== 'all') {
-                filtered = filtered.filter(p =>
-                    p.category === currentCategory ||
-                    p.subcategory === currentCategory
-                );
+            // مسح القائمة الفرعية الحالية
+            subSelect.innerHTML = '';
+
+            // إضافة خيار "كل العناصر" افتراضياً
+            subSelect.innerHTML += `<option value="">كل العناصر</option>`;
+
+            // إضافة العناصر الفرعية حسب القسم المختار
+            if (mainCategory === 'ملابس') {
+                subSelect.innerHTML += `
+                    <option value="تيشيرتات">تيشيرتات</option>
+                    <option value="بناطيل">بناطيل</option>
+                    <option value="جواكت">جواكت</option>
+                    <option value="بدل">بدل</option>
+                    <option value="ملابس حريمي">ملابس حريمي</option>
+                    <option value="أحذية">أحذية</option>
+                    <option value="إكسسوارات">إكسسوارات</option>
+                `;
+            } else if (mainCategory === 'إلكترونيات') {
+                subSelect.innerHTML += `
+                    <option value="هواتف">هواتف</option>
+                    <option value="لابتوب">لابتوب</option>
+                    <option value="تابلت">تابلت</option>
+                    <option value="شاشات">شاشات</option>
+                    <option value="سماعات">سماعات</option>
+                    <option value="طابعات">طابعات</option>
+                    <option value="ملحقات كمبيوتر">ملحقات كمبيوتر</option>
+                `;
+            } else if (mainCategory === 'منزل') {
+                subSelect.innerHTML += `
+                    <option value="موازين">موازين</option>
+                    <option value="مطبخ">مطبخ</option>
+                    <option value="أثاث">أثاث</option>
+                    <option value="ديكور">ديكور</option>
+                    <option value="أجهزة منزلية">أجهزة منزلية</option>
+                    <option value="أدوات تنظيف">أدوات تنظيف</option>
+                    <option value="إضاءة">إضاءة</option>
+                `;
+            } else if (mainCategory === 'جمال') {
+                subSelect.innerHTML += `
+                    <option value="عطور">عطور</option>
+                    <option value="مكياج">مكياج</option>
+                    <option value="عناية بشرة">عناية بشرة</option>
+                    <option value="عناية شعر">عناية شعر</option>
+                    <option value="أدوات تجميل">أدوات تجميل</option>
+                `;
+            } else if (mainCategory === 'أطفال') {
+                subSelect.innerHTML += `
+                    <option value="ملابس أطفال">ملابس أطفال</option>
+                    <option value="ألعاب">ألعاب</option>
+                    <option value="مستلزمات رضاعة">مستلزمات رضاعة</option>
+                    <option value="عربات أطفال">عربات أطفال</option>
+                    <option value="أثاث أطفال">أثاث أطفال</option>
+                `;
+            } else if (mainCategory === 'رياضة') {
+                subSelect.innerHTML += `
+                    <option value="ملابس رياضية">ملابس رياضية</option>
+                    <option value="أحذية رياضية">أحذية رياضية</option>
+                    <option value="معدات رياضية">معدات رياضية</option>
+                    <option value="كرة قدم">كرة قدم</option>
+                    <option value="جري">جري</option>
+                `;
             }
 
+            // بعد ما تتحدث القائمة الفرعية، قم بالبحث مباشرة
+            searchProducts();
+        }
+
+        // ===== دالة البحث الرئيسية (تشتغل بالضغط على زر البحث أو الكتابة) =====
+        function searchProducts() {
+            const mainSelect = document.getElementById('mainCategorySelect');
+            const subSelect = document.getElementById('subCategorySelect');
+            const mainCategory = mainSelect.value;
+            const subCategory = subSelect.value;
+            const searchInput = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            let filtered = allProducts;
+
+            // 1. فلترة حسب القسم الرئيسي
+            if (mainCategory !== 'all') {
+                filtered = filtered.filter(p => p.category === mainCategory);
+            }
+
+            // 2. فلترة حسب القسم الفرعي (لو مختار حاجة)
+            if (subCategory !== '') {
+                filtered = filtered.filter(p => p.subcategory === subCategory);
+            }
+
+            // 3. فلترة حسب نص البحث
             if (searchInput) {
                 filtered = filtered.filter(p => p.name.toLowerCase().includes(searchInput));
             }
+
+            // تحديث عنوان الصفحة
+            const breadcrumb = document.getElementById('categoryBreadcrumb');
+            if (mainCategory === 'all' && subCategory === '') {
+                breadcrumb.textContent = 'الكل';
+            } else if (mainCategory !== 'all' && subCategory === '') {
+                breadcrumb.textContent = mainCategory;
+            } else {
+                breadcrumb.textContent = subCategory;
+            }
+
+            // عرض المنتجات
             displayProducts(filtered);
         }
 
