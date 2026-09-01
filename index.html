@@ -456,47 +456,93 @@
             background: #b91c1c;
         }
 
-        /* ===== الهيرو ===== */
-        .amazon-hero {
+        /* ===== الهيرو الجديد (معرض صور متحرك) ===== */
+        .hero-slider {
             width: 100%;
             height: 280px;
-            background: linear-gradient(135deg, #0f172a, #1a1a2e, #059669);
+            position: relative;
+            overflow: hidden;
+            background: #0f172a;
+        }
+
+        .hero-slider .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            background-size: cover;
+            background-position: center;
         }
 
-        .amazon-hero::before {
-            content: '';
+        .hero-slider .slide.active {
+            opacity: 1;
+        }
+
+        .hero-slider .slide .overlay {
             position: absolute;
             inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .amazon-hero .hero-text {
-            position: relative;
+            background: rgba(15, 23, 42, 0.6);
             z-index: 1;
-            padding: 0 20px;
         }
 
-        .amazon-hero h1 {
+        .hero-slider .slide .content {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+            color: #fff;
+        }
+
+        .hero-slider .slide h1 {
             font-size: 42px;
             margin-bottom: 10px;
-            color: #ffffff;
             font-weight: 800;
         }
 
-        .amazon-hero h1 span {
+        .hero-slider .slide h1 span {
             color: #34d399;
         }
 
-        .amazon-hero p {
+        .hero-slider .slide p {
             font-size: 20px;
             color: #cbd5e1;
             font-weight: 300;
+        }
+
+        /* ===== أزرار السلايدر ===== */
+        .hero-slider .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: #fff;
+            font-size: 30px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-slider .slider-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+            color: #0f172a;
+        }
+
+        .hero-slider .slider-btn.prev {
+            left: 20px;
+        }
+
+        .hero-slider .slider-btn.next {
+            right: 20px;
         }
 
         /* ===== المنتجات ===== */
@@ -1720,10 +1766,10 @@
             .amazon-logo {
                 font-size: 22px;
             }
-            .amazon-hero h1 {
+            .hero-slider .slide h1 {
                 font-size: 32px;
             }
-            .amazon-hero p {
+            .hero-slider .slide p {
                 font-size: 17px;
             }
             .privacy-modal-content {
@@ -1746,13 +1792,13 @@
                 justify-content: center;
                 flex-wrap: wrap;
             }
-            .amazon-hero {
+            .hero-slider {
                 height: 180px;
             }
-            .amazon-hero h1 {
+            .hero-slider .slide h1 {
                 font-size: 24px;
             }
-            .amazon-hero p {
+            .hero-slider .slide p {
                 font-size: 14px;
             }
             #productsContainer {
@@ -1865,7 +1911,7 @@
                 font-size: 9px;
                 padding: 2px 6px;
             }
-            .amazon-hero h1 {
+            .hero-slider .slide h1 {
                 font-size: 20px;
             }
             .order-message-container {
@@ -1895,29 +1941,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #059669;
         }
-        /* ===== فيديو العرض الكامل ===== */
-section:has(video), section:has(iframe) {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-@media(max-width: 992px) {
-    section:has(video), section:has(iframe) {
-        min-height: 300px !important;
-    }
-}
-
-@media(max-width: 768px) {
-    section:has(video), section:has(iframe) {
-        min-height: 250px !important;
-    }
-}
-
-@media(max-width: 480px) {
-    section:has(video), section:has(iframe) {
-        min-height: 180px !important;
-    }
-}
     </style>
 </head>
 
@@ -2058,21 +2081,54 @@ section:has(video), section:has(iframe) {
             </div>
         </header>
 
-<!-- ===== فيديو يوتيوب - عرض كامل ===== -->
-<section style="width:100%;height:auto;min-height:400px;background:#000;overflow:hidden;position:relative;aspect-ratio:16/9;">
-    <video 
-        autoplay 
-        muted 
-        loop 
-        playsinline
-        style="width:100%;height:100%;object-fit:cover;display:block;"
-        src="https://a.top4top.io/m_3892lappb1.mp4">
-        متصفحك لا يدعم تشغيل الفيديو
-    </video>
-    <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 24px;border-radius:25px;font-size:15px;z-index:10;border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(4px);white-space:nowrap;">
-        🛍️ sun Store - أفضل العروض والمنتجات
+<!-- ===== الهيرو الجديد (معرض صور متحرك) مع أزرار ===== -->
+<section class="hero-slider" id="heroSlider">
+    <!-- الصورة 1 -->
+    <div class="slide active" style="background-image: url('https://i.imgpeek.com/sCYts4cTeWgc');">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>🛍️ <span>sun Store</span></h1>
+            <p>أفضل العروض والمنتجات في مصر</p>
+        </div>
     </div>
+    <!-- الصورة 2 -->
+    <div class="slide" style="background-image: url('https://i.imgpeek.com/NUmhETHu98pe');">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>👕 <span>أحدث</span> الموضة</h1>
+            <p>تشكيلة مميزة من الملابس العصرية</p>
+        </div>
+    </div>
+    <!-- الصورة 3 -->
+    <div class="slide" style="background-image: url('https://i.imgpeek.com/1QnVxTJEzfJm');">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>💻 <span>إلكترونيات</span> متطورة</h1>
+            <p>أفضل الأجهزة بأفضل الأسعار</p>
+        </div>
+    </div>
+    <!-- الصورة 4 -->
+    <div class="slide" style="background-image: url('https://i.imgpeek.com/j-ZWWE-EnEqI');">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>🏠 <span>منزل</span> ومطبخ</h1>
+            <p>كل ما تحتاجه لمنزلك المثالي</p>
+        </div>
+    </div>
+    <!-- الصورة 5 -->
+    <div class="slide" style="background-image: url('https://i.imgpeek.com/WL1nx7kUYbrN');">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>💄 <span>جمال</span> وعناية</h1>
+            <p>منتجات العناية والجمال الأفضل</p>
+        </div>
+    </div>
+
+    <!-- أزرار التنقل -->
+    <button class="slider-btn prev" onclick="manualSlide(-1)">&#10094;</button>
+    <button class="slider-btn next" onclick="manualSlide(1)">&#10095;</button>
 </section>
+
         <!-- ===== المنتجات ===== -->
         <div class="section-title">
             🛍️ <span>منتجاتنا</span>
@@ -2921,6 +2977,46 @@ section:has(video), section:has(iframe) {
 
         let selectedSizes = {};
         let selectedColors = {};
+
+        // ============================================================
+        // دوال السلايدر (الحركة التلقائية والتنقل اليدوي)
+        // ============================================================
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slider .slide');
+        const slideInterval = 7000; // 7 ثواني
+        let slideTimer;
+
+        function showSlide(index) {
+            // إذا وصلنا لآخر صورة، نرجع للأولى والعكس
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+
+            // إزالة كلاس "active" من كل الصور
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // إضافة كلاس "active" للصورة الحالية
+            slides[index].classList.add('active');
+            
+            currentSlideIndex = index;
+        }
+
+        function startAutoSlide() {
+            // إيقاف المؤقت السابق إذا كان موجوداً
+            clearInterval(slideTimer);
+            
+            // بدء مؤقت جديد
+            slideTimer = setInterval(() => {
+                showSlide(currentSlideIndex + 1);
+            }, slideInterval);
+        }
+
+        function manualSlide(direction) {
+            // إظهار الصورة التالية أو السابقة بناءً على الضغط
+            showSlide(currentSlideIndex + direction);
+            
+            // إعادة تشغيل العداد بعد التنقل اليدوي
+            startAutoSlide();
+        }
 
         // ============================================================
         // دوال عرض الصورة/الفيديو في مودال منفصل
@@ -4241,6 +4337,9 @@ function fallbackCopy(text) {
         // أحداث DOM
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
+            // تشغيل السلايدر عند تحميل الصفحة
+            startAutoSlide();
+
             window.addEventListener('scroll', () => {
                 const btn = document.getElementById('backToTop');
                 if (window.scrollY > 400) btn.classList.add('show');
