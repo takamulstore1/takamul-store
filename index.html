@@ -2415,32 +2415,39 @@ window.addEventListener('unhandledrejection', function(event) {
         console.error('❌ Domain not authorized:', window.location.hostname);
     }
 }); 
-
 function handleGoogleLogin() {
     const errorEl = document.getElementById('loginError');
     const successEl = document.getElementById('loginSuccess');
     const googleBtn = document.getElementById('googleLoginBtn');
     const loginBtn = document.getElementById('loginBtn');
 
+    // إخفاء الرسائل السابقة
     errorEl.classList.remove('show');
     successEl.classList.remove('show');
     
+    // تعطيل الأزرار
     googleBtn.disabled = true;
     loginBtn.disabled = true;
     googleBtn.innerHTML = '⏳ جاري الاتصال بـ Google...';
 
+    // استخدام signInWithPopup
     auth.signInWithPopup(googleProvider)
         .then((result) => {
+            // تم تسجيل الدخول بنجاح
             const user = result.user;
             console.log('✅ تم تسجيل الدخول بواسطة Google:', user.email);
+            
             successEl.textContent = `✅ مرحباً ${user.displayName || user.email}! جاري تحويلك...`;
             successEl.classList.add('show');
+            
             closeMediaModal();
             showNotification(`👋 مرحباً ${user.displayName || 'مستخدم'}!`, 'success');
         })
         .catch((error) => {
             console.error('❌ خطأ في تسجيل الدخول بجوجل:', error);
+            
             let msg = '⚠️ فشل تسجيل الدخول بواسطة Google';
+            
             switch(error.code) {
                 case 'auth/popup-closed-by-user':
                     msg = '⚠️ تم إغلاق نافذة تسجيل الدخول قبل إكمال العملية';
@@ -2451,17 +2458,28 @@ function handleGoogleLogin() {
                 case 'auth/account-exists-with-different-credential':
                     msg = '⚠️ يوجد حساب بنفس البريد الإلكتروني ولكن بكلمة مرور. يرجى تسجيل الدخول بالبريد وكلمة المرور أولاً.';
                     break;
+                case 'auth/cancelled-popup-request':
+                    msg = '⚠️ تم إلغاء طلب تسجيل الدخول';
+                    break;
+                case 'auth/network-request-failed':
+                    msg = '⚠️ فشل الاتصال بالشبكة. تحقق من اتصالك بالإنترنت';
+                    break;
+                case 'auth/too-many-requests':
+                    msg = '⚠️ تم إرسال العديد من الطلبات. حاول لاحقاً';
+                    break;
                 case 'auth/unauthorized-domain':
-                    msg = '⚠️ هذا المجال غير مصرح به. يرجى إضافة المجال إلى Firebase Console';
+                    msg = '⚠️ هذا المجال غير مصرح به. أضف المجال في Firebase Console';
                     break;
                 default:
                     msg = `⚠️ حدث خطأ: ${error.message}`;
             }
+            
             errorEl.textContent = msg;
             errorEl.classList.add('show');
             showNotification(msg, 'error');
         })
         .finally(() => {
+            // إعادة تمكين الأزرار
             googleBtn.disabled = false;
             loginBtn.disabled = false;
             googleBtn.innerHTML = `
@@ -2475,26 +2493,6 @@ function handleGoogleLogin() {
             `;
         });
 }
-
-
-        // ===== إصلاح file:// =====
-        (function fixEnvironment() {
-            if (window.location.protocol === 'file:') {
-                console.warn('⚠️ تشغيل محلي - محاكاة بيئة آمنة');
-                if (typeof localStorage === 'undefined') {
-                    window.localStorage = {
-                        _data: {},
-                        setItem: function(id, val) { this._data[id] = String(val); },
-                        getItem: function(id) { return this._data[id] || null; },
-                        removeItem: function(id) { delete this._data[id]; },
-                        clear: function() { this._data = {}; }
-                    };
-                }
-                if (!window.isSecureContext) {
-                    try { Object.defineProperty(window, 'isSecureContext', { value: true, writable: false, configurable: false }); } catch (e) {}
-                }
-            }
-        })();
 
         // ===== Firebase Configuration =====
         const firebaseConfig = {
