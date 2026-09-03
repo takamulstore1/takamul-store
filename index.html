@@ -2003,6 +2003,10 @@
                 background-position: 0% 50%;
             }
         }
+
+        .hero-slider .slide .overlay {
+    cursor: pointer;
+}
     </style>
 
     <!-- ===== شاشة تسجيل الدخول ===== -->
@@ -2139,32 +2143,44 @@
             </div>
         </header>
 
-        <!-- ===== الهيرو ===== -->
-        <section class="hero-slider" id="heroSlider">
-            <div class="slide active" style="background-image: url('https://i.imgpeek.com/sCYts4cTeWgc'); cursor: pointer;" onclick="openHeroImage('https://i.imgpeek.com/sCYts4cTeWgc')">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
-            <div class="slide" style="background-image: url('https://i.imgpeek.com/NUmhETHu98pe'); cursor: pointer;" onclick="openHeroImage('https://i.imgpeek.com/NUmhETHu98pe')">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
-            <div class="slide" style="background-image: url('https://i.imgpeek.com/1QnVxTJEzfJm'); cursor: pointer;" onclick="openHeroImage('https://i.imgpeek.com/1QnVxTJEzfJm')">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
-            <div class="slide" style="background-image: url('https://i.imgpeek.com/j-ZWWE-EnEqI'); cursor: pointer;" onclick="openHeroImage('https://i.imgpeek.com/j-ZWWE-EnEqI')">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
-            <div class="slide" style="background-image: url('https://i.imgpeek.com/WL1nx7kUYbrN'); cursor: pointer;" onclick="openHeroImage('https://i.imgpeek.com/WL1nx7kUYbrN')">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
+        <!-- ===== الهيدر===== -->
 
-            <button class="slider-btn prev" onclick="manualSlide(-1)">&#10094;</button>
-            <button class="slider-btn next" onclick="manualSlide(1)">&#10095;</button>
-        </section>
+<section class="hero-slider" id="heroSlider">
+    <!-- الصورة 1 -->
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=600&fit=crop');">
+        <div class="overlay"></div>
+        <div class="content"></div>
+    </div>
+    
+    <!-- الصورة 2 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&h=600&fit=crop');">
+        <div class="overlay"></div>
+        <div class="content"></div>
+    </div>
+    
+    <!-- الصورة 3 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=600&fit=crop');">
+        <div class="overlay"></div>
+        <div class="content"></div>
+    </div>
+    
+    <!-- الصورة 4 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&h=600&fit=crop');">
+        <div class="overlay"></div>
+        <div class="content"></div>
+    </div>
+    
+    <!-- الصورة 5 -->
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=600&fit=crop');">
+        <div class="overlay"></div>
+        <div class="content"></div>
+    </div>
+
+    <!-- أزرار التحكم اليدوي -->
+    <button class="slider-btn prev" onclick="manualSlide(-1)">&#10094;</button>
+    <button class="slider-btn next" onclick="manualSlide(1)">&#10095;</button>
+</section>
+
 
         <!-- ===== المنتجات ===== -->
         <div class="section-title">
@@ -4307,6 +4323,21 @@
                 colors: ["#1a1a2e", "#2c3e50"] },
         ];
 
+
+        // اختبار تحميل كل صورة على حدة
+function testImages() {
+    const slides = document.querySelectorAll('.hero-slider .slide');
+    slides.forEach((slide, index) => {
+        const style = slide.getAttribute('style');
+        const urlMatch = style.match(/url\(['"]?([^'"()]+)['"]?\)/);
+        if (urlMatch) {
+            console.log(`الصورة ${index + 1}: ${urlMatch[1]}`);
+        }
+    });
+}
+testImages();
+
+
         // ============================================================
         // المتغيرات العامة
         // ============================================================
@@ -4355,42 +4386,53 @@
         // ============================================================
         // دوال عرض الصورة/الفيديو
         // ============================================================
-        function openMediaModal(src, isVideo = false, label = '') {
-            const modal = document.getElementById('mediaModal');
-            const img = document.getElementById('modalImage');
-            const video = document.getElementById('modalVideo');
-            const videoSource = document.getElementById('modalVideoSource');
-            const labelEl = document.getElementById('mediaLabel');
+// ============================================================
+// دوال عرض الصورة/الفيديو
+// ============================================================
+function openMediaModal(src, isVideo = false, label = '') {
+    const modal = document.getElementById('mediaModal');
+    const img = document.getElementById('modalImage');
+    const video = document.getElementById('modalVideo');
+    const videoSource = document.getElementById('modalVideoSource');
+    const labelEl = document.getElementById('mediaLabel');
 
-            img.style.display = 'none';
-            video.style.display = 'none';
-            video.pause();
+    // إعادة تعيين كل شيء
+    img.style.display = 'none';
+    video.style.display = 'none';
+    video.pause();
+    videoSource.src = '';
+    video.load();
+    img.src = '';
 
-            if (isVideo) {
-                videoSource.src = src;
-                video.load();
-                video.style.display = 'block';
-                video.play().catch(() => {});
-                labelEl.textContent = label || '🎬 فيديو المنتج - اضغط خارج الفيديو للإغلاق';
-            } else {
-                img.src = src;
-                img.style.display = 'block';
-                labelEl.textContent = label || '📸 صورة المنتج - اضغط خارج الصورة للإغلاق';
-            }
-
-            modal.classList.add('open');
-            document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        if (isVideo) {
+            videoSource.src = src;
+            video.load();
+            video.style.display = 'block';
+            video.play().catch(() => {});
+            labelEl.textContent = label || '🎬 فيديو المنتج - اضغط خارج الفيديو للإغلاق';
+        } else {
+            const uniqueSrc = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
+            img.src = uniqueSrc;
+            img.style.display = 'block';
+            labelEl.textContent = label || '📸 صورة المنتج - اضغط خارج الصورة للإغلاق';
         }
+    }, 100);
 
-        function closeMediaModal() {
-            const modal = document.getElementById('mediaModal');
-            const video = document.getElementById('modalVideo');
-            if (video) {
-                video.pause();
-            }
-            modal.classList.remove('open');
-            document.body.style.overflow = '';
-        }
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMediaModal() {
+    const modal = document.getElementById('mediaModal');
+    const video = document.getElementById('modalVideo');
+    if (video) {
+        video.pause();
+    }
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
 
         // ============================================================
         // دوال المصادقة
