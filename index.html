@@ -2123,6 +2123,7 @@
                         <option value="جمال">💄 جمال وعناية</option>
                         <option value="أطفال">🧸 أطفال</option>
                         <option value="رياضة">⚽ رياضة</option>
+                        <option value="سيارات">🚗 سيارات</option>
                     </select>
 
                     <select id="subCategorySelect" onchange="searchProducts()" style="background:#f3f3f3;border:none;padding:0 10px;font-size:13px;color:#555;cursor:pointer;outline:none;border-right:1px solid #ccc;min-width:120px;text-align:center;">
@@ -4321,6 +4322,11 @@
                 subcategory: "جري", rating: 4.5, reviews: 135, image: "https://i.imgur.com/9KpQ8Mn.jpg",
                 freeShipping: true, description: "حزام جري قطني.", sizes: ["S", "M", "L"],
                 colors: ["#1a1a2e", "#2c3e50"] },
+
+                    // ===== السيارات =====
+{ id: 821, name: "سياره للبيع ", price: 1000000, oldPrice: 2000000, discount: "50%", category: "سيارات",
+                subcategory: "سيارات للبيع  ", rating: 4.5, reviews: 135, image: "https://i.imgur.com/9KpQ8Mn.jpg",
+                freeShipping: true, description: "سياره للبيع موديل 2026 " },
         ];
 
 
@@ -4964,7 +4970,13 @@ function closeMediaModal() {
                     <option value="جري">جري</option>
                 `;
             }
-
+              else if (mainCategory === 'سيارات') {
+                subSelect.innerHTML += `
+                    <option value="سيارات للاجره ">سيارات للاجره </option>
+                    <option value="سيارات للبيع  ">سيارات للبيع  </option>
+                    <option value="سيارات معدله ">سيارات معدله </option>
+                `;
+            }
             searchProducts();
         }
 
