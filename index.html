@@ -907,7 +907,7 @@
         .cart-sidebar {
             position: fixed;
             top: 0;
-            left: -450px; /* التعديل هنا */
+            left: -450px;
             width: 420px;
             max-width: 100%;
             height: 100vh;
@@ -920,7 +920,7 @@
         }
 
         .cart-sidebar.open {
-            left: 0; /* والتعديل هنا */
+            left: 0;
         }
 
         .cart-header {
@@ -2438,7 +2438,7 @@
                                 </div>
 
                                 <!-- رفع الصورة -->
-                                <div class="upload-section">
+                                <div class="upload-section" id="uploadSection">
                                     <label class="upload-label" for="paymentImage">
                                         <i class="fas fa-upload"></i>
                                         <span>📸 اضغط لرفع صورة إيصال التحويل</span>
@@ -2633,9 +2633,9 @@
         }
 
         // ============================================================
-        // بيانات المنتجات (هنا هتضيف منتجاتك)
+        // بيانات المنتجات
         // ============================================================
-           const allProducts = [
+        const allProducts = [
             // ===== ملابس =====
             { id: 1, name: "تيشرت قطني رجالي كلاسيك", price: 250, oldPrice: 350, discount: "29%", category: "ملابس",
                 subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://i.imgpeek.com/sCYts4cTeWgc",
@@ -4426,9 +4426,8 @@
                 subcategory: "جري", rating: 4.5, reviews: 135, image: "https://i.imgur.com/9KpQ8Mn.jpg",
                 freeShipping: true, description: "حزام جري قطني.", sizes: ["S", "M", "L"],
                 colors: ["#1a1a2e", "#2c3e50"] },
-
-                    // ===== السيارات =====
-{ id: 821, name: "سياره للبيع ", price: 1000000, oldPrice: 2000000, discount: "50%", category: "سيارات",
+            // ===== السيارات =====
+            { id: 821, name: "سياره للبيع ", price: 1000000, oldPrice: 2000000, discount: "50%", category: "سيارات",
                 subcategory: "سيارات للبيع  ", rating: 4.5, reviews: 135, image: "https://i.imgur.com/9KpQ8Mn.jpg",
                 freeShipping: true, description: "سياره للبيع موديل 2026 " },
         ];
@@ -5361,13 +5360,8 @@
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             document.getElementById('hiddenOrderTotal').value = total + ' ج.م';
 
-            // إظهار مودال الدفع فقط
             document.getElementById('checkoutModal').classList.add('open');
-            
-            // إخفاء قسم بيانات الشحن في البداية
             document.querySelector('.forminit-contact-section').style.display = 'none';
-            
-            // إظهار قسم الدفع
             document.querySelector('.instapay-section').style.display = 'block';
 
             autoFillCheckoutEmail();
@@ -5376,14 +5370,43 @@
         }
 
         function showShippingForm() {
-            // إظهار قسم بيانات الشحن
+            // التحقق من وجود صورة الإيصال
+            if (!uploadedImageBase64) {
+                showNotification('⚠️ يرجى رفع صورة إيصال التحويل أولاً', 'error');
+                const uploadSection = document.getElementById('uploadSection');
+                const errorMsg = document.createElement('div');
+                errorMsg.id = 'uploadError';
+                errorMsg.style.cssText = 'color:#dc2626;font-size:14px;margin-top:8px;font-weight:600;';
+                errorMsg.textContent = '⚠️ مطلوب رفع صورة إيصال التحويل';
+                
+                const oldError = document.getElementById('uploadError');
+                if (oldError) oldError.remove();
+                
+                uploadSection.appendChild(errorMsg);
+                uploadSection.style.borderColor = '#dc2626';
+                uploadSection.style.background = 'rgba(220,38,38,0.05)';
+                
+                setTimeout(() => {
+                    uploadSection.style.borderColor = '#94a3b8';
+                    uploadSection.style.background = '#f8fafc';
+                    const err = document.getElementById('uploadError');
+                    if (err) err.remove();
+                }, 4000);
+                
+                return;
+            }
+
+            const oldError = document.getElementById('uploadError');
+            if (oldError) oldError.remove();
+            const uploadSection = document.getElementById('uploadSection');
+            uploadSection.style.borderColor = '#94a3b8';
+            uploadSection.style.background = '#f8fafc';
+
             document.querySelector('.forminit-contact-section').style.display = 'block';
-            
-            // إخفاء قسم الدفع (اختياري، لو عايز تخفيه)
             document.querySelector('.instapay-section').style.display = 'none';
-            
-            // تغيير عنوان المودال
             document.querySelector('#checkoutModal .privacy-modal-header h2').innerHTML = '📦 <span>بيانات</span> الشحن';
+            
+            showNotification('✅ تم التحقق من صورة الإيصال، أكمل بيانات الشحن', 'success');
         }
 
         function autoFillCheckoutEmail() {
@@ -5438,7 +5461,7 @@
         // إرسال البريد الإلكتروني
         // ============================================================
         function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64,
-        imageName) {
+            imageName) {
             let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
             message += `👤 اسم العميل: ${name}\n`;
             message += `📱 رقم الهاتف: ${phone}\n`;
@@ -5891,7 +5914,6 @@
             const btnEgypt = document.getElementById('btnEgypt');
             const btnInternational = document.getElementById('btnInternational');
 
-            // إزالة التحديد من جميع الأزرار
             btnEgypt.classList.remove('payment-btn-active');
             btnInternational.classList.remove('payment-btn-active');
 
