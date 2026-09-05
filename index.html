@@ -8,21 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
-
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js">
     </script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js">
     </script>
-
-    <!-- Forminit SDK -->
     <script src="https://forminit.com/sdk/v1/forminit.js">
     </script>
 
@@ -224,7 +216,6 @@
             text-decoration: underline;
         }
 
-        /* ===== Google Login Button ===== */
         .google-login-btn {
             background: #ffffff !important;
             color: #333 !important;
@@ -261,7 +252,6 @@
             flex-shrink: 0;
         }
 
-        /* ===== قسم تغيير كلمة المرور ===== */
         .reset-manual-box {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -493,7 +483,7 @@
             background: #b91c1c;
         }
 
-        /* ===== الهيرو الجديد (معرض صور متحرك) ===== */
+        /* ===== الهيرو ===== */
         .hero-slider {
             width: 100%;
             height: 280px;
@@ -553,7 +543,6 @@
             font-weight: 300;
         }
 
-        /* ===== أزرار السلايدر ===== */
         .hero-slider .slider-btn {
             position: absolute;
             top: 50%;
@@ -675,7 +664,6 @@
             z-index: 5;
         }
 
-        /* ===== زر تشغيل الفيديو ===== */
         .video-play-btn {
             position: absolute;
             top: 50%;
@@ -919,20 +907,20 @@
         .cart-sidebar {
             position: fixed;
             top: 0;
-            left: -450px;
+            left: -450px; /* التعديل هنا */
             width: 420px;
             max-width: 100%;
             height: 100vh;
             background: #ffffff;
             display: flex;
             flex-direction: column;
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 10px 0 40px rgba(0, 0, 0, 0.2);
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
         }
 
         .cart-sidebar.open {
-            left: 0;
+            left: 0; /* والتعديل هنا */
         }
 
         .cart-header {
@@ -1146,7 +1134,7 @@
             background: #e2e8f0;
         }
 
-        /* ===== إنستا باي - رفع الصورة ===== */
+        /* ===== قسم الدفع ===== */
         .instapay-section {
             background: linear-gradient(135deg, #f0fdf4, #dcfce7);
             border: 2px solid #059669;
@@ -1506,6 +1494,79 @@
             color: #dc2626;
         }
 
+        /* ===== ستايل أزرار الدفع الجديدة ===== */
+        .payment-btn {
+            flex: 1;
+            min-width: 180px;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .payment-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .payment-btn:active {
+            transform: scale(0.97);
+        }
+
+        .payment-btn-egypt {
+            background: linear-gradient(135deg, #059669, #047857);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .payment-btn-egypt:hover {
+            box-shadow: 0 8px 30px rgba(5, 150, 105, 0.5);
+        }
+
+        .payment-btn-international {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .payment-btn-international:hover {
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+        }
+
+        .payment-btn-active {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5), 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+            transform: scale(1.03) !important;
+        }
+
+        .payment-details-box {
+            animation: fadeSlideDown 0.4s ease;
+        }
+
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .payment-details-box.hidden-details {
+            display: none !important;
+        }
+
+        .payment-details-box.visible-details {
+            display: block !important;
+        }
+
         /* ===== زر العودة ===== */
         .back-to-top {
             position: fixed;
@@ -1578,7 +1639,7 @@
             font-size: 14px;
         }
 
-        /* ===== اختيار المقاس في المنتج ===== */
+        /* ===== اختيار المقاس ===== */
         .size-selector {
             display: flex;
             gap: 8px;
@@ -1985,7 +2046,7 @@
 </head>
 
 <body>
-    <!-- ===== شريط الإعلانات المتحرك ===== -->
+    <!-- ===== شريط الإعلانات ===== -->
     <div style="background: linear-gradient(90deg, #0f172a, #059669, #0f172a); background-size: 200% 100%; animation: shimmer 4s ease-in-out infinite; color: #fff; padding: 10px 0; text-align: center; font-weight: 700; font-size: 16px; overflow: hidden; position: relative; z-index: 99999; border-bottom: 2px solid #34d399; direction: ltr;">
         <marquee behavior="scroll" direction="left" scrollamount="6" style="color:#fff; font-size:17px;">
             🎉 <span style="color:#34d399;">خصومات يوم الجمعة</span> - عروض لا تُفوت! 🎉 &nbsp;|&nbsp; 🛍️ تسوق الآن واستمتع بأفضل الأسعار 🛍️
@@ -2005,8 +2066,8 @@
         }
 
         .hero-slider .slide .overlay {
-    cursor: pointer;
-}
+            cursor: pointer;
+        }
     </style>
 
     <!-- ===== شاشة تسجيل الدخول ===== -->
@@ -2021,7 +2082,6 @@
 
             <button class="login-btn" id="loginBtn" onclick="handleLogin()">دخول 🚀</button>
 
-            <!-- زر تسجيل الدخول بجوجل -->
             <div class="divider">━━━━━━━━━ أو ━━━━━━━━━</div>
 
             <button class="login-btn google-login-btn" id="googleLoginBtn" onclick="handleGoogleLogin()">
@@ -2113,7 +2173,6 @@
                     <span>sun Store</span>
                 </a>
 
-                <!-- ===== خانة البحث ===== -->
                 <div class="amazon-search" style="display:flex; gap:5px;">
                     <select id="mainCategorySelect" onchange="updateSubcategories()" style="background:#f3f3f3;border:none;padding:0 10px;font-size:13px;color:#555;cursor:pointer;outline:none;border-right:1px solid #ccc;min-width:100px;text-align:center;">
                         <option value="all">الكل</option>
@@ -2144,44 +2203,32 @@
             </div>
         </header>
 
-        <!-- ===== الهيدر===== -->
+        <!-- ===== الهيرو ===== -->
+        <section class="hero-slider" id="heroSlider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=600&fit=crop');">
+                <div class="overlay"></div>
+                <div class="content"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&h=600&fit=crop');">
+                <div class="overlay"></div>
+                <div class="content"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=600&fit=crop');">
+                <div class="overlay"></div>
+                <div class="content"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&h=600&fit=crop');">
+                <div class="overlay"></div>
+                <div class="content"></div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=600&fit=crop');">
+                <div class="overlay"></div>
+                <div class="content"></div>
+            </div>
 
-<section class="hero-slider" id="heroSlider">
-    <!-- الصورة 1 -->
-    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=600&fit=crop');">
-        <div class="overlay"></div>
-        <div class="content"></div>
-    </div>
-    
-    <!-- الصورة 2 -->
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&h=600&fit=crop');">
-        <div class="overlay"></div>
-        <div class="content"></div>
-    </div>
-    
-    <!-- الصورة 3 -->
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=600&fit=crop');">
-        <div class="overlay"></div>
-        <div class="content"></div>
-    </div>
-    
-    <!-- الصورة 4 -->
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&h=600&fit=crop');">
-        <div class="overlay"></div>
-        <div class="content"></div>
-    </div>
-    
-    <!-- الصورة 5 -->
-    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=600&fit=crop');">
-        <div class="overlay"></div>
-        <div class="content"></div>
-    </div>
-
-    <!-- أزرار التحكم اليدوي -->
-    <button class="slider-btn prev" onclick="manualSlide(-1)">&#10094;</button>
-    <button class="slider-btn next" onclick="manualSlide(1)">&#10095;</button>
-</section>
-
+            <button class="slider-btn prev" onclick="manualSlide(-1)">&#10094;</button>
+            <button class="slider-btn next" onclick="manualSlide(1)">&#10095;</button>
+        </section>
 
         <!-- ===== المنتجات ===== -->
         <div class="section-title">
@@ -2234,7 +2281,7 @@
                     <h3>الإجمالي</h3>
                     <h2><span id="cartTotal">0</span> ج.م</h2>
                 </div>
-                <button class="checkout-btn" onclick="checkout()">📧 تأكيد الطلب </button>
+                <button class="checkout-btn" onclick="checkout()">📧 تأكيد الطلب</button>
                 <button class="clear-cart-btn" onclick="clearCart()">🗑️ تفريغ العربة</button>
             </div>
         </aside>
@@ -2254,7 +2301,7 @@
                 </div>
                 <div class="privacy-modal-body">
                     <h3>سياسة الخصوصية</h3>
-                    <p>يلتزم متجر Takamul بحماية بيانات جميع المستخدمين، وعدم مشاركة البيانات مع أي جهة إلا بما يسمح به القانون.</p>
+                    <p>يلتزم متجر sun Store بحماية بيانات جميع المستخدمين، وعدم مشاركة البيانات مع أي جهة إلا بما يسمح به القانون.</p>
                     <p>جميع بيانات الدفع يتم تشفيرها باستخدام تقنيات آمنة.</p>
                     <p>يمكنك طلب حذف بياناتك في أي وقت عبر التواصل معنا.</p>
                     <p>📧 <strong>takamulis26@gmail.com</strong></p>
@@ -2286,7 +2333,7 @@
             </div>
         </div>
 
-        <!-- ===== مودال الدفع مع رفع الصورة وعرضها ===== -->
+        <!-- ===== مودال الدفع ===== -->
         <div id="checkoutModal" class="privacy-modal">
             <div class="privacy-modal-content">
                 <div class="privacy-modal-header">
@@ -2296,63 +2343,133 @@
                 <div class="privacy-modal-body">
                     <div class="checkout-box">
 
-                        <!-- ===== قسم إنستا باي مع رفع الصورة ===== -->
+                        <!-- ===== قسم الدفع بزرارين ===== -->
                         <div class="instapay-section">
                             <div class="instapay-title">
-                                <i class="fas fa-mobile-alt"></i>
-                                الدفع عبر إنستا باي &amp; المحافظ الإلكترونية
+                                <i class="fas fa-credit-card"></i>
+                                اختيار طريقة الدفع
                                 <i class="fas fa-shield-alt"></i>
                             </div>
-                            <p style="color:#334155;font-size:14px;margin-bottom:6px;">
-                                📱 قم بتحويل مبلغ التوصيل إلى أحد الأرقام التالية:
-                            </p>
 
-                            <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;">
-                                <span style="font-size:13px;font-weight:600;color:#1a1a2e;">🏦 إنستا باي</span>
-                                <div class="instapay-number" style="font-size:20px;padding:6px 16px;">
-                                    <i class="fas fa-phone"></i> 01550533369
-                                </div>
-                                <button class="copy-btn" onclick="copyInstapayNumber('01550533369')" style="margin:2px 0 8px;">
-                                    <i class="fas fa-copy"></i> نسخ الرقم
+                            <!-- الأزرار -->
+                            <div style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin:15px 0;">
+                                <button class="payment-btn payment-btn-egypt" onclick="showPaymentMethod('egypt')" id="btnEgypt">
+                                    🇪🇬 الدفع داخل مصر
+                                </button>
+                                <button class="payment-btn payment-btn-international" onclick="showPaymentMethod('international')" id="btnInternational">
+                                    🌍 الدفع خارج مصر
                                 </button>
                             </div>
 
-                            <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;border-top:1px dashed rgba(5,150,105,0.3);padding-top:8px;">
-                                <span style="font-size:13px;font-weight:600;color:#1a1a2e;">💳 محفظة إلكترونية</span>
-                                <div class="instapay-number" style="font-size:20px;padding:6px 16px;border-color:#3b82f6;">
-                                    <i class="fas fa-wallet"></i> 01500945666
+                            <!-- منطقة عرض بيانات الدفع -->
+                            <div id="paymentDetailsContainer">
+
+                                <!-- بيانات الدفع داخل مصر -->
+                                <div id="paymentDetailsEgypt" class="payment-details-box visible-details">
+                                    <p style="color:#334155;font-size:15px;margin-bottom:10px;">
+                                        📱 قم بتحويل المبلغ إلى أحد الأرقام التالية:
+                                    </p>
+                                    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;">
+                                        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">🏦 إنستا باي (مصر)</span>
+                                        <div class="instapay-number" style="font-size:20px;padding:6px 16px;">
+                                            <i class="fas fa-phone"></i> 01550533369
+                                        </div>
+                                        <button class="copy-btn" onclick="copyInstapayNumber('01550533369')" style="margin:2px 0 8px;">
+                                            <i class="fas fa-copy"></i> نسخ الرقم
+                                        </button>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;border-top:1px dashed rgba(5,150,105,0.3);padding-top:8px;">
+                                        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">💳 محفظة إلكترونية (مصر)</span>
+                                        <div class="instapay-number" style="font-size:20px;padding:6px 16px;border-color:#3b82f6;">
+                                            <i class="fas fa-wallet"></i> 01500945666
+                                        </div>
+                                        <button class="copy-btn" onclick="copyInstapayNumber('01500945666')" style="margin:2px 0 8px;background:#3b82f6;">
+                                            <i class="fas fa-copy"></i> نسخ الرقم
+                                        </button>
+                                    </div>
                                 </div>
-                                <button class="copy-btn" onclick="copyInstapayNumber('01500945666')" style="margin:2px 0 8px;background:#3b82f6;">
-                                    <i class="fas fa-copy"></i> نسخ الرقم
-                                </button>
+
+                                <!-- بيانات الدفع خارج مصر -->
+                                <div id="paymentDetailsInternational" class="payment-details-box hidden-details">
+                                    <p style="color:#334155;font-size:15px;margin-bottom:10px;">
+                                        🌍 للدفع من خارج مصر، يرجى التحويل إلى أحد الحسابات التالية:
+                                    </p>
+
+                                    <!-- 1. باي بال (PayPal) - زر -->
+                                    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;">
+                                        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">💳 باي بال (PayPal)</span>
+                                        <a href="https://paypal.me/ElhossinyMohammed" target="_blank" style="width:100%;max-width:300px;text-decoration:none;">
+                                            <button style="width:100%;padding:14px 24px;background:linear-gradient(135deg,#0070ba,#003087);color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;transition:0.3s;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 15px rgba(0,112,186,0.3);">
+                                                <i class="fab fa-paypal" style="font-size:24px;"></i>
+                                                الدفع عبر باي بال
+                                                <i class="fas fa-arrow-right"></i>
+                                            </button>
+                                        </a>
+                                        <span style="font-size:12px;color:#64748b;margin-top:4px;">📌 اضغط على الزر للدفع عبر PayPal</span>
+                                    </div>
+
+                                    <!-- 2. بينانس (Binance) -->
+                                    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;border-top:1px dashed rgba(37,99,235,0.3);padding-top:8px;">
+                                        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">🟡 بينانس (Binance)</span>
+                                        <div class="instapay-number" style="font-size:18px;padding:6px 16px;border-color:#f3ba2f;">
+                                            <i class="fab fa-bitcoin"></i> 290629540
+                                        </div>
+                                        <button class="copy-btn" onclick="copyInstapayNumber('290629540')" style="margin:2px 0 8px;background:#f3ba2f;color:#1a1a2e;">
+                                            <i class="fas fa-copy"></i> نسخ المعرف (UID)
+                                        </button>
+                                        <span style="font-size:12px;color:#64748b;margin-top:4px;">📌 معرف المستخدم (UID) للحوالات</span>
+                                    </div>
+
+                                    <!-- 3. بي بايت (Bypit) -->
+                                    <div style="display:flex;flex-direction:column;align-items:center;margin:5px 0;border-top:1px dashed rgba(37,99,235,0.3);padding-top:8px;">
+                                        <span style="font-size:13px;font-weight:600;color:#1a1a2e;">🔵 بي بايت (Bypit)</span>
+                                        <div class="instapay-number" style="font-size:18px;padding:6px 16px;border-color:#3b82f6;">
+                                            <i class="fas fa-coins"></i> 554876090
+                                        </div>
+                                        <button class="copy-btn" onclick="copyInstapayNumber('554876090')" style="margin:2px 0 8px;background:#3b82f6;">
+                                            <i class="fas fa-copy"></i> نسخ المعرف
+                                        </button>
+                                        <span style="font-size:12px;color:#64748b;margin-top:4px;">📌 معرف المستخدم على منصة Bypit</span>
+                                    </div>
+
+                                    <div style="margin-top:10px;padding:10px;background:#fff8e1;border-radius:8px;border:1px solid #f59e0b;font-size:13px;color:#78350f;">
+                                        <i class="fas fa-info-circle"></i> يتم حساب سعر الصرف حسب سعر السوق في يوم التحويل.
+                                    </div>
+                                </div>
+
+                                <!-- رفع الصورة -->
+                                <div class="upload-section">
+                                    <label class="upload-label" for="paymentImage">
+                                        <i class="fas fa-upload"></i>
+                                        <span>📸 اضغط لرفع صورة إيصال التحويل</span>
+                                        <span style="font-size:12px;color:#94a3b8;">(jpg, png, pdf) - ستظهر في الرسالة</span>
+                                    </label>
+                                    <input type="file" id="paymentImage" name="fi-file-receipt" accept="image/*,application/pdf" onchange="previewImage(event)">
+                                    <div class="file-name" id="fileName">✅ تم اختيار: <span id="fileNameText"></span></div>
+                                    <div class="upload-preview" id="imagePreview">
+                                        <img id="previewImg" src="" alt="صورة الإيصال">
+                                    </div>
+                                </div>
+
+                                <div class="instapay-hint">
+                                    <i class="fas fa-info-circle"></i> بعد التحويل، ارفع صورة الإيصال وستظهر في ملخص الطلب
+                                </div>
+                                <div class="payment-note">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <strong>ملاحظة:</strong> سيتم تأكيد طلبك بعد التحقق من إيصال الدفع.
+                                </div>
                             </div>
 
-                            <div class="upload-section">
-                                <label class="upload-label" for="paymentImage">
-                                    <i class="fas fa-upload"></i>
-                                    <span>📸 اضغط لرفع صورة إيصال التحويل</span>
-                                    <span style="font-size:12px;color:#94a3b8;">(jpg, png, pdf) - ستظهر في الرسالة</span>
-                                </label>
-                                <input type="file" id="paymentImage" name="fi-file-receipt" accept="image/*,application/pdf" onchange="previewImage(event)">
-                                <div class="file-name" id="fileName">✅ تم اختيار: <span id="fileNameText"></span></div>
-                                <div class="upload-preview" id="imagePreview">
-                                    <img id="previewImg" src="" alt="صورة الإيصال">
-                                </div>
-                            </div>
-
-                            <div class="instapay-hint">
-                                <i class="fas fa-info-circle"></i> بعد التحويل، ارفع صورة الإيصال وستظهر في ملخص الطلب
-                            </div>
-                            <div class="payment-note">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <strong>ملاحظة:</strong> سيتم تأكيد طلبك بعد التحقق من إيصال الدفع.
-                            </div>
+                            <!-- زر متابعة لبيانات الشحن -->
+                            <button type="button" onclick="showShippingForm()" style="margin-top:10px; padding:14px; background:linear-gradient(135deg, #059669, #047857); color:#fff; border:none; border-radius:10px; font-size:17px; font-weight:700; cursor:pointer; width:100%;">
+                                ✅ متابعة لبيانات الشحن
+                            </button>
                         </div>
 
                         <hr style="border:1px solid #e2e8f0;margin:15px 0;">
 
-                        <!-- ===== نموذج البريد الإلكتروني مع عرض الصورة ===== -->
-                        <div class="forminit-contact-section">
+                        <!-- ===== نموذج البريد الإلكتروني ===== -->
+                        <div class="forminit-contact-section" style="display:none;">
                             <form id="contactForm" enctype="multipart/form-data">
                                 <div class="form-grid">
                                     <input type="text" name="fi-sender-firstName" placeholder="الاسم الأول" required>
@@ -2371,7 +2488,7 @@
                                         <div id="orderMessage">🛒 لا توجد منتجات في العربة</div>
                                     </div>
 
-                                    <button type="submit" class="submit-btn" id="contactSubmitBtn">📧 تأكيد وإرسال الطلب </button>
+                                    <button type="submit" class="submit-btn" id="contactSubmitBtn">📧 تأكيد وإرسال الطلب</button>
                                     <p id="contactStatus" class="status-msg"></p>
                                 </div>
                             </form>
@@ -2425,7 +2542,7 @@
     <!-- جافاسكريبت -->
     <!-- ============================================================ -->
     <script>
-        // ===== إصلاح بيئة التشغيل (للتشغيل المحلي) =====
+        // ===== إصلاح بيئة التشغيل =====
         (function fixEnvironment() {
             if (window.location.protocol === 'file:') {
                 console.warn('⚠️ تشغيل محلي - محاكاة بيئة آمنة');
@@ -2445,7 +2562,7 @@
             }
         })();
 
-        // ===== Firebase Configuration =====
+        // ===== Firebase =====
         const firebaseConfig = {
             apiKey: "AIzaSyC-r27FKI-t4LC6mNx3Ouf_34DZ9aHl72g",
             authDomain: "takamul-4d702.firebaseapp.com",
@@ -2456,14 +2573,10 @@
             measurementId: "G-DR0M1VDN98"
         };
 
-        // تهيئة Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-
-        // تعيين لغة الواجهة
         auth.languageCode = 'ar';
 
-        // إعداد مزود Google
         const googleProvider = new firebase.auth.GoogleAuthProvider();
         googleProvider.addScope('https://www.googleapis.com/auth/userinfo.email');
         googleProvider.addScope('https://www.googleapis.com/auth/userinfo.profile');
@@ -2480,7 +2593,7 @@
         const FORM_ID = "xxdqj8abktj";
         const REDIRECT_URL = "https://forminit.com/thank-you";
 
-        // ===== خريطة أسماء الألوان بالعربية =====
+        // ===== خريطة أسماء الألوان =====
         const colorNames = {
             '#000000': 'أسود',
             '#ffffff': 'أبيض',
@@ -2501,14 +2614,10 @@
         };
 
         function getColorName(hexColor) {
-            if (colorNames[hexColor]) {
-                return colorNames[hexColor];
-            }
+            if (colorNames[hexColor]) return colorNames[hexColor];
             const lowerHex = hexColor.toLowerCase();
             for (const [key, value] of Object.entries(colorNames)) {
-                if (key.toLowerCase() === lowerHex) {
-                    return value;
-                }
+                if (key.toLowerCase() === lowerHex) return value;
             }
             return hexColor;
         }
@@ -2518,28 +2627,23 @@
             const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi', '.mkv', '.flv', '.wmv', '.m4v'];
             const urlLower = url.toLowerCase();
             for (const ext of videoExtensions) {
-                if (urlLower.endsWith(ext)) {
-                    return true;
-                }
+                if (urlLower.endsWith(ext)) return true;
             }
-            if (urlLower.includes('video') || urlLower.includes('mp4') || urlLower.includes('webm')) {
-                return true;
-            }
-            return false;
+            return urlLower.includes('video') || urlLower.includes('mp4') || urlLower.includes('webm');
         }
 
         // ============================================================
-        // بيانات المنتجات - دمج المنتجات من كلا الملفين مع إزالة التكرارات
+        // بيانات المنتجات (هنا هتضيف منتجاتك)
         // ============================================================
-        const allProducts = [
+           const allProducts = [
             // ===== ملابس =====
             { id: 1, name: "تيشرت قطني رجالي كلاسيك", price: 250, oldPrice: 350, discount: "29%", category: "ملابس",
                 subcategory: "تيشيرتات", rating: 4.7, reviews: 120, image: "https://i.imgpeek.com/sCYts4cTeWgc",
-                video: "https://a.top4top.io/m_3892lappb1.mp4", freeShipping: true,
+                video: "https://vewo.io/v/4eae8aff94fe", freeShipping: true,
                 description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", sizes: ["S", "M", "L", "XL", "XXL"],
                 colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c", "#f39c12"] },
             { id: 2, name: "تيشرت رياضي قطني", price: 200, oldPrice: 280, discount: "28%", category: "ملابس",
-                subcategory: "تيشيرتات", rating: 4.5, reviews: 95, image: "https://i.imgpeek.com/sCYts4cTeWgc",
+                subcategory: "تيشيرتات", rating: 4.5, reviews: 95, image: "https://i.imgpeek.com/sCYts4cTeWgc", video: "https://savedly.net/f/csrsjmmu",
                 freeShipping: true, description: "تيشرت رياضي خفيف الوزن.", sizes: ["S", "M", "L", "XL"],
                 colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] },
             { id: 3, name: "تيشرت بولو أنيق", price: 300, oldPrice: 420, discount: "29%", category: "ملابس",
@@ -4330,20 +4434,6 @@
         ];
 
 
-        // اختبار تحميل كل صورة على حدة
-function testImages() {
-    const slides = document.querySelectorAll('.hero-slider .slide');
-    slides.forEach((slide, index) => {
-        const style = slide.getAttribute('style');
-        const urlMatch = style.match(/url\(['"]?([^'"()]+)['"]?\)/);
-        if (urlMatch) {
-            console.log(`الصورة ${index + 1}: ${urlMatch[1]}`);
-        }
-    });
-}
-testImages();
-
-
         // ============================================================
         // المتغيرات العامة
         // ============================================================
@@ -4353,7 +4443,6 @@ testImages();
         let currentDetailProductId = null;
         let uploadedImageBase64 = null;
         let uploadedImageName = null;
-
         let selectedSizes = {};
         let selectedColors = {};
 
@@ -4385,60 +4474,49 @@ testImages();
             startAutoSlide();
         }
 
-        function openHeroImage(src) {
-            openMediaModal(src, false, '📸 صورة الهيرو - اضغط خارج الصورة للإغلاق');
-        }
-
         // ============================================================
         // دوال عرض الصورة/الفيديو
         // ============================================================
-// ============================================================
-// دوال عرض الصورة/الفيديو
-// ============================================================
-function openMediaModal(src, isVideo = false, label = '') {
-    const modal = document.getElementById('mediaModal');
-    const img = document.getElementById('modalImage');
-    const video = document.getElementById('modalVideo');
-    const videoSource = document.getElementById('modalVideoSource');
-    const labelEl = document.getElementById('mediaLabel');
+        function openMediaModal(src, isVideo = false, label = '') {
+            const modal = document.getElementById('mediaModal');
+            const img = document.getElementById('modalImage');
+            const video = document.getElementById('modalVideo');
+            const videoSource = document.getElementById('modalVideoSource');
+            const labelEl = document.getElementById('mediaLabel');
 
-    // إعادة تعيين كل شيء
-    img.style.display = 'none';
-    video.style.display = 'none';
-    video.pause();
-    videoSource.src = '';
-    video.load();
-    img.src = '';
-
-    setTimeout(() => {
-        if (isVideo) {
-            videoSource.src = src;
+            img.style.display = 'none';
+            video.style.display = 'none';
+            video.pause();
+            videoSource.src = '';
             video.load();
-            video.style.display = 'block';
-            video.play().catch(() => {});
-            labelEl.textContent = label || '🎬 فيديو المنتج - اضغط خارج الفيديو للإغلاق';
-        } else {
-            const uniqueSrc = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
-            img.src = uniqueSrc;
-            img.style.display = 'block';
-            labelEl.textContent = label || '📸 صورة المنتج - اضغط خارج الصورة للإغلاق';
+            img.src = '';
+
+            setTimeout(() => {
+                if (isVideo) {
+                    videoSource.src = src;
+                    video.load();
+                    video.style.display = 'block';
+                    video.play().catch(() => {});
+                    labelEl.textContent = label || '🎬 فيديو المنتج - اضغط خارج الفيديو للإغلاق';
+                } else {
+                    const uniqueSrc = src + (src.includes('?') ? '&' : '?') + 't=' + Date.now();
+                    img.src = uniqueSrc;
+                    img.style.display = 'block';
+                    labelEl.textContent = label || '📸 صورة المنتج - اضغط خارج الصورة للإغلاق';
+                }
+            }, 100);
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
         }
-    }, 100);
 
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeMediaModal() {
-    const modal = document.getElementById('mediaModal');
-    const video = document.getElementById('modalVideo');
-    if (video) {
-        video.pause();
-    }
-    modal.classList.remove('open');
-    document.body.style.overflow = '';
-}
-
+        function closeMediaModal() {
+            const modal = document.getElementById('mediaModal');
+            const video = document.getElementById('modalVideo');
+            if (video) video.pause();
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
         // ============================================================
         // دوال المصادقة
@@ -4496,40 +4574,16 @@ function closeMediaModal() {
             auth.signInWithPopup(googleProvider)
                 .then((result) => {
                     const user = result.user;
-                    console.log('✅ تم تسجيل الدخول بواسطة Google:', user.email);
                     successEl.textContent = `✅ مرحباً ${user.displayName || user.email}! جاري تحويلك...`;
                     successEl.classList.add('show');
-                    closeMediaModal();
                     showNotification(`👋 مرحباً ${user.displayName || 'مستخدم'}!`, 'success');
                 })
                 .catch((error) => {
-                    console.error('❌ خطأ في تسجيل الدخول بجوجل:', error);
                     let msg = '⚠️ فشل تسجيل الدخول بواسطة Google';
-                    switch (error.code) {
-                        case 'auth/popup-closed-by-user':
-                            msg = '⚠️ تم إغلاق نافذة تسجيل الدخول قبل إكمال العملية';
-                            break;
-                        case 'auth/popup-blocked':
-                            msg = '⚠️ تم حظر النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة للموقع';
-                            break;
-                        case 'auth/account-exists-with-different-credential':
-                            msg = '⚠️ يوجد حساب بنفس البريد الإلكتروني ولكن بكلمة مرور. يرجى تسجيل الدخول بالبريد وكلمة المرور أولاً.';
-                            break;
-                        case 'auth/cancelled-popup-request':
-                            msg = '⚠️ تم إلغاء طلب تسجيل الدخول';
-                            break;
-                        case 'auth/network-request-failed':
-                            msg = '⚠️ فشل الاتصال بالشبكة. تحقق من اتصالك بالإنترنت';
-                            break;
-                        case 'auth/too-many-requests':
-                            msg = '⚠️ تم إرسال العديد من الطلبات. حاول لاحقاً';
-                            break;
-                        case 'auth/unauthorized-domain':
-                            msg = '⚠️ هذا المجال غير مصرح به. أضف المجال في Firebase Console';
-                            break;
-                        default:
-                            msg = `⚠️ حدث خطأ: ${error.message}`;
-                    }
+                    if (error.code === 'auth/popup-closed-by-user') msg = '⚠️ تم إغلاق نافذة تسجيل الدخول قبل إكمال العملية';
+                    else if (error.code === 'auth/popup-blocked') msg = '⚠️ تم حظر النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة للموقع';
+                    else if (error.code === 'auth/account-exists-with-different-credential') msg = '⚠️ يوجد حساب بنفس البريد الإلكتروني ولكن بكلمة مرور. يرجى تسجيل الدخول بالبريد وكلمة المرور أولاً.';
+                    else if (error.code === 'auth/network-request-failed') msg = '⚠️ فشل الاتصال بالشبكة. تحقق من اتصالك بالإنترنت';
                     errorEl.textContent = msg;
                     errorEl.classList.add('show');
                     showNotification(msg, 'error');
@@ -4698,6 +4752,26 @@ function closeMediaModal() {
             }
         }
 
+        function showRegister() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('registerScreen').style.display = 'flex';
+            document.getElementById('resetPasswordScreen').style.display = 'none';
+        }
+
+        function showLogin() {
+            document.getElementById('registerScreen').style.display = 'none';
+            document.getElementById('resetPasswordScreen').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('loginError').classList.remove('show');
+            document.getElementById('loginSuccess').classList.remove('show');
+        }
+
+        function showResetPassword() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('registerScreen').style.display = 'none';
+            document.getElementById('resetPasswordScreen').style.display = 'flex';
+        }
+
         // ===== مراقبة حالة المستخدم =====
         auth.onAuthStateChanged((user) => {
             const loginScreen = document.getElementById('loginScreen');
@@ -4719,8 +4793,7 @@ function closeMediaModal() {
                 displayProducts(allProducts);
                 updateCartIconCount();
 
-                const isGoogle = user.providerData && user.providerData.some(p => p.providerId === 'google.com');
-                if (isGoogle) {
+                if (user.providerData && user.providerData.some(p => p.providerId === 'google.com')) {
                     showNotification(`✅ مرحباً ${displayName}! تم الدخول بواسطة Google 🎉`, 'success');
                 } else {
                     showNotification(`✅ مرحباً بك في متجر Sun Store ${displayName}`, 'success');
@@ -4754,26 +4827,6 @@ function closeMediaModal() {
             }
         });
 
-        function showRegister() {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('registerScreen').style.display = 'flex';
-            document.getElementById('resetPasswordScreen').style.display = 'none';
-        }
-
-        function showLogin() {
-            document.getElementById('registerScreen').style.display = 'none';
-            document.getElementById('resetPasswordScreen').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('loginError').classList.remove('show');
-            document.getElementById('loginSuccess').classList.remove('show');
-        }
-
-        function showResetPassword() {
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('registerScreen').style.display = 'none';
-            document.getElementById('resetPasswordScreen').style.display = 'flex';
-        }
-
         // ============================================================
         // دوال المتجر - عرض المنتجات
         // ============================================================
@@ -4800,7 +4853,7 @@ function closeMediaModal() {
                     const freeShipping = product.freeShipping ?
                         `<span class="free-shipping">🚚 التوصيل على حسب المحافظه</span>` : '';
                     const primeBadge = product.rating >= 4.8 ? `<span class="prime-badge">⭐ Prime</span>` :
-                    '';
+                        '';
 
                     const hasVideo = product.video && product.video.trim() !== '';
                     const hasImage = product.image && product.image.trim() !== '';
@@ -4969,12 +5022,11 @@ function closeMediaModal() {
                     <option value="كرة قدم">كرة قدم</option>
                     <option value="جري">جري</option>
                 `;
-            }
-              else if (mainCategory === 'سيارات') {
+            } else if (mainCategory === 'سيارات') {
                 subSelect.innerHTML += `
-                    <option value="سيارات للاجره ">سيارات للاجره </option>
-                    <option value="سيارات للبيع  ">سيارات للبيع  </option>
-                    <option value="سيارات معدله ">سيارات معدله </option>
+                    <option value="سيارات للاجره">سيارات للاجره</option>
+                    <option value="سيارات للبيع">سيارات للبيع</option>
+                    <option value="سيارات معدله">سيارات معدله</option>
                 `;
             }
             searchProducts();
@@ -5013,7 +5065,9 @@ function closeMediaModal() {
             displayProducts(filtered);
         }
 
-        // ===== سلة التسوق =====
+        // ============================================================
+        // سلة التسوق
+        // ============================================================
         function toggleCart() {
             const sidebar = document.getElementById('cartSidebar');
             const overlay = document.getElementById('overlay');
@@ -5307,16 +5361,29 @@ function closeMediaModal() {
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             document.getElementById('hiddenOrderTotal').value = total + ' ج.م';
 
-            const firstName = document.querySelector('input[name="fi-sender-firstName"]')?.value || '';
-            const lastName = document.querySelector('input[name="fi-sender-lastName"]')?.value || '';
-            document.getElementById('hiddenFullName').value = `${firstName} ${lastName}`.trim();
-
+            // إظهار مودال الدفع فقط
             document.getElementById('checkoutModal').classList.add('open');
+            
+            // إخفاء قسم بيانات الشحن في البداية
+            document.querySelector('.forminit-contact-section').style.display = 'none';
+            
+            // إظهار قسم الدفع
+            document.querySelector('.instapay-section').style.display = 'block';
 
-            // ملء البريد الإلكتروني تلقائياً
             autoFillCheckoutEmail();
 
             setTimeout(updateOrderSummary, 200);
+        }
+
+        function showShippingForm() {
+            // إظهار قسم بيانات الشحن
+            document.querySelector('.forminit-contact-section').style.display = 'block';
+            
+            // إخفاء قسم الدفع (اختياري، لو عايز تخفيه)
+            document.querySelector('.instapay-section').style.display = 'none';
+            
+            // تغيير عنوان المودال
+            document.querySelector('#checkoutModal .privacy-modal-header h2').innerHTML = '📦 <span>بيانات</span> الشحن';
         }
 
         function autoFillCheckoutEmail() {
@@ -5368,7 +5435,7 @@ function closeMediaModal() {
         }
 
         // ============================================================
-        // إرسال البريد الإلكتروني مع الصورة
+        // إرسال البريد الإلكتروني
         // ============================================================
         function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64,
         imageName) {
@@ -5413,7 +5480,7 @@ function closeMediaModal() {
         }
 
         // ============================================================
-        // ربط نموذج Forminit مع رفع الصورة
+        // ربط نموذج Forminit
         // ============================================================
         const contactForm = document.getElementById('contactForm');
         const contactStatus = document.getElementById('contactStatus');
@@ -5541,7 +5608,7 @@ function closeMediaModal() {
         }
 
         // ============================================================
-        // صفحة تفاصيل المنتج (مع مقاسات وألوان ومنتجات ذات صلة)
+        // صفحة تفاصيل المنتج
         // ============================================================
         function openProductDetails(productId) {
             const product = allProducts.find(p => p.id === productId);
@@ -5816,6 +5883,32 @@ function closeMediaModal() {
         }
 
         // ============================================================
+        // دوال عرض الدفع (داخل/خارج مصر)
+        // ============================================================
+        function showPaymentMethod(method) {
+            const egyptDiv = document.getElementById('paymentDetailsEgypt');
+            const internationalDiv = document.getElementById('paymentDetailsInternational');
+            const btnEgypt = document.getElementById('btnEgypt');
+            const btnInternational = document.getElementById('btnInternational');
+
+            // إزالة التحديد من جميع الأزرار
+            btnEgypt.classList.remove('payment-btn-active');
+            btnInternational.classList.remove('payment-btn-active');
+
+            if (method === 'egypt') {
+                egyptDiv.className = 'payment-details-box visible-details';
+                internationalDiv.className = 'payment-details-box hidden-details';
+                btnEgypt.classList.add('payment-btn-active');
+                showNotification('✅ تم اختيار الدفع داخل مصر', 'success');
+            } else if (method === 'international') {
+                egyptDiv.className = 'payment-details-box hidden-details';
+                internationalDiv.className = 'payment-details-box visible-details';
+                btnInternational.classList.add('payment-btn-active');
+                showNotification('🌍 تم اختيار الدفع خارج مصر', 'success');
+            }
+        }
+
+        // ============================================================
         // أحداث DOM
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
@@ -5853,8 +5946,9 @@ function closeMediaModal() {
             }, 1000);
         });
 
-        console.log('✅ متجر sun Store يعمل مع الصورة والفيديو معاً وعرضهم في مودال منفصل!');
+        console.log('✅ متجر sun Store يعمل مع زرارين الدفع (داخل/خارج مصر)!');
         console.log('📦 عدد المنتجات:', allProducts.length);
+        console.log('📌 أضف منتجاتك في مصفوفة allProducts');
     </script>
 </body>
 
