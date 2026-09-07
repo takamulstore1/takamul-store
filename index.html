@@ -2537,13 +2537,11 @@
             </div>
         </footer>
     </div>
-
-    <!-- ============================================================ -->
-    <!-- جافاسكريبت -->
-    <!-- ============================================================ -->
-    <script>
+    =====================================================
+<script>
+// ===== إصلاح بيئة التشغيل =====
 // ============================================================
-// جافاسكريبت - متجر sun Store (بعد التعديل لدعم معرض الصور)
+// جافاسكريبت - متجر sun Store (مع إجبار اختيار اللون)
 // ============================================================
 
 // ===== إصلاح بيئة التشغيل =====
@@ -6005,7 +6003,7 @@ function displayProducts(products) {
                         </div>
                         ${freeShipping}
                         ${primeBadge}
-                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); openProductDetails(${product.id})">🛒 اختيار المقاس</button>
+                        <button class="add-to-cart-btn" onclick="event.stopPropagation(); openProductDetails(${product.id})">🛒 اختيار</button>
                     </div>
                 </div>`;
         });
@@ -6987,15 +6985,45 @@ function addToCartWithSizeFromDetails(productId) {
     if (!product) return;
 
     const needsSize = product.sizes && product.sizes.length > 0;
+    const needsColor = product.colors && product.colors.length > 0;
     const selectedSize = selectedSizes[productId];
     const selectedColor = selectedColors[productId];
 
+    // التحقق من اختيار المقاس
     if (needsSize && !selectedSize) {
         const error = document.getElementById('sizeError');
         if (error) error.classList.add('show');
         showNotification('⚠️ يرجى اختيار المقاس', 'error');
         return;
     }
+
+    // التحقق من اختيار اللون (الجزء الجديد)
+    if (needsColor && !selectedColor) {
+        // نضيف رسالة خطأ مخصصة للون
+        const colorSelector = document.getElementById('colorSelector');
+        if (colorSelector) {
+            // نضيف رسالة خطأ بجوار خيارات الألوان إذا لم تكن موجودة
+            let colorError = document.getElementById('colorError');
+            if (!colorError) {
+                colorError = document.createElement('div');
+                colorError.id = 'colorError';
+                colorError.className = 'size-error';
+                colorError.textContent = '⚠️ يرجى اختيار اللون';
+                colorError.style.display = 'block';
+                colorSelector.parentNode.appendChild(colorError);
+            } else {
+                colorError.style.display = 'block';
+            }
+        }
+        showNotification('⚠️ يرجى اختيار اللون', 'error');
+        return;
+    }
+
+    // إخفاء رسائل الخطأ إذا كانت موجودة
+    const sizeError = document.getElementById('sizeError');
+    if (sizeError) sizeError.classList.remove('show');
+    const colorError = document.getElementById('colorError');
+    if (colorError) colorError.style.display = 'none';
 
     const colorName = selectedColor ? getColorName(selectedColor) : 'غير محدد';
     const size = selectedSize || 'غير محدد';
@@ -7096,7 +7124,7 @@ document.addEventListener('DOMContentLoaded', function() {
 console.log('✅ متجر sun Store يعمل مع معرض الصور المتعددة!');
 console.log('📦 عدد المنتجات:', allProducts.length);
 console.log('📌 كل منتج يدعم صور متعددة (معرض)');
-    </script>
+</script>
 </body>
 
 </html>
