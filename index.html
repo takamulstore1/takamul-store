@@ -2914,8 +2914,8 @@
         // ===== EmailJS =====
         const PUBLIC_KEY = "7RXGSj5jaLPLznhRM";
         const SERVICE_ID = "service_kltwtgn";
-        const TEMPLATE_ID = "template_iq9pnen";
-        const STORE_EMAIL = "sunstore1969@gmail.com";
+const TEMPLATE_ID = "template_5guho1l";
+const STORE_EMAIL = "yousefmohamed@gmail.com";
         emailjs.init({ publicKey: PUBLIC_KEY });
 
         // ===== Forminit =====
@@ -2940,8 +2940,7 @@
 
         // ===== إعدادات المدير =====
         const ADMIN_EMAIL = "yousefmohamed@gmail.com";
-        const ADMIN_PASSWORD = "123456789";
-
+        const ADMIN_PASSWORD = "123456";
 
         function isAdmin() {
             return auth.currentUser && auth.currentUser.email === ADMIN_EMAIL;
@@ -7403,232 +7402,34 @@ const allProducts = [
         // ============================================================
         // ===== إرسال البريد الإلكتروني =====
         // ============================================================
-        function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
-            let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
-            message += `👤 اسم العميل: ${name}\n`;
-            message += `📱 رقم الهاتف: ${phone}\n`;
-            message += `📍 العنوان: ${address}\n`;
-            message += `✉️ البريد الإلكتروني: ${email}\n\n`;
+function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
+    let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
+    message += `👤 اسم العميل: ${name}\n`;
+    message += `📱 رقم الهاتف: ${phone}\n`;
+    message += `📍 العنوان: ${address}\n`;
+    message += `✉️ البريد الإلكتروني: ${email}\n\n`;
+    message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
+    message += `💰 الإجمالي: ${total} ج.م\n`;
+    message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
 
-            // إضافة معلومات التوصيل
-            const now = new Date();
-            const deliveryDate = new Date(now);
-            deliveryDate.setDate(now.getDate() + DELIVERY_DAYS);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            message += `📦 التوصيل: ${deliveryDate.toLocaleDateString('ar-EG', options)}\n`;
-            message += `🏢 المخزن: طنطا\n\n`;
-
-            message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
-            message += `━`.repeat(35) + `\n`;
-            message += `📊 ملخص الطلب:\n`;
-            message += `• عدد القطع: ${totalItems} قطعة\n`;
-            message += `• الإجمالي: ${total} ج.م\n\n`;
-            message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
-            message += `🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}\n\n`;
-            message += `━`.repeat(35) + `\n`;
-
-            // ===== إضافة معرف Forminit =====
-            message += `\n🔗 معرف الطلب (Forminit): ${SUBMISSION_ID}\n\n`;
-
-            if (imageBase64) {
-                message += `\n📎 صورة إيصال التحويل:\n`;
-                message += `📁 اسم الملف: ${imageName || 'إيصال'}\n`;
-                message += `\n📸 الصورة:\n`;
-                message +=
-                    `<img src="${imageBase64}" alt="إيصال التحويل" style="max-width:100%;max-height:300px;border:1px solid #ccc;border-radius:8px;" />\n`;
-            } else {
-                message += `\n⚠️ لم يتم رفع صورة الإيصال\n`;
-            }
-
-            return emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-                to_email: STORE_EMAIL,
-                from_name: name,
-                from_email: email,
-                message: message,
-                subject: "🛍️ طلب جديد من متجر sun Store مع إيصال الدفع",
-                phone: phone,
-                location: address,
-                total: total + " ج.م",
-                store_name: "sun Store",
-                year: new Date().getFullYear(),
-                attachment: imageBase64 || '',
-                attachment_name: imageName || 'receipt.jpg'
-            });
-        }
-
-        // ============================================================
-        // ===== ربط نموذج Forminit مع Submission ID =====
-        // ============================================================
-        const contactForm = document.getElementById('contactForm');
-        const contactStatus = document.getElementById('contactStatus');
-        const contactSubmitBtn = document.getElementById('contactSubmitBtn');
-
-        if (contactForm && contactStatus) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-
-                const fileInput = document.getElementById('paymentImage');
-                if (!fileInput.files || fileInput.files.length === 0) {
-                    showNotification('⚠️ يرجى رفع صورة إيصال التحويل', 'error');
-                    return;
-                }
-
-                const address = document.getElementById('shippingAddress').value.trim();
-                if (!address) {
-                    showNotification('⚠️ يرجى إدخال عنوان الشحن', 'error');
-                    return;
-                }
-
-                contactStatus.textContent = '⏳ جاري الإرسال...';
-                contactStatus.className = 'status-msg';
-                contactSubmitBtn.disabled = true;
-                contactSubmitBtn.textContent = '⏳ جاري الإرسال...';
-
-                // ===== قراءة الاسم من الحقول =====
-                const firstName = document.getElementById('senderFirstName').value.trim() || 'غير مدخل';
-                const lastName = document.getElementById('senderLastName').value.trim() || '';
-                const fullName = `${firstName} ${lastName}`.trim() || 'غير مدخل';
-                const phone = document.getElementById('senderPhone').value.trim() || '';
-                const email = document.querySelector('input[name="fi-sender-email"]').value.trim() || '';
-
-                const formData = new FormData(contactForm);
-                const file = fileInput.files[0];
-                let imageBase64 = null;
-                let imageName = file.name;
-
-                if (file) {
-                    formData.append('fi-file-receipt', file);
-                    formData.append('payment_receipt', file);
-
-                    imageBase64 = await new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onload = (e) => resolve(e.target.result);
-                        reader.readAsDataURL(file);
-                    });
-                }
-
-                // ===== إضافة الاسم =====
-                formData.append('fi-sender-fullName', fullName);
-                formData.append('full_name', fullName);
-                formData.append('name', fullName);
-                formData.append('customer_name', fullName);
-                formData.append('client_name', fullName);
-
-                // ===== التأكد من أن الحقول المخفية تحتوي على الاسم =====
-                document.getElementById('hiddenFullName').value = fullName;
-                document.getElementById('hiddenFullName2').value = fullName;
-                document.getElementById('hiddenName').value = fullName;
-
-                // ===== إضافة الرسالة =====
-                const messageContainer = document.getElementById('orderMessage');
-                if (messageContainer) {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = messageContainer.innerHTML;
-                    const textContent = tempDiv.textContent || tempDiv.innerText || '';
-                    formData.append('fi-text-message', textContent);
-                } else {
-                    const hiddenMsg = document.getElementById('hiddenOrderMessage');
-                    if (hiddenMsg) formData.append('fi-text-message', hiddenMsg.value);
-                }
-
-                // ===== إضافة معرف Forminit =====
-                formData.append('submission_id', SUBMISSION_ID);
-
-                // ===== حساب الإجمالي =====
-                let total = 0;
-                let totalItems = 0;
-                let productsList = '';
-                cart.forEach((item, index) => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
-                    totalItems += item.quantity;
-                    const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ?
-                        ` (مقاس: ${item.selectedSize})` : '';
-                    const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
-                        ` (لون: ${item.selectedColor})` : '';
-                    productsList +=
-                        `${index + 1}. ${item.name}${sizeInfo}${colorInfo} | الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n`;
-                });
-
-                try {
-                    const result = await forminit.submit(FORM_ID, formData, {
-                        redirect: REDIRECT_URL
-                    });
-
-                    // ===== استخراج Submission ID =====
-                    const submissionId = result.submissionId || result.id || SUBMISSION_ID;
-
-                    contactSubmitBtn.disabled = false;
-                    contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب مع الإيصال';
-
-                    if (result.error) {
-                        contactStatus.textContent = '❌ ' + result.error.message;
-                        contactStatus.className = 'status-msg error';
-                        showNotification('❌ فشل الإرسال', 'error');
-                        return;
-                    }
-
-                    // ===== إنشاء الطلب وحفظه مع Submission ID =====
-                    const orderData = {
-                        items: cart.map(item => ({
-                            name: item.name,
-                            quantity: item.quantity,
-                            price: item.price,
-                            selectedSize: item.selectedSize,
-                            selectedColor: item.selectedColor
-                        })),
-                        total: total,
-                        address: address,
-                        customerName: fullName,
-                        customerPhone: phone,
-                        customerEmail: email,
-                        notes: '',
-                        submissionId: submissionId
-                    };
-
-                    const newOrder = createOrder(orderData);
-
-                    // ===== إرسال الإيميل =====
-                    sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems, imageBase64,
-                            imageName)
-                        .then(() => console.log('✅ EmailJS sent'))
-                        .catch(err => console.error('❌ EmailJS error:', err));
-
-                    contactStatus.textContent = `✅ تم إرسال الطلب بنجاح باسم: ${fullName}`;
-                    contactStatus.className = 'status-msg success';
-                    showNotification(`✅ تم إرسال الطلب باسم: ${fullName} - 🔗 معرف Forminit: ${submissionId}`, 'success');
-
-                    cart = [];
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    updateCartIconCount();
-                    renderCart();
-
-                    setTimeout(() => {
-                        closeCheckoutModal();
-                        contactForm.reset();
-                        document.getElementById('fileName').classList.remove('show');
-                        document.getElementById('imagePreview').classList.remove('show');
-                        document.getElementById('previewImg').src = '';
-                        uploadedImageBase64 = null;
-                        uploadedImageName = null;
-                        contactStatus.textContent = '';
-                        contactStatus.className = 'status-msg';
-                        document.getElementById('orderMessage').innerHTML = '🛒 لا توجد منتجات في العربة';
-                        updateOrdersBadge();
-                        showNotification(`📦 #${newOrder.id} - 🔗 ${submissionId}`, 'success');
-                    }, 3000);
-
-                } catch (error) {
-                    contactSubmitBtn.disabled = false;
-                    contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب مع الإيصال';
-                    contactStatus.textContent = '❌ حدث خطأ: ' + error.message;
-                    contactStatus.className = 'status-msg error';
-                    showNotification('❌ فشل الإرسال', 'error');
-                    console.error('Forminit Error:', error);
-                }
-            });
-        }
-
+    // ===== 1. إرسال الإيميل الأساسي (مضمون 100%) =====
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        to_email: "yousefmohamed@gmail.com", // ← هنا الإيميل اللي هيستقبل
+        from_name: name,
+        from_email: email,
+        message: message,
+        subject: "🛍️ طلب جديد من متجر sun Store",
+        phone: phone,
+        location: address,
+        total: total + " ج.م",
+        store_name: "sun Store",
+        year: new Date().getFullYear(),
+        attachment: '', 
+        attachment_name: ''
+    })
+    .then(() => console.log('✅ Email sent'))
+    .catch(err => console.error('❌ Email error:', err));
+}
         // ============================================================
         // ===== صفحة تفاصيل المنتج =====
         // ============================================================
