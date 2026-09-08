@@ -2871,7 +2871,7 @@
     <!-- ============================================================ -->
     <!-- ===== جافاسكريبت ===== -->
     <!-- ============================================================ -->
-    <script>
+<script>
         // ===== إصلاح بيئة التشغيل =====
         (function fixEnvironment() {
             if (window.location.protocol === 'file:') {
@@ -2938,6 +2938,13 @@
         let deliveryTime = null;
         let userAddress = '';
 
+        // ===== إعدادات المدير =====
+        const ADMIN_EMAIL = "y@gmail.com";
+
+        function isAdmin() {
+            return auth.currentUser && auth.currentUser.email === ADMIN_EMAIL;
+        }
+
         // ============================================================
         // ===== نظام الطلبات =====
         // ============================================================
@@ -2959,6 +2966,22 @@
 
         // ===== حساب حالة الطلب =====
         function getOrderStatus(order) {
+            
+            // إذا تم تغيير الحالة يدوياً من المدير، ناخذ بها فوراً
+            if (order.manualStatus === 'delivered') {
+                return { statusText: '✅ تم التوصيل', statusClass: 'delivered', timerText: '✅ تم التوصيل بنجاح', timerClass: 'completed', diffDays: 0, diffHours: 0, diffMinutes: 0 };
+            }
+            if (order.manualStatus === 'shipping') {
+                return { statusText: '🚚 جاري التوصيل', statusClass: 'shipping', timerText: '⏱️ جاري التوصيل الآن', timerClass: 'urgent', diffDays: 0, diffHours: 0, diffMinutes: 0 };
+            }
+            if (order.manualStatus === 'pending') {
+                return { statusText: '⏳ قيد التجهيز', statusClass: 'pending', timerText: '📦 جاري تجهيز الطلب', timerClass: '', diffDays: 0, diffHours: 0, diffMinutes: 0 };
+            }
+            if (order.manualStatus === 'delayed') {
+                return { statusText: '⏰ متأخر', statusClass: 'delayed', timerText: '⏰ تأخر الطلب عن الموعد', timerClass: 'urgent', diffDays: 0, diffHours: 0, diffMinutes: 0 };
+            }
+
+            // حساب الحالة العادية (بالوقت)
             const now = new Date();
             const deliveryDate = new Date(order.deliveryDate);
 
@@ -3035,9 +3058,10 @@
             return { statusText, statusClass, timerText, timerClass, diffDays, diffHours, diffMinutes };
         }
 
-        // ===== تحديث حالة الطلب إلى "تم التوصيل" =====
-        function markOrderDelivered(orderId) {
-            if (!confirm('هل أنت متأكد من أن الطلب #' + orderId + ' تم توصيله بنجاح؟')) {
+        // ===== دالة تحديث الحالة من لوحة تحكم المدير =====
+        function updateAdminOrderStatus(orderId, newStatus, statusLabel) {
+            if (!isAdmin()) {
+                showNotification('❌ غير مصرح لك بالتحكم في الطلبات', 'error');
                 return;
             }
 
@@ -3047,18 +3071,21 @@
                 return;
             }
 
-            orders[orderIndex].status = 'delivered';
+            orders[orderIndex].status = newStatus;
+            orders[orderIndex].manualStatus = newStatus; // حفظ الحالة اليدوية
             saveOrders();
-            showNotification('✅ تم تحديث حالة الطلب إلى "تم التوصيل"', 'success');
-            openOrdersModal();
+            showNotification(`✅ تم تغيير حالة الطلب إلى "${statusLabel}"`, 'success');
+            openOrdersModal(); // إعادة عرض الطلبات بالتحديث الجديد
         }
 
-        // ===== فتح مودال الطلبات مع عرض Submission ID وزر Done =====
+        // ===== فتح مودال الطلبات =====
         function openOrdersModal() {
             const modal = document.getElementById('ordersModal');
             const container = document.getElementById('ordersList');
 
             if (!modal || !container) return;
+
+            const admin = isAdmin(); // تحديد إذا كان المستخدم الحالي هو المدير
 
             if (orders.length === 0) {
                 container.innerHTML = `
@@ -3160,12 +3187,18 @@
                         </div>
                     ` : '';
 
-                    // ===== زر Done (يظهر فقط إذا لم يكن الطلب قد تم توصيله) =====
-                    const doneButton = order.status !== 'delivered' ? `
-                        <button class="done-btn" onclick="markOrderDelivered('${order.id}')">
-                            ✅ تم التوصيل
-                        </button>
-                    ` : '';
+                    // ===== أزرار تحكم المدير (تظهر فقط إذا كان هو المدير) =====
+                    let adminButtons = '';
+                    if (admin) {
+                        adminButtons = `
+                            <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+                                <button class="done-btn" style="background:#059669; flex:1;" onclick="updateAdminOrderStatus('${order.id}', 'delivered', 'تم التوصيل')">✅ تم التوصيل</button>
+                                <button class="done-btn" style="background:#3b82f6; flex:1;" onclick="updateAdminOrderStatus('${order.id}', 'shipping', 'جاري الشحن')">🚚 في الطريق</button>
+                                <button class="done-btn" style="background:#64748b; flex:1;" onclick="updateAdminOrderStatus('${order.id}', 'pending', 'قيد التجهيز')">⏳ لسه</button>
+                                <button class="done-btn" style="background:#dc2626; flex:1;" onclick="updateAdminOrderStatus('${order.id}', 'delayed', 'متأخر')">⏰ متأخر</button>
+                            </div>
+                        `;
+                    }
 
                     html += `
                         <div class="order-card">
@@ -3191,7 +3224,7 @@
                                 <i class="fas ${status.statusClass === 'delivered' ? 'fa-check-circle' : status.statusClass === 'delayed' ? 'fa-exclamation-triangle' : 'fa-clock'}"></i>
                                 ${timerDisplay}
                             </div>
-                            ${doneButton}
+                            ${adminButtons}
                         </div>
                     `;
                 });
@@ -3820,8 +3853,8 @@ const allProducts = [
             "https://i.imgur.com/4GvH3Wq.jpg"
         ],
         freeShipping: true, 
-        description: "حذاء رياضي مريح ومناسب للجري والمشي.",
-        sizes: ["40", "41", "42", "43", "44", "45"], 
+        description: "حذاء رياضي مريح ومناسب للجري والمشي.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
         colors: ["#1a1a2e", "#2c3e50", "#c0392b"] 
     },
     { 
@@ -3897,7 +3930,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "ساعة يد أنيقة بتصميم عصري.", 
-        sizes: ["متوسط"], 
+        sizes: ["متوسط"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -3954,7 +3987,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "محفظة جلدية فاخرة.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -3973,7 +4006,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "سوار ذهبي أنيق وجذاب.", 
-        sizes: ["متوسط"], 
+        sizes: ["متوسط"],
         colors: ["#1a1a2e", "#f39c12"] 
     },
     { 
@@ -3992,7 +4025,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "ربطة عنق أنيقة للمناسبات.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -4030,7 +4063,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "وشاح صوف دافئ وأنيق.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#f39c12"] 
     },
     { 
@@ -4049,7 +4082,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "جوارب رجالي مريحة.", 
-        sizes: ["M", "L", "XL"], 
+        sizes: ["M", "L", "XL"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -4068,7 +4101,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "منديل جيب أنيق.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#ffffff", "#1a1a2e", "#e74c3c", "#3498db"] 
     },
     { 
@@ -4087,7 +4120,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "بروش رجالي فاخر.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#f39c12", "#e74c3c"] 
     },
     { 
@@ -4391,7 +4424,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "بدلة رسمية سوداء.", 
-        sizes: ["M", "L", "XL"], 
+        sizes: ["M", "L", "XL"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -4581,7 +4614,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "ساعة يد نسائية.", 
-        sizes: ["متوسط"], 
+        sizes: ["متوسط"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -4600,7 +4633,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "نظارة شمسية نسائية.", 
-        sizes: ["متوسط"], 
+        sizes: ["متوسط"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -4619,7 +4652,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حزام نسائي جلدي.", 
-        sizes: ["S", "M", "L"], 
+        sizes: ["S", "M", "L"],
         colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
     },
     { 
@@ -4638,7 +4671,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "محفظة نسائية أنيقة.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -4657,7 +4690,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "سوار نسائي فاخر.", 
-        sizes: ["متوسط"], 
+        sizes: ["متوسط"],
         colors: ["#1a1a2e", "#f39c12", "#e74c3c"] 
     },
     { 
@@ -4676,7 +4709,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "وشاح حريري أنيق.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#f39c12"] 
     },
     { 
@@ -4695,7 +4728,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "جوارب نسائية ناعمة.", 
-        sizes: ["S", "M", "L"], 
+        sizes: ["S", "M", "L"],
         colors: ["#ffffff", "#1a1a2e", "#e74c3c"] 
     },
     { 
@@ -4714,7 +4747,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "بروش نسائي فاخر.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#f39c12", "#e74c3c"] 
     },
     { 
@@ -5019,7 +5052,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "طقم ملابس رياضية مريح.",
-        sizes: ["S", "M", "L", "XL"], 
+        sizes: ["S", "M", "L", "XL"],
         colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] 
     },
     { 
@@ -5057,7 +5090,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "طاقية رياضية خفيفة.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#2c3e50", "#e74c3c", "#3498db"] 
     },
     { 
@@ -5096,7 +5129,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة قدم احترافي.",
-        sizes: ["40", "41", "42", "43", "44"], 
+        sizes: ["40", "41", "42", "43", "44"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5115,7 +5148,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة سلة احترافي.",
-        sizes: ["40", "41", "42", "43", "44", "45"], 
+        sizes: ["40", "41", "42", "43", "44", "45"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5153,7 +5186,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة يد احترافي.",
-        sizes: ["40", "41", "42", "43", "44", "45"], 
+        sizes: ["40", "41", "42", "43", "44", "45"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5172,7 +5205,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء تمرين متعدد الاستخدامات.",
-        sizes: ["40", "41", "42", "43", "44"], 
+        sizes: ["40", "41", "42", "43", "44"],
         colors: ["#1a1a2e", "#2c3e50", "#f39c12"] 
     },
     { 
@@ -5210,7 +5243,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "دمبل مناسب للتمارين المنزلية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5229,7 +5262,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "دمبل 10 كجم للتمارين المتقدمة.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5248,7 +5281,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "بار حديد لتمارين رفع الأثقال.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5267,7 +5300,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حبل قفز للتمارين القلبية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#e74c3c", "#2c3e50", "#3498db"] 
     },
     { 
@@ -5286,7 +5319,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "سجادة رياضية مريحة.",
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#8e44ad"] 
     },
     { 
@@ -5305,7 +5338,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "مضرب تنس احترافي.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5324,7 +5357,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حقيبة رياضية عملية.",
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"] 
     },
     { 
@@ -5362,7 +5395,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "كرسي رياضي محمول.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5381,7 +5414,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "كرة قدم عالية الجودة.",
-        sizes: [], 
+        sizes: [],
         colors: ["#ffffff", "#1a1a2e", "#e74c3c"] 
     },
     { 
@@ -5400,7 +5433,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة قدم للأطفال.",
-        sizes: ["32", "33", "34", "35", "36", "37"], 
+        sizes: ["32", "33", "34", "35", "36", "37"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5495,7 +5528,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "حزام جري لحمل الأغراض.", 
-        sizes: ["S", "M", "L"], 
+        sizes: ["S", "M", "L"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5514,7 +5547,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "سماعة جري لاسلكية مقاومة للعرق.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5533,7 +5566,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "زجاجة ماء رياضية عملية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#2c3e50", "#3498db", "#e74c3c"] 
     },
     { 
@@ -5552,7 +5585,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "ساعة رياضية متعددة الوظائف.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5590,7 +5623,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "حزام مقاومة للتمارين.", 
-        sizes: ["S", "M", "L"], 
+        sizes: ["S", "M", "L"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5609,7 +5642,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "قناع جري خفيف.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5628,7 +5661,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "سوار معصم رياضي.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5647,7 +5680,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "منشفة رياضية سريعة الجفاف.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#3498db"] 
     },
     { 
@@ -5780,7 +5813,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "جوارب رياضية قطنية.",
-        sizes: ["M", "L", "XL"], 
+        sizes: ["M", "L", "XL"],
         colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5799,7 +5832,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "طاقية رياضية قطنية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#2c3e50", "#e74c3c", "#3498db"] 
     },
     { 
@@ -5837,7 +5870,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة قدم قطني.",
-        sizes: ["40", "41", "42", "43", "44"], 
+        sizes: ["40", "41", "42", "43", "44"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5856,7 +5889,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة سلة قطني.",
-        sizes: ["40", "41", "42", "43", "44", "45"], 
+        sizes: ["40", "41", "42", "43", "44", "45"],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -5894,7 +5927,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حذاء كرة يد قطني.",
-        sizes: ["40", "41", "42", "43", "44", "45"], 
+        sizes: ["40", "41", "42", "43", "44", "45"],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5951,7 +5984,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "دمبل قطني.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5970,7 +6003,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "دمبل 10 كجم قطني.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -5989,7 +6022,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "بار حديد قطني.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -6008,7 +6041,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "حبل قفز قطني.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#e74c3c", "#2c3e50", "#3498db"] 
     },
     { 
@@ -6027,7 +6060,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "سجادة رياضية قطنية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#8e44ad"] 
     },
     { 
@@ -6046,7 +6079,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "مضرب تنس قطني.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
     },
     { 
@@ -6065,7 +6098,7 @@ const allProducts = [
         ],
         freeShipping: true,
         description: "حقيبة رياضية قطنية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"] 
     },
     { 
@@ -6103,7 +6136,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "كرسي رياضي قطني.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#1a1a2e", "#2c3e50"] 
     },
     { 
@@ -6122,7 +6155,7 @@ const allProducts = [
         ],
         freeShipping: true, 
         description: "كرة قدم قطنية.", 
-        sizes: [], 
+        sizes: [],
         colors: ["#ffffff", "#1a1a2e", "#e74c3c"] 
     },
     { 
@@ -6408,14 +6441,10 @@ const allProducts = [
                 })
                 .catch((error) => {
                     let msg = '⚠️ فشل تسجيل الدخول بواسطة Google';
-                    if (error.code === 'auth/popup-closed-by-user') msg =
-                    '⚠️ تم إغلاق نافذة تسجيل الدخول قبل إكمال العملية';
-                    else if (error.code === 'auth/popup-blocked') msg =
-                    '⚠️ تم حظر النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة للموقع';
-                    else if (error.code === 'auth/account-exists-with-different-credential') msg =
-                        '⚠️ يوجد حساب بنفس البريد الإلكتروني ولكن بكلمة مرور. يرجى تسجيل الدخول بالبريد وكلمة المرور أولاً.';
-                    else if (error.code === 'auth/network-request-failed') msg =
-                    '⚠️ فشل الاتصال بالشبكة. تحقق من اتصالك بالإنترنت';
+                    if (error.code === 'auth/popup-closed-by-user') msg = '⚠️ تم إغلاق نافذة تسجيل الدخول قبل إكمال العملية';
+                    else if (error.code === 'auth/popup-blocked') msg = '⚠️ تم حظر النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة للموقع';
+                    else if (error.code === 'auth/account-exists-with-different-credential') msg = '⚠️ يوجد حساب بنفس البريد الإلكتروني ولكن بكلمة مرور. يرجى تسجيل الدخول بالبريد وكلمة المرور أولاً.';
+                    else if (error.code === 'auth/network-request-failed') msg = '⚠️ فشل الاتصال بالشبكة. تحقق من اتصالك بالإنترنت';
                     errorEl.textContent = msg;
                     errorEl.classList.add('show');
                     showNotification(msg, 'error');
@@ -8010,7 +8039,7 @@ const allProducts = [
         console.log('⭐ قم بإضافة صور المنتجات في مصفوفة images لكل منتج');
         console.log('👤 تم إضافة الاسم الكامل (full_name, name) إلى Forminit بنجاح!');
         console.log(`🔗 معرف Forminit المخصص: ${SUBMISSION_ID}`);
-        console.log('✅ زر "تم التوصيل" (Done) تم إضافته بنجاح في صفحة الطلبات!');
+        console.log('✅ تم تفعيل لوحة تحكم المدير (Admin Control) على أزرار الطلبات!');
     </script>
 </body>
 
