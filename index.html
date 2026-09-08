@@ -2914,7 +2914,7 @@
         // ===== EmailJS =====
         const PUBLIC_KEY = "7RXGSj5jaLPLznhRM";
         const SERVICE_ID = "service_kltwtgn";
-        const TEMPLATE_ID = "template_iq9pnen";
+    const TEMPLATE_ID = "template_5guho1l";
         const STORE_EMAIL = "sunstore1969@gmail.com";
         emailjs.init({ publicKey: PUBLIC_KEY });
 
@@ -7401,468 +7401,70 @@ const allProducts = [
         // ============================================================
         // ===== إرسال البريد الإلكتروني =====
         // ============================================================
-        function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
-            let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
-            message += `👤 اسم العميل: ${name}\n`;
-            message += `📱 رقم الهاتف: ${phone}\n`;
-            message += `📍 العنوان: ${address}\n`;
-            message += `✉️ البريد الإلكتروني: ${email}\n\n`;
+function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
+    // إنشاء رسالة النص
+    let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
+    message += `👤 اسم العميل: ${name}\n`;
+    message += `📱 رقم الهاتف: ${phone}\n`;
+    message += `📍 العنوان: ${address}\n`;
+    message += `✉️ البريد الإلكتروني: ${email}\n\n`;
 
-            // إضافة معلومات التوصيل
-            const now = new Date();
-            const deliveryDate = new Date(now);
-            deliveryDate.setDate(now.getDate() + DELIVERY_DAYS);
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            message += `📦 التوصيل: ${deliveryDate.toLocaleDateString('ar-EG', options)}\n`;
-            message += `🏢 المخزن: طنطا\n\n`;
+    // إضافة معلومات التوصيل
+    const now = new Date();
+    const deliveryDate = new Date(now);
+    deliveryDate.setDate(now.getDate() + DELIVERY_DAYS);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    message += `📦 التوصيل: ${deliveryDate.toLocaleDateString('ar-EG', options)}\n`;
+    message += `🏢 المخزن: طنطا\n\n`;
 
-            message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
-            message += `━`.repeat(35) + `\n`;
-            message += `📊 ملخص الطلب:\n`;
-            message += `• عدد القطع: ${totalItems} قطعة\n`;
-            message += `• الإجمالي: ${total} ج.م\n\n`;
-            message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
-            message += `🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}\n\n`;
-            message += `━`.repeat(35) + `\n`;
+    message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
+    message += `━`.repeat(35) + `\n`;
+    message += `📊 ملخص الطلب:\n`;
+    message += `• عدد القطع: ${totalItems} قطعة\n`;
+    message += `• الإجمالي: ${total} ج.م\n\n`;
+    message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
+    message += `🕐 وقت الطلب: ${new Date().toLocaleTimeString('ar-EG')}\n\n`;
+    message += `━`.repeat(35) + `\n`;
+    message += `\n🔗 معرف الطلب (Forminit): ${SUBMISSION_ID}\n`;
 
-            // ===== إضافة معرف Forminit =====
-            message += `\n🔗 معرف الطلب (Forminit): ${SUBMISSION_ID}\n\n`;
+    // ===== 1. إرسال الإيميل الأساسي (مضمون) =====
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        to_email: STORE_EMAIL,
+        from_name: name,
+        from_email: email,
+        message: message,
+        subject: "🛍️ طلب جديد من متجر sun Store",
+        phone: phone,
+        location: address,
+        total: total + " ج.م",
+        store_name: "sun Store",
+        year: new Date().getFullYear(),
+        attachment: '',
+        attachment_name: ''
+    })
+    .then(() => console.log('✅ EmailJS sent (Basic)'))
+    .catch(err => console.error('❌ EmailJS error:', err));
 
-            if (imageBase64) {
-                message += `\n📎 صورة إيصال التحويل:\n`;
-                message += `📁 اسم الملف: ${imageName || 'إيصال'}\n`;
-                message += `\n📸 الصورة:\n`;
-                message +=
-                    `<img src="${imageBase64}" alt="إيصال التحويل" style="max-width:100%;max-height:300px;border:1px solid #ccc;border-radius:8px;" />\n`;
-            } else {
-                message += `\n⚠️ لم يتم رفع صورة الإيصال\n`;
-            }
-
-            return emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-                to_email: STORE_EMAIL,
-                from_name: name,
-                from_email: email,
-                message: message,
-                subject: "🛍️ طلب جديد من متجر sun Store مع إيصال الدفع",
-                phone: phone,
-                location: address,
-                total: total + " ج.م",
-                store_name: "sun Store",
-                year: new Date().getFullYear(),
-                attachment: imageBase64 || '',
-                attachment_name: imageName || 'receipt.jpg'
-            });
-        }
-
-        // ============================================================
-        // ===== ربط نموذج Forminit مع Submission ID =====
-        // ============================================================
-        const contactForm = document.getElementById('contactForm');
-        const contactStatus = document.getElementById('contactStatus');
-        const contactSubmitBtn = document.getElementById('contactSubmitBtn');
-
-        if (contactForm && contactStatus) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-
-                const fileInput = document.getElementById('paymentImage');
-                if (!fileInput.files || fileInput.files.length === 0) {
-                    showNotification('⚠️ يرجى رفع صورة إيصال التحويل', 'error');
-                    return;
-                }
-
-                const address = document.getElementById('shippingAddress').value.trim();
-                if (!address) {
-                    showNotification('⚠️ يرجى إدخال عنوان الشحن', 'error');
-                    return;
-                }
-
-                contactStatus.textContent = '⏳ جاري الإرسال...';
-                contactStatus.className = 'status-msg';
-                contactSubmitBtn.disabled = true;
-                contactSubmitBtn.textContent = '⏳ جاري الإرسال...';
-
-                // ===== قراءة الاسم من الحقول =====
-                const firstName = document.getElementById('senderFirstName').value.trim() || 'غير مدخل';
-                const lastName = document.getElementById('senderLastName').value.trim() || '';
-                const fullName = `${firstName} ${lastName}`.trim() || 'غير مدخل';
-                const phone = document.getElementById('senderPhone').value.trim() || '';
-                const email = document.querySelector('input[name="fi-sender-email"]').value.trim() || '';
-
-                const formData = new FormData(contactForm);
-                const file = fileInput.files[0];
-                let imageBase64 = null;
-                let imageName = file.name;
-
-                if (file) {
-                    formData.append('fi-file-receipt', file);
-                    formData.append('payment_receipt', file);
-
-                    imageBase64 = await new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onload = (e) => resolve(e.target.result);
-                        reader.readAsDataURL(file);
-                    });
-                }
-
-                // ===== إضافة الاسم =====
-                formData.append('fi-sender-fullName', fullName);
-                formData.append('full_name', fullName);
-                formData.append('name', fullName);
-                formData.append('customer_name', fullName);
-                formData.append('client_name', fullName);
-
-                // ===== التأكد من أن الحقول المخفية تحتوي على الاسم =====
-                document.getElementById('hiddenFullName').value = fullName;
-                document.getElementById('hiddenFullName2').value = fullName;
-                document.getElementById('hiddenName').value = fullName;
-
-                // ===== إضافة الرسالة =====
-                const messageContainer = document.getElementById('orderMessage');
-                if (messageContainer) {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = messageContainer.innerHTML;
-                    const textContent = tempDiv.textContent || tempDiv.innerText || '';
-                    formData.append('fi-text-message', textContent);
-                } else {
-                    const hiddenMsg = document.getElementById('hiddenOrderMessage');
-                    if (hiddenMsg) formData.append('fi-text-message', hiddenMsg.value);
-                }
-
-                // ===== إضافة معرف Forminit =====
-                formData.append('submission_id', SUBMISSION_ID);
-
-                // ===== حساب الإجمالي =====
-                let total = 0;
-                let totalItems = 0;
-                let productsList = '';
-                cart.forEach((item, index) => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
-                    totalItems += item.quantity;
-                    const sizeInfo = item.selectedSize && item.selectedSize !== 'غير محدد' ?
-                        ` (مقاس: ${item.selectedSize})` : '';
-                    const colorInfo = item.selectedColor && item.selectedColor !== 'غير محدد' ?
-                        ` (لون: ${item.selectedColor})` : '';
-                    productsList +=
-                        `${index + 1}. ${item.name}${sizeInfo}${colorInfo} | الكمية: ${item.quantity} | السعر: ${itemTotal} ج.م\n`;
-                });
-
-                try {
-                    const result = await forminit.submit(FORM_ID, formData, {
-                        redirect: REDIRECT_URL
-                    });
-
-                    // ===== استخراج Submission ID =====
-                    const submissionId = result.submissionId || result.id || SUBMISSION_ID;
-
-                    contactSubmitBtn.disabled = false;
-                    contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب مع الإيصال';
-
-                    if (result.error) {
-                        contactStatus.textContent = '❌ ' + result.error.message;
-                        contactStatus.className = 'status-msg error';
-                        showNotification('❌ فشل الإرسال', 'error');
-                        return;
-                    }
-
-                    // ===== إنشاء الطلب وحفظه مع Submission ID =====
-                    const orderData = {
-                        items: cart.map(item => ({
-                            name: item.name,
-                            quantity: item.quantity,
-                            price: item.price,
-                            selectedSize: item.selectedSize,
-                            selectedColor: item.selectedColor
-                        })),
-                        total: total,
-                        address: address,
-                        customerName: fullName,
-                        customerPhone: phone,
-                        customerEmail: email,
-                        notes: '',
-                        submissionId: submissionId
-                    };
-
-                    const newOrder = createOrder(orderData);
-
-                    // ===== إرسال الإيميل =====
-                    sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems, imageBase64,
-                            imageName)
-                        .then(() => console.log('✅ EmailJS sent'))
-                        .catch(err => console.error('❌ EmailJS error:', err));
-
-                    contactStatus.textContent = `✅ تم إرسال الطلب بنجاح باسم: ${fullName}`;
-                    contactStatus.className = 'status-msg success';
-                    showNotification(`✅ تم إرسال الطلب باسم: ${fullName} - 🔗 معرف Forminit: ${submissionId}`, 'success');
-
-                    cart = [];
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    updateCartIconCount();
-                    renderCart();
-
-                    setTimeout(() => {
-                        closeCheckoutModal();
-                        contactForm.reset();
-                        document.getElementById('fileName').classList.remove('show');
-                        document.getElementById('imagePreview').classList.remove('show');
-                        document.getElementById('previewImg').src = '';
-                        uploadedImageBase64 = null;
-                        uploadedImageName = null;
-                        contactStatus.textContent = '';
-                        contactStatus.className = 'status-msg';
-                        document.getElementById('orderMessage').innerHTML = '🛒 لا توجد منتجات في العربة';
-                        updateOrdersBadge();
-                        showNotification(`📦 #${newOrder.id} - 🔗 ${submissionId}`, 'success');
-                    }, 3000);
-
-                } catch (error) {
-                    contactSubmitBtn.disabled = false;
-                    contactSubmitBtn.textContent = '📧 تأكيد وإرسال الطلب مع الإيصال';
-                    contactStatus.textContent = '❌ حدث خطأ: ' + error.message;
-                    contactStatus.className = 'status-msg error';
-                    showNotification('❌ فشل الإرسال', 'error');
-                    console.error('Forminit Error:', error);
-                }
-            });
-        }
-
-        // ============================================================
-        // ===== صفحة تفاصيل المنتج =====
-        // ============================================================
-        function openProductDetails(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            if (!product) return;
-            currentDetailProductId = productId;
-            const modal = document.getElementById('productDetailsModal');
-            const content = document.getElementById('productDetailsContent');
-
-            if (!selectedSizes[productId]) {
-                selectedSizes[productId] = null;
-            }
-            if (!selectedColors[productId]) {
-                selectedColors[productId] = null;
-            }
-
-            const stars = '⭐'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ? '⭐' : '');
-
-            let sizeOptionsHTML = '';
-            if (product.sizes && product.sizes.length > 0) {
-                sizeOptionsHTML = `
-                    <span class="size-label">📏 اختر المقاس:</span>
-                    <div class="size-selector" id="sizeSelector">
-                        ${product.sizes.map(size => `
-                            <div class="size-option ${selectedSizes[productId] === size ? 'selected' : ''}" 
-                                 onclick="selectSize(${productId}, '${size}')">
-                                ${size}
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="size-error" id="sizeError">⚠️ يرجى اختيار المقاس</div>
-                `;
-            }
-
-            let colorOptionsHTML = '';
-            if (product.colors && product.colors.length > 0) {
-                colorOptionsHTML = `
-                    <span class="size-label">🎨 اختر اللون:</span>
-                    <div class="color-selector" id="colorSelector">
-                        ${product.colors.map(color => {
-                            const colorName = getColorName(color);
-                            return `
-                                <div class="color-option ${selectedColors[productId] === color ? 'selected' : ''}" 
-                                     style="background-color: ${color};"
-                                     onclick="selectColor(${productId}, '${color}')"
-                                     title="${colorName}">
-                                    <span class="color-tooltip">${colorName}</span>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                `;
-            }
-
-            const optionsSection = (sizeOptionsHTML || colorOptionsHTML) ? `
-                <div style="background:#f8fafc;padding:15px;border-radius:10px;margin:10px 0;border:1px solid #e2e8f0;">
-                    ${sizeOptionsHTML}
-                    ${colorOptionsHTML}
-                </div>
-            ` : '';
-
-            const hasVideo = product.video && product.video.trim() !== '';
-            const mainImage = product.images && product.images.length > 0 ? product.images[0] : null;
-            const hasImage = mainImage && mainImage.trim() !== '';
-
-            // ===== معرض الصور المتعددة =====
-            let galleryHTML = '';
-            if (product.images && product.images.length > 1) {
-                galleryHTML = `
-                    <div style="margin-top:12px;">
-                        <div style="display:flex;gap:8px;overflow-x:auto;padding:8px 0;flex-wrap:nowrap;scrollbar-width:thin;">
-                            ${product.images.map((img, index) => `
-                                <img src="${img}" 
-                                     onclick="event.stopPropagation(); openMediaModal('${img}', false, '📸 صورة ${index+1} من ${product.name}')"
-                                     style="width:80px;height:80px;object-fit:cover;border-radius:10px;cursor:pointer;border:3px solid ${index === 0 ? '#059669' : '#e2e8f0'};flex-shrink:0;transition:all 0.3s;"
-                                     onmouseover="this.style.transform='scale(1.05)';this.style.borderColor='#059669';"
-                                     onmouseout="this.style.transform='scale(1)';this.style.borderColor='${index === 0 ? '#059669' : '#e2e8f0'}';"
-                                     alt="${product.name} - صورة ${index+1}"
-                                     title="صورة ${index+1}">
-                            `).join('')}
-                        </div>
-                        <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;justify-content:center;">
-                            <span style="background:#059669;color:#fff;padding:2px 16px;border-radius:20px;font-size:12px;font-weight:600;">
-                                📸 ${product.images.length} صور متاحة
-                            </span>
-                            <span style="background:#f1f5f9;color:#1a1a2e;padding:2px 16px;border-radius:20px;font-size:12px;">
-                                👆 اضغط على الصورة للتكبير
-                            </span>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // ===== عرض الصورة الرئيسية =====
-            let detailMediaHTML = '';
-            if (hasVideo || hasImage) {
-                detailMediaHTML +=
-                    `<div style="display:grid;grid-template-columns:${hasVideo && hasImage ? '1fr 1fr' : '1fr'};gap:12px;height:280px;">`;
-
-                if (hasVideo) {
-                    detailMediaHTML += `
-                        <div style="background:#000;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;cursor:pointer;position:relative;" onclick="event.stopPropagation(); openMediaModal('${product.video}', true, '🎬 فيديو المنتج - ${product.name}')">
-                            <video muted loop playsinline style="width:100%;height:100%;object-fit:contain;padding:10px;" onclick="event.stopPropagation(); openMediaModal('${product.video}', true, '🎬 فيديو المنتج - ${product.name}')">
-                                <source src="${product.video}" type="video/mp4">
-                            </video>
-                            <div class="video-play-btn" style="position:absolute;width:50px;height:50px;font-size:22px;pointer-events:none;">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:2px 12px;border-radius:12px;font-size:11px;z-index:5;"><i class="fas fa-video"></i> فيديو</span>
-                        </div>
-                    `;
-                }
-
-                if (hasImage) {
-                    detailMediaHTML += `
-                        <div style="background:#f8fafc;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;cursor:pointer;position:relative;" onclick="event.stopPropagation(); openMediaModal('${mainImage}', false, '📸 صورة المنتج - ${product.name}')">
-                            <img src="${mainImage}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;padding:10px;" onclick="event.stopPropagation(); openMediaModal('${mainImage}', false, '📸 صورة المنتج - ${product.name}')" onerror="this.src='https://via.placeholder.com/400x300?text=أضف+صورة'">
-                            ${!hasVideo ? `<span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:2px 12px;border-radius:12px;font-size:11px;z-index:5;"><i class="fas fa-image"></i> صورة رئيسية</span>` : ''}
-                            ${product.images && product.images.length > 1 ? `<span style="position:absolute;top:8px;right:8px;background:rgba(5,150,105,0.9);color:#fff;padding:2px 12px;border-radius:12px;font-size:11px;z-index:5;"><i class="fas fa-images"></i> +${product.images.length - 1}</span>` : ''}
-                        </div>
-                    `;
-                }
-
-                detailMediaHTML += `</div>`;
-                detailMediaHTML += galleryHTML;
-
-            } else {
-                detailMediaHTML = `
-                    <div style="background:#f8fafc;border-radius:12px;height:280px;display:flex;align-items:center;justify-content:center;border:1px solid #e2e8f0;color:#aaa;flex-direction:column;gap:10px;">
-                        <i class="fas fa-image" style="font-size:50px;opacity:0.3;"></i>
-                        <span style="font-size:14px;color:#ccc;">أضف صورة للمنتج</span>
-                    </div>
-                `;
-            }
-
-            // ===== المنتجات ذات الصلة =====
-            const relatedProducts = allProducts
-                .filter(p => p.id !== productId && (p.category === product.category || p.subcategory === product
-                    .category))
-                .slice(0, 15);
-
-            let relatedHTML = '';
-            if (relatedProducts.length > 0) {
-                relatedHTML = `
-                    <div class="related-products-section">
-                        <div class="section-title-sm">🔄 <span>منتجات ذات صلة</span> من نفس القسم</div>
-                        <div class="related-products-grid">
-                            ${relatedProducts.map(p => {
-                                const hasVideoRel = p.video && p.video.trim() !== '';
-                                const relImage = p.images && p.images.length > 0 ? p.images[0] : null;
-                                const hasImageRel = relImage && relImage.trim() !== '';
-                                let mediaRelated = '';
-                                if (hasVideoRel) {
-                                    mediaRelated = `
-                                        <video muted loop playsinline onclick="event.stopPropagation(); openMediaModal('${p.video}', true, '🎬 فيديو المنتج - ${p.name}')">
-                                            <source src="${p.video}" type="video/mp4">
-                                        </video>
-                                    `;
-                                } else if (hasImageRel) {
-                                    mediaRelated = `
-                                        <img src="${relImage}" alt="${p.name}" onclick="event.stopPropagation(); openMediaModal('${relImage}', false, '📸 صورة المنتج - ${p.name}')" onerror="this.src='https://via.placeholder.com/180x120?text=أضف+صورة'">
-                                    `;
-                                } else {
-                                    mediaRelated = `
-                                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#ccc;"><i class="fas fa-image" style="font-size:30px;opacity:0.3;"></i></div>
-                                    `;
-                                }
-                                return `
-                                    <div class="related-product-card" onclick="openProductDetails(${p.id})">
-                                        <div class="related-img">
-                                            ${mediaRelated}
-                                            ${p.images && p.images.length > 1 ? `<span style="position:absolute;top:4px;right:4px;background:rgba(5,150,105,0.85);color:#fff;padding:1px 8px;border-radius:10px;font-size:9px;z-index:5;"><i class="fas fa-images"></i> ${p.images.length}</span>` : ''}
-                                        </div>
-                                        <div class="related-info">
-                                            <h4>${p.name}</h4>
-                                            <div class="related-price">
-                                                ${p.price} ج.م
-                                                ${p.oldPrice ? `<span class="old">${p.oldPrice} ج.م</span>` : ''}
-                                            </div>
-                                            <button class="add-small-btn" onclick="event.stopPropagation(); openProductDetails(${p.id})">🛒 اختيار</button>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                `;
-            }
-
-            content.innerHTML = `
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:25px;">
-                    <div>
-                        ${detailMediaHTML}
-                        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
-                            ${hasVideo ? `<span style="background:#059669;color:#fff;padding:3px 12px;border-radius:12px;font-size:11px;"><i class="fas fa-video"></i> فيديو</span>` : ''}
-                            ${hasImage ? `<span style="background:#3b82f6;color:#fff;padding:3px 12px;border-radius:12px;font-size:11px;"><i class="fas fa-image"></i> صورة رئيسية</span>` : ''}
-                            ${product.images && product.images.length > 1 ? `<span style="background:#8e44ad;color:#fff;padding:3px 12px;border-radius:12px;font-size:11px;"><i class="fas fa-images"></i> ${product.images.length} صور</span>` : ''}
-                            <span style="background:#f1f5f9;color:#1a1a2e;padding:3px 12px;border-radius:12px;font-size:11px;">👆 اضغط على الصورة/الفيديو للتكبير</span>
-                        </div>
-                    </div>
-                    <div>
-                        <button onclick="closeProductDetails()" style="background:#f1f5f9;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px;margin-bottom:12px;">← العودة</button>
-                        <h1 style="font-size:22px;font-weight:800;color:#1a1a2e;">${product.name}</h1>
-                        <div style="display:flex;align-items:center;gap:10px;margin:6px 0 10px;">
-                            <span style="color:#059669;font-size:18px;">${stars}</span>
-                            <span style="color:#64748b;font-size:14px;">(${product.reviews || 0} تقييم)</span>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 12px;">
-                            <span style="font-size:28px;font-weight:800;color:#1a1a2e;">${product.price} ج.م</span>
-                            ${product.oldPrice ? `<span style="font-size:18px;color:#94a3b8;text-decoration:line-through;">${product.oldPrice} ج.م</span>` : ''}
-                            ${product.discount ? `<span style="font-size:14px;color:#059669;font-weight:700;background:rgba(5,150,105,0.1);padding:2px 12px;border-radius:20px;">${product.discount}</span>` : ''}
-                        </div>
-                        ${product.freeShipping ? `<span style="color:#059669;font-weight:700;font-size:14px;display:block;margin-bottom:8px;">🚚 التوصيل على حسب المحافظه</span>` : ''}
-                        ${optionsSection}
-                        <div style="color:#334155;line-height:1.8;margin:10px 0;font-size:15px;">
-                            <strong>📝 الوصف:</strong>
-                            <p>${product.description || 'منتج مميز من متجر sun Store'}</p>
-                        </div>
-                        <button class="add-to-cart-btn" onclick="addToCartWithSizeFromDetails(${product.id})" style="width:100%;padding:14px;background:linear-gradient(135deg,#059669,#047857);border:none;color:#fff;border-radius:10px;cursor:pointer;font-weight:700;font-size:17px;transition:0.3s;margin-top:10px;">🛒 إضافة إلى العربة</button>
-                    </div>
-                </div>
-                ${relatedHTML}
-            `;
-
-            modal.classList.add('open');
-            document.body.style.overflow = 'hidden';
-
-            setTimeout(() => {
-                document.querySelectorAll('#productDetailsContent video, .related-products-grid video').forEach(
-                v => {
-                    v.play().catch(() => {});
-                });
-            }, 500);
-        }
-
+    // ===== 2. محاولة إرسال إيميل يحتوي على الصورة (اختياري) =====
+    if (imageBase64) {
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+            to_email: STORE_EMAIL,
+            from_name: name,
+            from_email: email,
+            message: message,
+            subject: "🛍️ طلب جديد من متجر sun Store (مع صورة الإيصال)",
+            phone: phone,
+            location: address,
+            total: total + " ج.م",
+            store_name: "sun Store",
+            year: new Date().getFullYear(),
+            attachment: imageBase64,
+            attachment_name: imageName || 'receipt.jpg'
+        })
+        .then(() => console.log('✅ EmailJS sent (With Image)'))
+        .catch(err => console.error('❌ EmailJS error (Image):', err)); // مش هيمنع الطلب
+    }
+}
         function selectSize(productId, size) {
             selectedSizes[productId] = size;
             const selector = document.getElementById('sizeSelector');
