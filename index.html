@@ -3643,9 +3643,2892 @@
         // ============================================================
         // ===== بيانات المنتجات (ضع منتجاتك هنا) =====
         // ============================================================
-        const allProducts = [
-            // ضع منتجاتك هنا
-        ];
+   const allProducts = [
+    // ===== ملابس (1-80) =====
+    { 
+        id: 1, 
+        name: "تيشرت قطني رجالي كلاسيك", 
+        price: 250, 
+        oldPrice: 350, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.7, 
+        reviews: 120,
+        images: [
+            "https://i.imgpeek.com/sCYts4cTeWgc",
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        video: "https://vewo.io/v/4eae8aff94fe", 
+        freeShipping: true,
+        description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 2, 
+        name: "تيشرت رياضي قطني", 
+        price: 200, 
+        oldPrice: 280, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.5, 
+        reviews: 95,
+        images: [
+            "https://i.imgpeek.com/sCYts4cTeWgc",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        video: "https://savedly.net/f/csrsjmmu",
+        freeShipping: true, 
+        description: "تيشرت رياضي خفيف الوزن.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] 
+    },
+    { 
+        id: 3, 
+        name: "تيشرت بولو أنيق", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.6, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت بولو أنيق ومناسب للمناسبات.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 4, 
+        name: "تيشرت كم طويل شتوي", 
+        price: 280, 
+        oldPrice: 380, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.5, 
+        reviews: 78,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت كم طويل مناسب للشتاء.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 5, 
+        name: "تيشرت طباعة مميز", 
+        price: 220, 
+        oldPrice: 310, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.4, 
+        reviews: 68,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت بتصميم طباعة جذاب.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 6, 
+        name: "بنطلون جينز رجالي", 
+        price: 450, 
+        oldPrice: 600, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.6, 
+        reviews: 80,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون جينز متين وعصري.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#34495e"] 
+    },
+    { 
+        id: 7, 
+        name: "بنطلون كارجو عملي", 
+        price: 380, 
+        oldPrice: 500, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.4, 
+        reviews: 60,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون كارجو عملي ومريح.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#5d4037", "#33691e", "#3e2723"] 
+    },
+    { 
+        id: 8, 
+        name: "بنطلون كلاسيك أنيق", 
+        price: 420, 
+        oldPrice: 560, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.5, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون كلاسيك أنيق.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 9, 
+        name: "بنطلون رياضي مريح", 
+        price: 300, 
+        oldPrice: 400, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.5, 
+        reviews: 65,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون رياضي مريح.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 10, 
+        name: "جاكيت شتوي دافئ", 
+        price: 750, 
+        oldPrice: 1000, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.8, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت شتوي دافئ وأنيق.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 11, 
+        name: "جاكيت جينز عصري", 
+        price: 550, 
+        oldPrice: 750, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.5, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت جينز عصري.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 12, 
+        name: "جاكيت جلدي فاخر", 
+        price: 800, 
+        oldPrice: 1100, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.7, 
+        reviews: 120,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت جلدي أنيق.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 13, 
+        name: "جاكيت بومبر عصري", 
+        price: 600, 
+        oldPrice: 800, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.6, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت بومبر عصري.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 14, 
+        name: "جاكيت خفيف ربيعي", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.5, 
+        reviews: 80,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت خفيف مناسب للربيع.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 15, 
+        name: "بدلة رجالي كلاسيك", 
+        price: 1200, 
+        oldPrice: 1600, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.9, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة رجالي كلاسيكية مناسبة للمناسبات.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 16, 
+        name: "بدلة رسمية أنيقة", 
+        price: 1500, 
+        oldPrice: 2000, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.7, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة رسمية أنيقة.", 
+        sizes: ["M", "L", "XL"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 17, 
+        name: "بدلة كاجوال عصرية", 
+        price: 1000, 
+        oldPrice: 1300, 
+        discount: "23%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.6, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة كاجوال أنيقة.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 18, 
+        name: "بدلة صيفي خفيفة", 
+        price: 900, 
+        oldPrice: 1200, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.5, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة صيفي خفيفة.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 19, 
+        name: "فستان سهرة أنيق", 
+        price: 850, 
+        oldPrice: 1200, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.9, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/3WmQ7Tp.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "فستان سهرة بتصميم أنيق وجذاب.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#8e44ad", "#f39c12"] 
+    },
+    { 
+        id: 20, 
+        name: "بلوزة حريمي أنيقة", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.6, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/3WmQ7Tp.jpg"
+        ],
+        freeShipping: true, 
+        description: "بلوزة حريمي أنيقة.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#8e44ad", "#f39c12"] 
+    },
+    { 
+        id: 21, 
+        name: "تنورة حريمي عصرية", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.5, 
+        reviews: 75,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "تنورة حريمي عصرية.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#8e44ad"] 
+    },
+    { 
+        id: 22, 
+        name: "فستان كاجوال مريح", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.5, 
+        reviews: 80,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "فستان كاجوال مريح.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#3498db"] 
+    },
+    { 
+        id: 23, 
+        name: "حذاء رياضي رجالي", 
+        price: 650, 
+        oldPrice: 900, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.6, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء رياضي مريح ومناسب للجري والمشي.",
+        sizes: ["40", "41", "42", "43", "44", "45"], 
+        colors: ["#1a1a2e", "#2c3e50", "#c0392b"] 
+    },
+    { 
+        id: 24, 
+        name: "حذاء رسمي رجالي", 
+        price: 700, 
+        oldPrice: 950, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.7, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء رسمي أنيق للمناسبات.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 25, 
+        name: "حذاء كاجوال رجالي", 
+        price: 500, 
+        oldPrice: 700, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.5, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كاجوال مريح.", 
+        sizes: ["40", "41", "42", "43", "44"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 26, 
+        name: "حذاء صيفي رجالي", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.4, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء صيفي خفيف.", 
+        sizes: ["40", "41", "42", "43", "44"],
+        colors: ["#1a1a2e", "#2c3e50", "#f39c12"] 
+    },
+    { 
+        id: 27, 
+        name: "ساعة يد رجالية", 
+        price: 1200, 
+        oldPrice: 1600, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.8, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "ساعة يد أنيقة بتصميم عصري.", 
+        sizes: ["متوسط"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 28, 
+        name: "نظارة شمسية رجالية", 
+        price: 350, 
+        oldPrice: 500, 
+        discount: "30%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.5, 
+        reviews: 89,
+        images: [
+            "https://i.imgur.com/2JpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "نظارة شمسية عصرية تحمي العينين.", 
+        sizes: ["متوسط"],
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 29, 
+        name: "حزام جلدي رجالي", 
+        price: 250, 
+        oldPrice: 350, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.3, 
+        reviews: 67,
+        images: [
+            "https://i.imgur.com/4TpQ8Jk.jpg",
+            "https://i.imgur.com/8FpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "حزام جلدي عالي الجودة.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 30, 
+        name: "محفظة جلدية أنيقة", 
+        price: 200, 
+        oldPrice: 280, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.4, 
+        reviews: 78,
+        images: [
+            "https://i.imgur.com/8FpQ8Jk.jpg",
+            "https://i.imgur.com/4TpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "محفظة جلدية فاخرة.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 31, 
+        name: "سوار ذهبي رجالي", 
+        price: 850, 
+        oldPrice: 1200, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.9, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "سوار ذهبي أنيق وجذاب.", 
+        sizes: ["متوسط"], 
+        colors: ["#1a1a2e", "#f39c12"] 
+    },
+    { 
+        id: 32, 
+        name: "ربطة عنق كلاسيكية", 
+        price: 180, 
+        oldPrice: 250, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.2, 
+        reviews: 45,
+        images: [
+            "https://i.imgur.com/1VpQ8Mn.jpg",
+            "https://i.imgur.com/3GpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "ربطة عنق أنيقة للمناسبات.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 33, 
+        name: "قبعة رجالية كاجوال", 
+        price: 150, 
+        oldPrice: 200, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.1, 
+        reviews: 38,
+        images: [
+            "https://i.imgur.com/6BvX5Zp.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "قبعة كاجوال مثالية للاستخدام اليومي.", 
+        sizes: ["S", "M", "L"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 34, 
+        name: "وشاح صوف شتوي", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.6, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "وشاح صوف دافئ وأنيق.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 35, 
+        name: "جوارب رجالي مريحة", 
+        price: 80, 
+        oldPrice: 120, 
+        discount: "33%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.4, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جوارب رجالي مريحة.", 
+        sizes: ["M", "L", "XL"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 36, 
+        name: "منديل جيب أنيق", 
+        price: 60, 
+        oldPrice: 90, 
+        discount: "33%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.3, 
+        reviews: 100,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/8FpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "منديل جيب أنيق.", 
+        sizes: [], 
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 37, 
+        name: "بروش رجالي فاخر", 
+        price: 120, 
+        oldPrice: 170, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.5, 
+        reviews: 60,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/3GpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "بروش رجالي فاخر.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#f39c12", "#e74c3c"] 
+    },
+    { 
+        id: 38, 
+        name: "تيشرت قطني كلاسيك", 
+        price: 230, 
+        oldPrice: 320, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.6, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/3WmQ7Tp.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت قطني كلاسيك.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#000000", "#ffffff", "#1a5276"] 
+    },
+    { 
+        id: 39, 
+        name: "تيشرت رياضي خفيف", 
+        price: 190, 
+        oldPrice: 260, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.4, 
+        reviews: 88,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت رياضي خفيف.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 40, 
+        name: "تيشرت بولو كلاسيك", 
+        price: 280, 
+        oldPrice: 390, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.7, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت بولو كلاسيك.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 41, 
+        name: "تيشرت كم طويل صوف", 
+        price: 320, 
+        oldPrice: 420, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.5, 
+        reviews: 72,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت كم طويل صوف.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 42, 
+        name: "تيشرت طبعة كرتون", 
+        price: 210, 
+        oldPrice: 290, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.4, 
+        reviews: 65,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت طبعة كرتون.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 43, 
+        name: "بنطلون جينز سليم", 
+        price: 480, 
+        oldPrice: 620, 
+        discount: "23%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.7, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون جينز سليم.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#34495e"] 
+    },
+    { 
+        id: 44, 
+        name: "بنطلون كارجو عسكري", 
+        price: 400, 
+        oldPrice: 520, 
+        discount: "23%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.5, 
+        reviews: 55,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون كارجو عسكري.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#5d4037", "#33691e", "#3e2723"] 
+    },
+    { 
+        id: 45, 
+        name: "بنطلون كلاسيك رسمي", 
+        price: 460, 
+        oldPrice: 600, 
+        discount: "23%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.6, 
+        reviews: 75,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون كلاسيك رسمي.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 46, 
+        name: "بنطلون رياضي قطني", 
+        price: 280, 
+        oldPrice: 380, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.4, 
+        reviews: 60,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون رياضي قطني.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 47, 
+        name: "جاكيت شتوي ثقيل", 
+        price: 800, 
+        oldPrice: 1100, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.9, 
+        reviews: 160,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت شتوي ثقيل.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 48, 
+        name: "جاكيت جينز كلاسيك", 
+        price: 520, 
+        oldPrice: 700, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.6, 
+        reviews: 75,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت جينز كلاسيك.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 49, 
+        name: "جاكيت جلدي أسود", 
+        price: 850, 
+        oldPrice: 1150, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.8, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت جلدي أسود.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 50, 
+        name: "جاكيت بومبر كاجوال", 
+        price: 550, 
+        oldPrice: 750, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.5, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت بومبر كاجوال.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 51, 
+        name: "جاكيت خفيف صيفي", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.4, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت خفيف صيفي.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 52, 
+        name: "بدلة رجالي صوف", 
+        price: 1300, 
+        oldPrice: 1700, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.8, 
+        reviews: 190,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة رجالي صوف.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 53, 
+        name: "بدلة رسمية سوداء", 
+        price: 1600, 
+        oldPrice: 2100, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.9, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة رسمية سوداء.", 
+        sizes: ["M", "L", "XL"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 54, 
+        name: "بدلة كاجوال زرقاء", 
+        price: 950, 
+        oldPrice: 1250, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.5, 
+        reviews: 105,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة كاجوال زرقاء.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 55, 
+        name: "بدلة صيفي بيضاء", 
+        price: 850, 
+        oldPrice: 1100, 
+        discount: "23%", 
+        category: "ملابس",
+        subcategory: "بدل", 
+        rating: 4.4, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بدلة صيفي بيضاء.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 56, 
+        name: "فستان سهرة طويل", 
+        price: 900, 
+        oldPrice: 1250, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.8, 
+        reviews: 80,
+        images: [
+            "https://i.imgur.com/3WmQ7Tp.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "فستان سهرة طويل.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#8e44ad", "#f39c12"] 
+    },
+    { 
+        id: 57, 
+        name: "بلوزة حريمي حرير", 
+        price: 320, 
+        oldPrice: 440, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.7, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/3WmQ7Tp.jpg"
+        ],
+        freeShipping: true, 
+        description: "بلوزة حريمي حرير.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#8e44ad", "#f39c12"] 
+    },
+    { 
+        id: 58, 
+        name: "تنورة حريمي طويلة", 
+        price: 380, 
+        oldPrice: 500, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.6, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "تنورة حريمي طويلة.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#8e44ad"] 
+    },
+    { 
+        id: 59, 
+        name: "فستان كاجوال قصير", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "ملابس حريمي", 
+        rating: 4.5, 
+        reviews: 75,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "فستان كاجوال قصير.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#e74c3c", "#2c3e50", "#3498db"] 
+    },
+    { 
+        id: 60, 
+        name: "حذاء رياضي نسائي", 
+        price: 550, 
+        oldPrice: 750, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.6, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء رياضي نسائي.", 
+        sizes: ["36", "37", "38", "39", "40", "41"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 61, 
+        name: "حذاء رسمي نسائي", 
+        price: 600, 
+        oldPrice: 800, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.7, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء رسمي نسائي.", 
+        sizes: ["36", "37", "38", "39", "40"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 62, 
+        name: "حذاء كاجوال نسائي", 
+        price: 450, 
+        oldPrice: 620, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "أحذية", 
+        rating: 4.5, 
+        reviews: 120,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كاجوال نسائي.", 
+        sizes: ["36", "37", "38", "39", "40"],
+        colors: ["#1a1a2e", "#2c3e50", "#f39c12"] 
+    },
+    { 
+        id: 63, 
+        name: "ساعة يد نسائية", 
+        price: 1000, 
+        oldPrice: 1350, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.8, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "ساعة يد نسائية.", 
+        sizes: ["متوسط"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 64, 
+        name: "نظارة شمسية نسائية", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.5, 
+        reviews: 80,
+        images: [
+            "https://i.imgur.com/2JpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "نظارة شمسية نسائية.", 
+        sizes: ["متوسط"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 65, 
+        name: "حزام نسائي جلدي", 
+        price: 200, 
+        oldPrice: 280, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.4, 
+        reviews: 60,
+        images: [
+            "https://i.imgur.com/4TpQ8Jk.jpg",
+            "https://i.imgur.com/8FpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "حزام نسائي جلدي.", 
+        sizes: ["S", "M", "L"], 
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 66, 
+        name: "محفظة نسائية أنيقة", 
+        price: 180, 
+        oldPrice: 250, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.5, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/8FpQ8Jk.jpg",
+            "https://i.imgur.com/4TpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "محفظة نسائية أنيقة.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 67, 
+        name: "سوار نسائي فاخر", 
+        price: 750, 
+        oldPrice: 1000, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.9, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "سوار نسائي فاخر.", 
+        sizes: ["متوسط"], 
+        colors: ["#1a1a2e", "#f39c12", "#e74c3c"] 
+    },
+    { 
+        id: 68, 
+        name: "وشاح حريري أنيق", 
+        price: 250, 
+        oldPrice: 350, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.6, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "وشاح حريري أنيق.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 69, 
+        name: "جوارب نسائية ناعمة", 
+        price: 70, 
+        oldPrice: 100, 
+        discount: "30%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.3, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جوارب نسائية ناعمة.", 
+        sizes: ["S", "M", "L"], 
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c"] 
+    },
+    { 
+        id: 70, 
+        name: "بروش نسائي فاخر", 
+        price: 110, 
+        oldPrice: 150, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "إكسسوارات", 
+        rating: 4.4, 
+        reviews: 55,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بروش نسائي فاخر.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#f39c12", "#e74c3c"] 
+    },
+    { 
+        id: 71, 
+        name: "تيشرت قطني بيج", 
+        price: 240, 
+        oldPrice: 340, 
+        discount: "29%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.6, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/3WmQ7Tp.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت قطني بيج.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c"] 
+    },
+    { 
+        id: 72, 
+        name: "تيشرت رياضي أزرق", 
+        price: 190, 
+        oldPrice: 270, 
+        discount: "30%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.4, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت رياضي أزرق.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 73, 
+        name: "تيشرت بولو أخضر", 
+        price: 290, 
+        oldPrice: 400, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.7, 
+        reviews: 88,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت بولو أخضر.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#2ecc71"] 
+    },
+    { 
+        id: 74, 
+        name: "تيشرت كم طويل بيج", 
+        price: 300, 
+        oldPrice: 400, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.5, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت كم طويل بيج.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#5d4037"] 
+    },
+    { 
+        id: 75, 
+        name: "تيشرت طبعة نجوم", 
+        price: 230, 
+        oldPrice: 320, 
+        discount: "28%", 
+        category: "ملابس",
+        subcategory: "تيشيرتات", 
+        rating: 4.5, 
+        reviews: 60,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "تيشرت طبعة نجوم.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c", "#f39c12"] 
+    },
+    { 
+        id: 76, 
+        name: "بنطلون جينز أزرق", 
+        price: 460, 
+        oldPrice: 610, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.7, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون جينز أزرق.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#34495e"] 
+    },
+    { 
+        id: 77, 
+        name: "بنطلون كارجو أخضر", 
+        price: 390, 
+        oldPrice: 510, 
+        discount: "24%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.5, 
+        reviews: 55,
+        images: [
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/2FpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون كارجو أخضر.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#5d4037", "#33691e", "#3e2723"] 
+    },
+    { 
+        id: 78, 
+        name: "بنطلون كلاسيك رمادي", 
+        price: 430, 
+        oldPrice: 570, 
+        discount: "25%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.6, 
+        reviews: 72,
+        images: [
+            "https://i.imgur.com/4GvH3Wq.jpg",
+            "https://i.imgur.com/8M7Nq2l.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون كلاسيك رمادي.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+    { 
+        id: 79, 
+        name: "بنطلون رياضي أسود", 
+        price: 290, 
+        oldPrice: 390, 
+        discount: "26%", 
+        category: "ملابس",
+        subcategory: "بناطيل", 
+        rating: 4.5, 
+        reviews: 62,
+        images: [
+            "https://i.imgur.com/8M7Nq2l.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون رياضي أسود.", 
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 80, 
+        name: "جاكيت شتوي رمادي", 
+        price: 770, 
+        oldPrice: 1050, 
+        discount: "27%", 
+        category: "ملابس",
+        subcategory: "جواكت", 
+        rating: 4.8, 
+        reviews: 145,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت شتوي رمادي.", 
+        sizes: ["M", "L", "XL", "XXL"],
+        colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"] 
+    },
+        // ===== رياضة (751-820) =====
+    { 
+        id: 751, 
+        name: "قميص رياضي خفيف", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.5, 
+        reviews: 80,
+        images: [
+            "https://i.imgur.com/8FpQ8Jk.jpg",
+            "https://i.imgur.com/6BvX5Zp.jpg"
+        ],
+        freeShipping: true, 
+        description: "قميص رياضي خفيف الوزن.",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] 
+    },
+    { 
+        id: 752, 
+        name: "شورت رياضي مريح", 
+        price: 180, 
+        oldPrice: 250, 
+        discount: "28%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.4, 
+        reviews: 65,
+        images: [
+            "https://i.imgur.com/6BvX5Zp.jpg",
+            "https://i.imgur.com/8FpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "شورت رياضي مريح.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 753, 
+        name: "بنطلون رياضي مريح", 
+        price: 250, 
+        oldPrice: 350, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.6, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون رياضي مريح.",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 754, 
+        name: "جاكيت رياضي خفيف", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.7, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت رياضي خفيف.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 755, 
+        name: "سترة رياضية خفيفة", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.6, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "سترة رياضية خفيفة.",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 756, 
+        name: "طقم ملابس رياضية مريح", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "ملابس رياضية", 
+        rating: 4.7, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "طقم ملابس رياضية مريح.",
+        sizes: ["S", "M", "L", "XL"], 
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] 
+    },
+    { 
+        id: 757, 
+        name: "جوارب رياضية مريحة", 
+        price: 80, 
+        oldPrice: 120, 
+        discount: "33%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.4, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جوارب رياضية مريحة.", 
+        sizes: ["M", "L", "XL"],
+        colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 758, 
+        name: "طاقية رياضية خفيفة", 
+        price: 70, 
+        oldPrice: 100, 
+        discount: "30%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.4, 
+        reviews: 120,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "طاقية رياضية خفيفة.", 
+        sizes: [], 
+        colors: ["#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 759, 
+        name: "حذاء جري مريح", 
+        price: 650, 
+        oldPrice: 900, 
+        discount: "28%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.8, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg",
+            "https://i.imgur.com/4GvH3Wq.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء جري مريح.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
+        colors: ["#1a1a2e", "#2c3e50", "#c0392b"] 
+    },
+    { 
+        id: 760, 
+        name: "حذاء كرة قدم احترافي", 
+        price: 700, 
+        oldPrice: 950, 
+        discount: "26%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.9, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/4TpQ8Jk.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة قدم احترافي.",
+        sizes: ["40", "41", "42", "43", "44"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 761, 
+        name: "حذاء كرة سلة احترافي", 
+        price: 750, 
+        oldPrice: 1000, 
+        discount: "25%",
+        category: "رياضة", 
+        subcategory: "أحذية رياضية", 
+        rating: 4.8, 
+        reviews: 160,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة سلة احترافي.",
+        sizes: ["40", "41", "42", "43", "44", "45"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 762, 
+        name: "حذاء تنس خفيف", 
+        price: 600, 
+        oldPrice: 820, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.7, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء تنس خفيف.", 
+        sizes: ["39", "40", "41", "42", "43", "44"],
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 763, 
+        name: "حذاء كرة يد احترافي", 
+        price: 600, 
+        oldPrice: 820, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "أحذية رياضية", 
+        rating: 4.7, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة يد احترافي.",
+        sizes: ["40", "41", "42", "43", "44", "45"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 764, 
+        name: "حذاء تمرين متعدد", 
+        price: 450, 
+        oldPrice: 620, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.6, 
+        reviews: 160,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء تمرين متعدد الاستخدامات.",
+        sizes: ["40", "41", "42", "43", "44"], 
+        colors: ["#1a1a2e", "#2c3e50", "#f39c12"] 
+    },
+    { 
+        id: 765, 
+        name: "حذاء مشي مريح", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.5, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء مشي مريح.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 766, 
+        name: "دمبل 5 كجم للتمارين", 
+        price: 250, 
+        oldPrice: 350, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.6, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "دمبل مناسب للتمارين المنزلية.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 767, 
+        name: "دمبل 10 كجم للتمارين", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "معدات رياضية", 
+        rating: 4.7, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "دمبل 10 كجم للتمارين المتقدمة.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 768, 
+        name: "بار حديد لرفع الأثقال", 
+        price: 500, 
+        oldPrice: 700, 
+        discount: "29%",
+        category: "رياضة", 
+        subcategory: "معدات رياضية", 
+        rating: 4.8, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "بار حديد لتمارين رفع الأثقال.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 769, 
+        name: "حبل قفز للتمارين", 
+        price: 80, 
+        oldPrice: 120, 
+        discount: "33%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.5, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حبل قفز للتمارين القلبية.", 
+        sizes: [], 
+        colors: ["#e74c3c", "#2c3e50", "#3498db"] 
+    },
+    { 
+        id: 770, 
+        name: "سجادة رياضية مريحة", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%",
+        category: "رياضة", 
+        subcategory: "معدات رياضية", 
+        rating: 4.8, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "سجادة رياضية مريحة.",
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#8e44ad"] 
+    },
+    { 
+        id: 771, 
+        name: "مضرب تنس احترافي", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.6, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "مضرب تنس احترافي.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 772, 
+        name: "حقيبة رياضية عملية", 
+        price: 250, 
+        oldPrice: 350, 
+        discount: "29%",
+        category: "رياضة", 
+        subcategory: "معدات رياضية", 
+        rating: 4.5, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حقيبة رياضية عملية.",
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 773, 
+        name: "خوذة دراجة آمنة", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.7, 
+        reviews: 120,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "خوذة دراجة آمنة.", 
+        sizes: ["S", "M", "L"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 774, 
+        name: "كرسي رياضي محمول", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.5, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "كرسي رياضي محمول.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 775, 
+        name: "كرة قدم عالية الجودة", 
+        price: 180, 
+        oldPrice: 250, 
+        discount: "28%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.7, 
+        reviews: 220,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "كرة قدم عالية الجودة.",
+        sizes: [], 
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c"] 
+    },
+    { 
+        id: 776, 
+        name: "حذاء كرة قدم للأطفال", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.6, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة قدم للأطفال.",
+        sizes: ["32", "33", "34", "35", "36", "37"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 777, 
+        name: "قفاز حارس مرمى احترافي", 
+        price: 200, 
+        oldPrice: 280, 
+        discount: "29%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.6, 
+        reviews: 120,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "قفاز حارس مرمى احترافي.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 778, 
+        name: "طقم حراس مرمى احترافي", 
+        price: 350, 
+        oldPrice: 480, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.7, 
+        reviews: 110,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "طقم حراس مرمى احترافي.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 779, 
+        name: "شورت كرة قدم مريح", 
+        price: 150, 
+        oldPrice: 220, 
+        discount: "32%", 
+        category: "رياضة",
+        subcategory: "كرة قدم", 
+        rating: 4.4, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "شورت كرة قدم مريح.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 780, 
+        name: "جورب كرة قدم احترافي", 
+        price: 60, 
+        oldPrice: 90, 
+        discount: "33%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.3, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "جورب كرة قدم احترافي.", 
+        sizes: ["M", "L", "XL"],
+        colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 781, 
+        name: "حزام جري لحمل الأغراض", 
+        price: 150, 
+        oldPrice: 220, 
+        discount: "32%",
+        category: "رياضة", 
+        subcategory: "جري", 
+        rating: 4.5, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "حزام جري لحمل الأغراض.", 
+        sizes: ["S", "M", "L"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 782, 
+        name: "سماعة جري لاسلكية", 
+        price: 300, 
+        oldPrice: 420, 
+        discount: "29%",
+        category: "رياضة", 
+        subcategory: "جري", 
+        rating: 4.7, 
+        reviews: 160,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "سماعة جري لاسلكية مقاومة للعرق.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 783, 
+        name: "زجاجة ماء رياضية", 
+        price: 80, 
+        oldPrice: 120, 
+        discount: "33%", 
+        category: "رياضة",
+        subcategory: "جري", 
+        rating: 4.4, 
+        reviews: 200,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "زجاجة ماء رياضية عملية.", 
+        sizes: [], 
+        colors: ["#2c3e50", "#3498db", "#e74c3c"] 
+    },
+    { 
+        id: 784, 
+        name: "ساعة رياضية متعددة", 
+        price: 400, 
+        oldPrice: 550, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "جري", 
+        rating: 4.8, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "ساعة رياضية متعددة الوظائف.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 785, 
+        name: "حذاء جري خفيف الوزن", 
+        price: 500, 
+        oldPrice: 700, 
+        discount: "29%",
+        category: "رياضة", 
+        subcategory: "جري", 
+        rating: 4.8, 
+        reviews: 190,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "حذاء جري خفيف الوزن.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
+        colors: ["#1a1a2e", "#2c3e50", "#f39c12"] 
+    },
+    { 
+        id: 786, 
+        name: "حزام مقاومة للتمارين", 
+        price: 150, 
+        oldPrice: 220, 
+        discount: "32%",
+        category: "رياضة", 
+        subcategory: "جري", 
+        rating: 4.5, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "حزام مقاومة للتمارين.", 
+        sizes: ["S", "M", "L"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 787, 
+        name: "قناع جري خفيف", 
+        price: 120, 
+        oldPrice: 170, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "جري", 
+        rating: 4.3, 
+        reviews: 100,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "قناع جري خفيف.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 788, 
+        name: "سوار معصم رياضي", 
+        price: 100, 
+        oldPrice: 150, 
+        discount: "33%", 
+        category: "رياضة",
+        subcategory: "جري", 
+        rating: 4.5, 
+        reviews: 130,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "سوار معصم رياضي.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 789, 
+        name: "منشفة رياضية سريعة الجفاف", 
+        price: 80, 
+        oldPrice: 120, 
+        discount: "33%",
+        category: "رياضة", 
+        subcategory: "جري", 
+        rating: 4.4, 
+        reviews: 180,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "منشفة رياضية سريعة الجفاف.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#3498db"] 
+    },
+    { 
+        id: 790, 
+        name: "قميص رياضي قطني", 
+        price: 280, 
+        oldPrice: 390, 
+        discount: "28%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.5, 
+        reviews: 85,
+        images: [
+            "https://i.imgur.com/8FpQ8Jk.jpg",
+            "https://i.imgur.com/6BvX5Zp.jpg"
+        ],
+        freeShipping: true, 
+        description: "قميص رياضي قطني.",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] 
+    },
+    { 
+        id: 791, 
+        name: "شورت رياضي قطني", 
+        price: 170, 
+        oldPrice: 240, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.4, 
+        reviews: 70,
+        images: [
+            "https://i.imgur.com/6BvX5Zp.jpg",
+            "https://i.imgur.com/8FpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "شورت رياضي قطني.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 792, 
+        name: "بنطلون رياضي قطني", 
+        price: 240, 
+        oldPrice: 330, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.6, 
+        reviews: 75,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بنطلون رياضي قطني.",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 793, 
+        name: "جاكيت رياضي قطني", 
+        price: 380, 
+        oldPrice: 520, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.7, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جاكيت رياضي قطني.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 794, 
+        name: "سترة رياضية قطنية", 
+        price: 340, 
+        oldPrice: 460, 
+        discount: "26%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.6, 
+        reviews: 90,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "سترة رياضية قطنية.",
+        sizes: ["S", "M", "L", "XL", "XXL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71"] 
+    },
+    { 
+        id: 795, 
+        name: "طقم ملابس رياضية قطني", 
+        price: 380, 
+        oldPrice: 520, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "ملابس رياضية", 
+        rating: 4.7, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "طقم ملابس رياضية قطني.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"] 
+    },
+    { 
+        id: 796, 
+        name: "جوارب رياضية قطنية", 
+        price: 75, 
+        oldPrice: 110, 
+        discount: "32%",
+        category: "رياضة", 
+        subcategory: "ملابس رياضية", 
+        rating: 4.4, 
+        reviews: 190,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جوارب رياضية قطنية.",
+        sizes: ["M", "L", "XL"], 
+        colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 797, 
+        name: "طاقية رياضية قطنية", 
+        price: 65, 
+        oldPrice: 95, 
+        discount: "32%", 
+        category: "رياضة",
+        subcategory: "ملابس رياضية", 
+        rating: 4.4, 
+        reviews: 125,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "طاقية رياضية قطنية.", 
+        sizes: [], 
+        colors: ["#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 798, 
+        name: "حذاء جري قطني", 
+        price: 600, 
+        oldPrice: 820, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.7, 
+        reviews: 170,
+        images: [
+            "https://i.imgur.com/2FpQ8Rj.jpg",
+            "https://i.imgur.com/5HpQ8Jk.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء جري قطني.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
+        colors: ["#1a1a2e", "#2c3e50", "#c0392b"] 
+    },
+    { 
+        id: 799, 
+        name: "حذاء كرة قدم قطني", 
+        price: 680, 
+        oldPrice: 920, 
+        discount: "26%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.8, 
+        reviews: 190,
+        images: [
+            "https://i.imgur.com/4TpQ8Jk.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة قدم قطني.",
+        sizes: ["40", "41", "42", "43", "44"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 800, 
+        name: "حذاء كرة سلة قطني", 
+        price: 720, 
+        oldPrice: 980, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "أحذية رياضية", 
+        rating: 4.8, 
+        reviews: 170,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة سلة قطني.",
+        sizes: ["40", "41", "42", "43", "44", "45"], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 801, 
+        name: "حذاء تنس قطني", 
+        price: 580, 
+        oldPrice: 800, 
+        discount: "28%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.7, 
+        reviews: 150,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء تنس قطني.", 
+        sizes: ["39", "40", "41", "42", "43", "44"],
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 802, 
+        name: "حذاء كرة يد قطني", 
+        price: 580, 
+        oldPrice: 800, 
+        discount: "28%",
+        category: "رياضة", 
+        subcategory: "أحذية رياضية", 
+        rating: 4.7, 
+        reviews: 140,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء كرة يد قطني.",
+        sizes: ["40", "41", "42", "43", "44", "45"], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 803, 
+        name: "حذاء تمرين قطني", 
+        price: 430, 
+        oldPrice: 590, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.6, 
+        reviews: 170,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء تمرين قطني.", 
+        sizes: ["40", "41", "42", "43", "44"],
+        colors: ["#1a1a2e", "#2c3e50", "#f39c12"] 
+    },
+    { 
+        id: 804, 
+        name: "حذاء مشي قطني", 
+        price: 380, 
+        oldPrice: 520, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "أحذية رياضية", 
+        rating: 4.5, 
+        reviews: 160,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حذاء مشي قطني.", 
+        sizes: ["40", "41", "42", "43", "44", "45"],
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 805, 
+        name: "دمبل 5 كجم قطني", 
+        price: 240, 
+        oldPrice: 330, 
+        discount: "27%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.6, 
+        reviews: 115,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "دمبل قطني.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 806, 
+        name: "دمبل 10 كجم قطني", 
+        price: 390, 
+        oldPrice: 530, 
+        discount: "26%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.7, 
+        reviews: 100,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "دمبل 10 كجم قطني.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 807, 
+        name: "بار حديد قطني", 
+        price: 480, 
+        oldPrice: 680, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.8, 
+        reviews: 145,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "بار حديد قطني.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 808, 
+        name: "حبل قفز قطني", 
+        price: 75, 
+        oldPrice: 110, 
+        discount: "32%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.5, 
+        reviews: 190,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حبل قفز قطني.", 
+        sizes: [], 
+        colors: ["#e74c3c", "#2c3e50", "#3498db"] 
+    },
+    { 
+        id: 809, 
+        name: "سجادة رياضية قطنية", 
+        price: 290, 
+        oldPrice: 400, 
+        discount: "28%",
+        category: "رياضة", 
+        subcategory: "معدات رياضية", 
+        rating: 4.8, 
+        reviews: 210,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "سجادة رياضية قطنية.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#8e44ad"] 
+    },
+    { 
+        id: 810, 
+        name: "مضرب تنس قطني", 
+        price: 290, 
+        oldPrice: 400, 
+        discount: "28%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.6, 
+        reviews: 115,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "مضرب تنس قطني.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 811, 
+        name: "حقيبة رياضية قطنية", 
+        price: 240, 
+        oldPrice: 330, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "معدات رياضية", 
+        rating: 4.5, 
+        reviews: 190,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "حقيبة رياضية قطنية.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"] 
+    },
+    { 
+        id: 812, 
+        name: "خوذة دراجة قطنية", 
+        price: 340, 
+        oldPrice: 460, 
+        discount: "26%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.7, 
+        reviews: 125,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "خوذة دراجة قطنية.", 
+        sizes: ["S", "M", "L"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 813, 
+        name: "كرسي رياضي قطني", 
+        price: 390, 
+        oldPrice: 530, 
+        discount: "26%", 
+        category: "رياضة",
+        subcategory: "معدات رياضية", 
+        rating: 4.5, 
+        reviews: 95,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "كرسي رياضي قطني.", 
+        sizes: [], 
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    { 
+        id: 814, 
+        name: "كرة قدم قطنية", 
+        price: 170, 
+        oldPrice: 240, 
+        discount: "29%", 
+        category: "رياضة",
+        subcategory: "كرة قدم", 
+        rating: 4.7, 
+        reviews: 230,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "كرة قدم قطنية.", 
+        sizes: [], 
+        colors: ["#ffffff", "#1a1a2e", "#e74c3c"] 
+    },
+    { 
+        id: 815, 
+        name: "حذاء كرة قدم أطفال قطني", 
+        price: 340, 
+        oldPrice: 460, 
+        discount: "26%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.6, 
+        reviews: 155,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "حذاء كرة قدم أطفال قطني.", 
+        sizes: ["32", "33", "34", "35", "36", "37"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 816, 
+        name: "قفاز حارس مرمى قطني", 
+        price: 190, 
+        oldPrice: 260, 
+        discount: "27%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.6, 
+        reviews: 125,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "قفاز حارس مرمى قطني.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 817, 
+        name: "طقم حراس مرمى قطني", 
+        price: 340, 
+        oldPrice: 460, 
+        discount: "26%",
+        category: "رياضة", 
+        subcategory: "كرة قدم", 
+        rating: 4.7, 
+        reviews: 115,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true,
+        description: "طقم حراس مرمى قطني.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 818, 
+        name: "شورت كرة قدم قطني", 
+        price: 140, 
+        oldPrice: 200, 
+        discount: "30%", 
+        category: "رياضة",
+        subcategory: "كرة قدم", 
+        rating: 4.4, 
+        reviews: 145,
+        images: [
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "شورت كرة قدم قطني.", 
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 819, 
+        name: "جورب كرة قدم قطني", 
+        price: 55, 
+        oldPrice: 85, 
+        discount: "35%", 
+        category: "رياضة",
+        subcategory: "كرة قدم", 
+        rating: 4.3, 
+        reviews: 210,
+        images: [
+            "https://i.imgur.com/3GpQ8Rj.jpg",
+            "https://i.imgur.com/9KpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "جورب كرة قدم قطني.", 
+        sizes: ["M", "L", "XL"],
+        colors: ["#ffffff", "#2c3e50", "#e74c3c"] 
+    },
+    { 
+        id: 820, 
+        name: "حزام جري قطني", 
+        price: 140, 
+        oldPrice: 200, 
+        discount: "30%", 
+        category: "رياضة",
+        subcategory: "جري", 
+        rating: 4.5, 
+        reviews: 135,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg"
+        ],
+        freeShipping: true, 
+        description: "حزام جري قطني.", 
+        sizes: ["S", "M", "L"],
+        colors: ["#1a1a2e", "#2c3e50"] 
+    },
+    // ===== السيارات =====
+    { 
+        id: 821, 
+        name: "سياره للبيع", 
+        price: 1000000, 
+        oldPrice: 2000000, 
+        discount: "50%", 
+        category: "سيارات",
+        subcategory: "سيارات للبيع", 
+        rating: 4.5, 
+        reviews: 135,
+        images: [
+            "https://i.imgur.com/9KpQ8Mn.jpg",
+            "https://i.imgur.com/7YpQ8Mn.jpg",
+            "https://i.imgur.com/3GpQ8Rj.jpg"
+        ],
+        freeShipping: true, 
+        description: "سياره للبيع موديل 2026",
+        sizes: [],
+        colors: ["#1a1a2e", "#2c3e50", "#e74c3c"]
+    }
+];
 
         // ============================================================
         // ===== المتغيرات العامة =====
