@@ -2914,8 +2914,8 @@
         // ===== EmailJS =====
         const PUBLIC_KEY = "7RXGSj5jaLPLznhRM";
         const SERVICE_ID = "service_kltwtgn";
-const TEMPLATE_ID = "template_5guho1l";
-const STORE_EMAIL = "yousefmohamed@gmail.com";
+        const TEMPLATE_ID = "template_5guho1l";
+        const STORE_EMAIL = "yousefmohamed@gmail.com"; // ✅ تم التعديل هنا ليصبح البريد الإلكتروني للمدير
         emailjs.init({ publicKey: PUBLIC_KEY });
 
         // ===== Forminit =====
@@ -3059,7 +3059,7 @@ const STORE_EMAIL = "yousefmohamed@gmail.com";
             return { statusText, statusClass, timerText, timerClass, diffDays, diffHours, diffMinutes };
         }
 
-        // ===== دالة تحديث الحالة من لوحة تحكم المدير =====
+        // ===== دالة تحديث حالة الطلب من لوحة تحكم المدير =====
         function updateAdminOrderStatus(orderId, newStatus, statusLabel) {
             if (!isAdmin()) {
                 showNotification('❌ غير مصرح لك بالتحكم في الطلبات', 'error');
@@ -7402,34 +7402,35 @@ const allProducts = [
         // ============================================================
         // ===== إرسال البريد الإلكتروني =====
         // ============================================================
-function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
-    let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
-    message += `👤 اسم العميل: ${name}\n`;
-    message += `📱 رقم الهاتف: ${phone}\n`;
-    message += `📍 العنوان: ${address}\n`;
-    message += `✉️ البريد الإلكتروني: ${email}\n\n`;
-    message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
-    message += `💰 الإجمالي: ${total} ج.م\n`;
-    message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
+        function sendOrderEmail(name, email, phone, address, total, productsList, totalItems, imageBase64, imageName) {
+            let message = `🛍️ طلب جديد من متجر sun Store!\n\n`;
+            message += `👤 اسم العميل: ${name}\n`;
+            message += `📱 رقم الهاتف: ${phone}\n`;
+            message += `📍 العنوان: ${address}\n`;
+            message += `✉️ البريد الإلكتروني: ${email}\n\n`;
+            message += `📦 تفاصيل المنتجات:\n${productsList}\n`;
+            message += `💰 الإجمالي: ${total} ج.م\n`;
+            message += `📅 تاريخ الطلب: ${new Date().toLocaleDateString('ar-EG')}\n`;
 
-    // ===== 1. إرسال الإيميل الأساسي (مضمون 100%) =====
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        to_email: "yousefmohamed@gmail.com", // ← هنا الإيميل اللي هيستقبل
-        from_name: name,
-        from_email: email,
-        message: message,
-        subject: "🛍️ طلب جديد من متجر sun Store",
-        phone: phone,
-        location: address,
-        total: total + " ج.م",
-        store_name: "sun Store",
-        year: new Date().getFullYear(),
-        attachment: '', 
-        attachment_name: ''
-    })
-    .then(() => console.log('✅ Email sent'))
-    .catch(err => console.error('❌ Email error:', err));
-}
+            // ===== 1. إرسال الإيميل الأساسي (مضمون 100%) =====
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+                to_email: ADMIN_EMAIL, // ✅ إرسال إلى بريد المدير
+                from_name: name,
+                from_email: email,
+                message: message,
+                subject: "🛍️ طلب جديد من متجر sun Store",
+                phone: phone,
+                location: address,
+                total: total + " ج.م",
+                store_name: "sun Store",
+                year: new Date().getFullYear(),
+                attachment: '', 
+                attachment_name: ''
+            })
+            .then(() => console.log('✅ Email sent'))
+            .catch(err => console.error('❌ Email error:', err));
+        }
+
         // ============================================================
         // ===== صفحة تفاصيل المنتج =====
         // ============================================================
@@ -7843,6 +7844,7 @@ function sendOrderEmail(name, email, phone, address, total, productsList, totalI
         console.log('👤 تم إضافة الاسم الكامل (full_name, name) إلى Forminit بنجاح!');
         console.log(`🔗 معرف Forminit المخصص: ${SUBMISSION_ID}`);
         console.log('✅ تم تفعيل لوحة تحكم المدير (Admin Control) على أزرار الطلبات!');
+        console.log(`📧 سيتم إرسال جميع الطلبات إلى بريد المدير: ${ADMIN_EMAIL}`);
     </script>
 </body>
 
