@@ -2451,14 +2451,11 @@
 
         <!-- ===== شريط الأقسام ===== -->
         <div class="categories-bar" id="categoriesBar">
-            <button class="cat-btn active" onclick="filterProducts('all')">🏠 الكل</button>
-            <button class="cat-btn" onclick="filterProducts('ملابس')">👕 ملابس</button>
-            <button class="cat-btn" onclick="filterProducts('إلكترونيات')">💻 إلكترونيات</button>
-            <button class="cat-btn" onclick="filterProducts('منزل')">🏠 منزل ومطبخ</button>
-            <button class="cat-btn" onclick="filterProducts('جمال')">💄 جمال وعناية</button>
-            <button class="cat-btn" onclick="filterProducts('أطفال')">🧸 أطفال</button>
-            <button class="cat-btn" onclick="filterProducts('رياضة')">⚽ رياضة</button>
-            <button class="cat-btn" onclick="filterProducts('سيارات')">🚗 سيارات</button>
+            <button class="cat-btn active" onclick="filterProducts('موازين')">موازين </button>
+            <button class="cat-btn" onclick="filterProducts('سكاكين و ادوات جزاره')">سكاكين و ادوات جزاره </button>
+            <button class="cat-btn" onclick="filterProducts('إلكترونيات')"> إلكترونيات</button>
+            <button class="cat-btn" onclick="filterProducts('منتجات قطنيه')"> منتجات قطنيه</button>
+            <button class="cat-btn" onclick="filterProducts('اكسسوارات')">اكسسوارات</button>
         </div>
 
         <!-- ===== الهيرو ===== -->
@@ -2490,8 +2487,8 @@
 
         <!-- ===== المنتجات ===== -->
         <div class="section-title">
-            🛍️ <span>منتجاتنا</span>
-            <span class="category-breadcrumb" id="categoryBreadcrumb">الكل</span>
+            <span>نقترح اليك </span>
+            <span class="category-breadcrumb" id="categoryBreadcrumb">موازين</span>
         </div>
 
         <div id="loadingSpinner" style="display:none;text-align:center;padding:40px;grid-column:1/-1;">
@@ -2935,268 +2932,82 @@
         // ============================================================
         const allProducts = [{
             id: 1,
-            name: "تيشرت قطني رجالي كلاسيك",
+            name: "سكين جزارة احترافي",
             price: 250,
             oldPrice: 350,
             discount: "29%",
-            category: "ملابس",
-            subcategory: "تيشيرتات",
+            category: "سكاكين و ادوات جزاره",
+            subcategory: "سكاكين",
             rating: 4.7,
             reviews: 120,
-            images: ["https://i.imgpeek.com/sCYts4cTeWgc", "https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/4GvH3Wq.jpg"],
+            images: ["https://i.imgpeek.com/XHTAhZ3DFNsT", "https://i.imgpeek.com/XHTAhZ3DFNsT", "https://i.imgpeek.com/XHTAhZ3DFNsT"],
             video: "https://vewo.io/v/4eae8aff94fe",
             freeShipping: true,
-            description: "تيشرت قطني مريح للغاية، مناسب للاستخدام اليومي.",
-            sizes: ["S", "M", "L", "XL", "XXL"],
-            colors: ["#000000", "#ffffff", "#1a5276", "#e74c3c", "#f39c12"]
+            description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
         }, {
             id: 2,
-            name: "تيشرت رياضي قطني",
+            name: "توكة رجالي كلاسيك",
             price: 200,
             oldPrice: 280,
             discount: "28%",
-            category: "ملابس",
-            subcategory: "تيشيرتات",
+            category: "اكسسوارات",
+            subcategory: "توكه",
             rating: 4.5,
             reviews: 95,
             images: ["https://i.imgpeek.com/sCYts4cTeWgc", "https://i.imgur.com/8M7Nq2l.jpg"],
             video: "https://savedly.net/f/csrsjmmu",
             freeShipping: true,
-            description: "تيشرت رياضي خفيف الوزن.",
-            sizes: ["S", "M", "L", "XL"],
+            description: "توكة جلدية كلاسيكية تناسب جميع المناسبات.",
             colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"]
         }, {
             id: 3,
-            name: "تيشرت بولو أنيق",
+            name: "تيشيرت قطني رياضي",
             price: 300,
             oldPrice: 420,
             discount: "29%",
-            category: "ملابس",
+            category: "منتجات قطنيه",
             subcategory: "تيشيرتات",
             rating: 4.6,
             reviews: 85,
             images: ["https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/8M7Nq2l.jpg"],
             freeShipping: true,
-            description: "تيشرت بولو أنيق ومناسب للمناسبات.",
+            description: "تيشيرت قطني مريح مناسب للرياضة والاستخدام اليومي.",
             sizes: ["S", "M", "L", "XL", "XXL"],
             colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"]
         }, {
             id: 4,
-            name: "تيشرت كم طويل شتوي",
+            name: "ميزان مطبخ إلكتروني",
             price: 280,
             oldPrice: 380,
             discount: "26%",
-            category: "ملابس",
-            subcategory: "تيشيرتات",
+            category: "موازين",
+            subcategory: "موازين",
             rating: 4.5,
             reviews: 78,
             images: ["https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/5HpQ8Jk.jpg"],
             freeShipping: true,
-            description: "تيشرت كم طويل مناسب للشتاء.",
-            sizes: ["S", "M", "L", "XL"],
-            colors: ["#1a1a2e", "#2c3e50", "#5d4037"]
+            description: "ميزان مطبخ إلكتروني دقيق بسعة 5 كجم وشاشة LCD واضحة.",
         }, {
             id: 5,
-            name: "تيشرت طباعة مميز",
+            name: "سماعة بلوتوث لاسلكية",
             price: 220,
             oldPrice: 310,
             discount: "29%",
-            category: "ملابس",
-            subcategory: "تيشيرتات",
+            category: "إلكترونيات",
+            subcategory: "موبايل",
             rating: 4.4,
             reviews: 68,
             images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/9KpQ8Mn.jpg"],
             freeShipping: true,
-            description: "تيشرت بتصميم طباعة جذاب.",
-            sizes: ["S", "M", "L", "XL", "XXL"],
-            colors: ["#ffffff", "#1a1a2e", "#e74c3c", "#f39c12"]
-        }, {
-            id: 6,
-            name: "بنطلون جينز رجالي",
-            price: 450,
-            oldPrice: 600,
-            discount: "25%",
-            category: "ملابس",
-            subcategory: "بناطيل",
-            rating: 4.6,
-            reviews: 80,
-            images: ["https://i.imgur.com/2FpQ8Rj.jpg", "https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/4GvH3Wq.jpg"],
-            freeShipping: true,
-            description: "بنطلون جينز متين وعصري.",
-            sizes: ["S", "M", "L", "XL", "XXL"],
-            colors: ["#1a1a2e", "#2c3e50", "#34495e"]
-        }, {
-            id: 7,
-            name: "بنطلون كارجو عملي",
-            price: 380,
-            oldPrice: 500,
-            discount: "24%",
-            category: "ملابس",
-            subcategory: "بناطيل",
-            rating: 4.4,
-            reviews: 60,
-            images: ["https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/8M7Nq2l.jpg"],
-            freeShipping: true,
-            description: "بنطلون كارجو عملي ومريح.",
-            sizes: ["M", "L", "XL", "XXL"],
-            colors: ["#5d4037", "#33691e", "#3e2723"]
-        }, {
-            id: 8,
-            name: "بنطلون كلاسيك أنيق",
-            price: 420,
-            oldPrice: 560,
-            discount: "25%",
-            category: "ملابس",
-            subcategory: "بناطيل",
-            rating: 4.5,
-            reviews: 70,
-            images: ["https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/2FpQ8Rj.jpg"],
-            freeShipping: true,
-            description: "بنطلون كلاسيك أنيق.",
-            sizes: ["S", "M", "L", "XL"],
-            colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"]
-        }, {
-            id: 9,
-            name: "بنطلون رياضي مريح",
-            price: 300,
-            oldPrice: 400,
-            discount: "25%",
-            category: "ملابس",
-            subcategory: "بناطيل",
-            rating: 4.5,
-            reviews: 65,
-            images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/7YpQ8Mn.jpg"],
-            freeShipping: true,
-            description: "بنطلون رياضي مريح.",
-            sizes: ["S", "M", "L", "XL", "XXL"],
-            colors: ["#2c3e50", "#e74c3c", "#2ecc71"]
-        }, {
-            id: 10,
-            name: "جاكيت شتوي دافئ",
-            price: 750,
-            oldPrice: 1000,
-            discount: "25%",
-            category: "ملابس",
-            subcategory: "جواكت",
-            rating: 4.8,
-            reviews: 150,
-            images: ["https://i.imgur.com/2FpQ8Rj.jpg", "https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/9KpQ8Mn.jpg"],
-            freeShipping: true,
-            description: "جاكيت شتوي دافئ وأنيق.",
-            sizes: ["M", "L", "XL", "XXL"],
-            colors: ["#1a1a2e", "#2c3e50", "#4a4a4a"]
-        }, {
-            id: 11,
-            name: "شاشة 4K 55 بوصة",
-            price: 12000,
-            oldPrice: 15000,
-            discount: "20%",
-            category: "إلكترونيات",
-            subcategory: "شاشات",
-            rating: 4.9,
-            reviews: 200,
-            images: ["https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/4GvH3Wq.jpg"],
-            freeShipping: true,
-            description: "شاشة 4K بحجم 55 بوصة بتقنية HDR.",
-            sizes: ["55 بوصة"],
-            colors: ["#000000"]
-        }, {
-            id: 12,
-            name: "سماعة لاسلكية",
-            price: 350,
-            oldPrice: 500,
-            discount: "30%",
-            category: "إلكترونيات",
-            subcategory: "سماعات",
-            rating: 4.6,
-            reviews: 110,
-            images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/5HpQ8Jk.jpg"],
-            freeShipping: true,
-            description: "سماعة لاسلكية بتقنية بلوتوث 5.0.",
-            sizes: ["واحدة"],
-            colors: ["#000000", "#ffffff", "#e74c3c"]
-        }, {
-            id: 13,
-            name: "طقم أواني طهي 10 قطع",
-            price: 1200,
-            oldPrice: 1600,
-            discount: "25%",
-            category: "منزل",
-            subcategory: "أواني",
-            rating: 4.7,
-            reviews: 90,
-            images: ["https://i.imgur.com/9KpQ8Mn.jpg", "https://i.imgur.com/5HpQ8Jk.jpg"],
-            freeShipping: true,
-            description: "طقم أواني طهي غير لاصق 10 قطع.",
-            sizes: ["واحدة"],
-            colors: ["#2c3e50", "#e74c3c"]
-        }, {
-            id: 14,
-            name: "مجموعة عناية بالبشرة",
-            price: 450,
-            oldPrice: 600,
-            discount: "25%",
-            category: "جمال",
-            subcategory: "عناية",
-            rating: 4.5,
-            reviews: 70,
-            images: ["https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/8M7Nq2l.jpg"],
-            freeShipping: true,
-            description: "مجموعة عناية بالبشرة تحتوي على 5 منتجات.",
-            sizes: ["واحدة"],
-            colors: ["#ffffff"]
-        }, {
-            id: 15,
-            name: "لعبة تعليمية تفاعلية",
-            price: 280,
-            oldPrice: 400,
-            discount: "30%",
-            category: "أطفال",
-            subcategory: "ألعاب",
-            rating: 4.8,
-            reviews: 120,
-            images: ["https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/9KpQ8Mn.jpg"],
-            freeShipping: true,
-            description: "لعبة تعليمية تفاعلية للأطفال 3-6 سنوات.",
-            sizes: ["واحدة"],
-            colors: ["#3498db", "#e74c3c", "#f39c12"]
-        }, {
-            id: 16,
-            name: "حذاء رياضي رجالي",
-            price: 850,
-            oldPrice: 1100,
-            discount: "23%",
-            category: "رياضة",
-            subcategory: "أحذية",
-            rating: 4.7,
-            reviews: 95,
-            images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/2FpQ8Rj.jpg"],
-            freeShipping: true,
-            description: "حذاء رياضي مريح ومناسب للجري.",
-            sizes: ["40", "41", "42", "43", "44"],
-            colors: ["#1a1a2e", "#ffffff", "#e74c3c"]
-        }, {
-            id: 17,
-            name: "مجموعة أدوات صيانة سيارات",
-            price: 1500,
-            oldPrice: 2000,
-            discount: "25%",
-            category: "سيارات",
-            subcategory: "أدوات",
-            rating: 4.6,
-            reviews: 50,
-            images: ["https://i.imgur.com/9KpQ8Mn.jpg", "https://i.imgur.com/5HpQ8Jk.jpg"],
-            freeShipping: true,
-            description: "مجموعة أدوات صيانة سيارات 100 قطعة.",
-            sizes: ["واحدة"],
-            colors: ["#2c3e50"]
-        }, ];
+            description: "سماعة بلوتوث بتقنية عزل الضوضاء وجودة صوت عالية."
+        }
+     ];
 
         // ============================================================
         // المتغيرات العامة
         // ============================================================
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let currentCategory = 'all';
+        let currentCategory = 'موازين'; // تم تغيير القيمة الافتراضية إلى 'موازين'
         let currentDetailProductId = null;
         let uploadedImageBase64 = null;
         let uploadedImageName = null;
@@ -3685,13 +3496,11 @@
             const breadcrumb = document.getElementById('categoryBreadcrumb');
             const categoryNames = {
                 'all': 'الكل',
-                'ملابس': 'ملابس',
+                'موازين': 'موازين',
+                'سكاكين و ادوات جزاره': 'سكاكين و ادوات جزاره',
                 'إلكترونيات': 'إلكترونيات',
-                'منزل': 'منزل ومطبخ',
-                'جمال': 'جمال وعناية',
-                'أطفال': 'أطفال',
-                'رياضة': 'رياضة',
-                'سيارات': 'سيارات'
+                'منتجات قطنيه': 'منتجات قطنيه',
+                'اكسسوارات': 'اكسسوارات'
             };
             breadcrumb.textContent = categoryNames[category] || category;
 
@@ -3714,13 +3523,11 @@
         function getCategoryDisplayName(category) {
             const names = {
                 'all': 'الكل',
-                'ملابس': 'ملابس',
+                'موازين': 'موازين',
+                'سكاكين و ادوات جزاره': 'سكاكين و ادوات جزاره',
                 'إلكترونيات': 'إلكترونيات',
-                'منزل': 'منزل ومطبخ',
-                'جمال': 'جمال وعناية',
-                'أطفال': 'أطفال',
-                'رياضة': 'رياضة',
-                'سيارات': 'سيارات'
+                'منتجات قطنيه': 'منتجات قطنيه',
+                'اكسسوارات': 'اكسسوارات'
             };
             return names[category] || category;
         }
@@ -4712,7 +4519,8 @@
                 }
             });
 
-            displayProducts(allProducts);
+            // عرض منتجات الموازين فقط عند التحميل
+            filterProducts('موازين');
 
             setTimeout(() => {
                 document.querySelectorAll('video').forEach(video => {
@@ -4729,16 +4537,19 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(function() {
                         if (typeof displayProducts === 'function' && allProducts) {
-                            displayProducts(allProducts);
-                            console.log('✅ تم عرض المنتجات بنجاح، عددها:', allProducts.length);
+                            // عرض منتجات الموازين فقط عند التحميل
+                            const filtered = allProducts.filter(p => p.category === 'موازين' || p.subcategory === 'موازين');
+                            displayProducts(filtered);
+                            console.log('✅ تم عرض منتجات الموازين بنجاح، عددها:', filtered.length);
                         }
                     }, 300);
                 });
             } else {
                 setTimeout(function() {
                     if (typeof displayProducts === 'function' && allProducts) {
-                        displayProducts(allProducts);
-                        console.log('✅ تم عرض المنتجات بنجاح، عددها:', allProducts.length);
+                        const filtered = allProducts.filter(p => p.category === 'موازين' || p.subcategory === 'موازين');
+                        displayProducts(filtered);
+                        console.log('✅ تم عرض منتجات الموازين بنجاح، عددها:', filtered.length);
                     }
                 }, 300);
             }
