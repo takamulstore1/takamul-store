@@ -11,18 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js">
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
     <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- Forminit - استخدام CDN الصحيح -->
-    <script src="https://forminit.com/sdk/v1/forminit.js">
-    </script>
+    <!-- Forminit -->
+    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
 
     <style>
         /* ===== BASES ===== */
@@ -42,11 +38,11 @@
             color: #1a1a2e;
         }
 
-        /* ===== شاشة تسجيل الدخول (مودال) ===== */
+        /* ===== شاشة تسجيل الدخول ===== */
         #loginScreen {
             position: fixed;
             inset: 0;
-            background: rgba(26, 26, 46, 0.92);
+            background: rgba(15, 23, 42, 0.92);
             display: none;
             justify-content: center;
             align-items: center;
@@ -271,14 +267,14 @@
             text-decoration: underline;
         }
 
-        /* ===== نافذة إدخال البيانات بعد تسجيل الدخول ===== */
+        /* ===== نافذة إدخال البيانات ===== */
         #profileModal {
             position: fixed;
             inset: 0;
             display: none;
             justify-content: center;
             align-items: center;
-            background: rgba(26, 26, 46, 0.85);
+            background: rgba(15, 23, 42, 0.85);
             z-index: 99998;
             backdrop-filter: blur(8px);
         }
@@ -395,7 +391,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(26, 26, 46, 0.92);
+            background: rgba(15, 23, 42, 0.92);
             z-index: 99998;
             backdrop-filter: blur(10px);
             justify-content: center;
@@ -602,48 +598,58 @@
             box-shadow: 0 2px 10px rgba(5, 150, 105, 0.3);
         }
 
-        /* ===== الهيرو ===== */
+        /* ============================================================ */
+        /* ===== الهيرو - صورة كاملة مستطيلة ===== */
+        /* ============================================================ */
         .hero-slider {
             width: 100%;
-            height: 280px;
+            height: auto;
             position: relative;
             overflow: hidden;
             background: #0f172a;
         }
 
         .hero-slider .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background-size: cover;
-            background-position: center;
+            display: none;
             cursor: pointer;
         }
 
         .hero-slider .slide.active {
             opacity: 1;
+            display: block;
         }
 
+        .hero-slider .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* ✅ الطبقة الداكنة خفيفة جداً */
         .hero-slider .slide .overlay {
             position: absolute;
             inset: 0;
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.05);
             z-index: 1;
+            pointer-events: none;
         }
 
         .hero-slider .slide .content {
-            position: relative;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             z-index: 2;
             padding: 0 20px;
             color: #fff;
+            text-align: center;
         }
 
         .hero-slider .slide h1 {
@@ -666,7 +672,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(5, 150, 105, 0.85);
             border: none;
             color: #fff;
             font-size: 30px;
@@ -676,11 +682,12 @@
             border-radius: 50%;
             transition: 0.3s;
             backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .hero-slider .slider-btn:hover {
-            background: rgba(255, 255, 255, 0.6);
-            color: #0f172a;
+            background: #047857;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .hero-slider .slider-btn.prev {
@@ -925,7 +932,7 @@
             margin-top: 2px;
         }
 
-        /* ===== مودال عرض الصورة/الفيديو ===== */
+        /* ===== مودال الصورة/الفيديو ===== */
         .media-modal {
             position: fixed;
             inset: 0;
@@ -1165,7 +1172,8 @@
         }
 
         .qty-box button:hover {
-            background: #e2e8f0;
+            background: #d1fae5;
+            color: #059669;
         }
 
         .qty-box span {
@@ -1358,7 +1366,6 @@
             width: 100%;
         }
 
-        /* ===== ستايل أزرار الدفع ===== */
         .payment-btn {
             flex: 1;
             min-width: 180px;
@@ -1690,39 +1697,6 @@
             margin: 10px 0;
         }
 
-        /* ===== زر تحديد الموقع ===== */
-        .location-btn {
-            background: linear-gradient(135deg, #059669, #047857) !important;
-            color: #fff !important;
-            border: none !important;
-            padding: 12px 20px !important;
-            border-radius: 10px !important;
-            font-weight: 700 !important;
-            font-size: 15px !important;
-            cursor: pointer !important;
-            transition: 0.3s !important;
-            width: 100% !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 10px !important;
-        }
-
-        .location-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(5, 150, 105, 0.4);
-        }
-
-        .location-btn:active {
-            transform: scale(0.97);
-        }
-
-        .location-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
         .governorate-select {
             width: 100%;
             padding: 12px 16px;
@@ -1769,6 +1743,7 @@
 
         .back-to-top:hover {
             transform: translateY(-4px);
+            background: #047857;
         }
 
         /* ===== الفوتر ===== */
@@ -1814,6 +1789,10 @@
             font-size: 14px;
         }
 
+        footer .footer-bottom span {
+            color: #059669;
+        }
+
         /* ===== اختيار المقاس ===== */
         .size-selector {
             display: flex;
@@ -1843,11 +1822,6 @@
             border-color: #059669;
             background: #059669;
             color: #fff;
-        }
-
-        .size-selector .size-option.disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
         }
 
         .color-selector {
@@ -2041,13 +2015,17 @@
                 flex-wrap: wrap;
             }
             .hero-slider {
-                height: 180px;
+                height: auto;
             }
             .hero-slider .slide h1 {
                 font-size: 24px;
             }
             .hero-slider .slide p {
                 font-size: 14px;
+            }
+            .hero-slider .slider-btn {
+                font-size: 20px;
+                padding: 8px 12px;
             }
             #productsContainer {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -2292,10 +2270,7 @@
 
         .payment-details-box .payment-card .copy-btn:hover {
             transform: scale(1.05);
-        }
-
-        .payment-details-box .payment-card .copy-btn.blue {
-            background: #059669;
+            background: #047857;
         }
 
         .payment-details-box .payment-card .copy-btn.gold {
@@ -2331,9 +2306,9 @@
 
 <body>
     <!-- ===== شريط الإعلانات ===== -->
-    <div style="background: linear-gradient(90deg, #0f172a, #059669, #0f172a); background-size: 200% 100%; animation: shimmer 4s ease-in-out infinite; color: #fff; padding: 10px 0; text-align: center; font-weight: 700; font-size: 16px; overflow: hidden; position: relative; z-index: 99999; border-bottom: 2px solid #34d399; direction: ltr;">
+    <div style="background: linear-gradient(90deg, #059669, #047857, #059669); background-size: 200% 100%; animation: shimmer 4s ease-in-out infinite; color: #fff; padding: 10px 0; text-align: center; font-weight: 700; font-size: 16px; overflow: hidden; position: relative; z-index: 99999; direction: ltr;">
         <marquee behavior="scroll" direction="left" scrollamount="6" style="color:#fff; font-size:17px;">
-            🎉 <span style="color:#34d399;">خصومات يوم الجمعة</span> - عروض لا تُفوت! 🎉 &nbsp;|&nbsp; 🛍️ تسوق الآن واستمتع بأفضل الأسعار 🛍️
+             <span style="color:#a7f3d0;"> خصومات رمضان</span>
         </marquee>
     </div>
     <style>
@@ -2345,7 +2320,7 @@
         .hero-slider .slide .overlay { cursor: pointer; }
     </style>
 
-    <!-- ===== شاشة تسجيل الدخول (مودال) - مخفية في البداية ===== -->
+    <!-- ===== شاشة تسجيل الدخول ===== -->
     <div id="loginScreen" class="hidden">
         <div class="login-box">
             <button class="close-btn" onclick="closeLogin()">✕</button>
@@ -2405,7 +2380,7 @@
         </div>
     </div>
 
-    <!-- ===== نافذة إدخال البيانات بعد تسجيل الدخول ===== -->
+    <!-- ===== نافذة إدخال البيانات ===== -->
     <div id="profileModal">
         <div class="profile-box">
             <button class="close-btn" onclick="closeProfileModal()">✕</button>
@@ -2458,25 +2433,20 @@
             <button class="cat-btn" onclick="filterProducts('اكسسوارات')">اكسسوارات</button>
         </div>
 
-        <!-- ===== الهيرو ===== -->
+        <!-- ===== الهيرو - صور كاملة مستطيلة ===== -->
         <section class="hero-slider" id="heroSlider">
-            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920&h=600&fit=crop');">
+            <div class="slide active">
+                <img src="https://i.imgpeek.com/SEoLgXTzK2PD" alt="Sun Store Slide 1">
                 <div class="overlay"></div>
                 <div class="content"></div>
             </div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&h=600&fit=crop');">
+            <div class="slide">
+                <img src="https://i.imgpeek.com/Ky2-ebyqX4-f" alt="Sun Store Slide 2">
                 <div class="overlay"></div>
                 <div class="content"></div>
             </div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&h=600&fit=crop');">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&h=600&fit=crop');">
-                <div class="overlay"></div>
-                <div class="content"></div>
-            </div>
-            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=600&fit=crop');">
+            <div class="slide">
+                <img src="https://i.imgpeek.com/C--gwaDYMeTj" alt="Sun Store Slide 3">
                 <div class="overlay"></div>
                 <div class="content"></div>
             </div>
@@ -2586,9 +2556,7 @@
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- ===== مودال الدفع - بيانات الشحن ===== -->
-        <!-- ============================================================ -->
+        <!-- ===== مودال الدفع ===== -->
         <div id="checkoutModal" class="privacy-modal">
             <div class="privacy-modal-content">
                 <div class="privacy-modal-header">
@@ -2831,7 +2799,6 @@
         // جافاسكريبت - متجر sun Store
         // ============================================================
 
-        // ===== إصلاح بيئة التشغيل =====
         (function fixEnvironment() {
             if (window.location.protocol === 'file:') {
                 console.warn('⚠️ تشغيل محلي - محاكاة بيئة آمنة');
@@ -2851,7 +2818,6 @@
             }
         })();
 
-        // ===== Firebase =====
         const firebaseConfig = {
             apiKey: "AIzaSyC-r27FKI-t4LC6mNx3Ouf_34DZ9aHl72g",
             authDomain: "takamul-4d702.firebaseapp.com",
@@ -2869,16 +2835,13 @@
         googleProvider.addScope('email');
         googleProvider.addScope('profile');
 
-        // ===== EmailJS =====
         const PUBLIC_KEY = "7RXGSj5jaLPLznhRM";
         const SERVICE_ID = "service_kltwtgn";
         const TEMPLATE_ID = "template_iq9pnen";
         const STORE_EMAIL = "sunstore1969@gmail.com";
 
-        // ===== Forminit - التحقق من وجود المكتبة =====
         let forminitReady = false;
 
-        // تهيئة EmailJS
         try {
             emailjs.init({ publicKey: PUBLIC_KEY });
             console.log('✅ EmailJS initialized');
@@ -2886,12 +2849,10 @@
             console.warn('⚠️ EmailJS initialization failed:', e);
         }
 
-        // تهيئة Forminit - التحقق من وجود الكائن
         let forminit = null;
         const FORM_ID = "xxdqj8abktj";
         const REDIRECT_URL = "https://forminit.com/thank-you";
 
-        // محاولة الحصول على كائن forminit
         try {
             if (typeof window.forminit !== 'undefined') {
                 forminit = window.forminit;
@@ -2903,7 +2864,6 @@
                 console.log('✅ Forminit initialized with new Forminit()');
             } else {
                 console.warn('⚠️ Forminit not found, will use fallback');
-                // إنشاء كائن وهمي للـ forminit
                 forminit = {
                     submit: function(formId, formData, options) {
                         console.log('⚠️ Forminit fallback - would submit:', formId, formData);
@@ -2923,28 +2883,25 @@
             forminitReady = false;
         }
 
-        // ===== بيانات المستخدم =====
         let currentUser = null;
         let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {};
 
-        // ============================================================
-        // بيانات المنتجات
-        // ============================================================
-        const allProducts = [{
+ const allProducts = [
+     {
             id: 1,
-            name: "سكين جزارة احترافي",
-            price: 250,
-            oldPrice: 350,
-            discount: "29%",
+            name: "هوك جزارة ٢٠٠كيلو جرام",
+            price: 800,
+            oldPrice: 900,
+            discount: "5%",
             category: "سكاكين و ادوات جزاره",
             subcategory: "سكاكين",
             rating: 4.7,
             reviews: 120,
-            images: ["https://i.imgpeek.com/XHTAhZ3DFNsT", "https://i.imgpeek.com/XHTAhZ3DFNsT", "https://i.imgpeek.com/XHTAhZ3DFNsT"],
-            video: "https://vewo.io/v/4eae8aff94fe",
+            images: ["https://g.top4top.io/p_3905ssa2n1.jpeg" ],
             freeShipping: true,
             description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
-        }, {
+        },
+    {
             id: 2,
             name: "توكة رجالي كلاسيك",
             price: 200,
@@ -2976,19 +2933,62 @@
             colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"]
         }, {
             id: 4,
-            name: "ميزان مطبخ إلكتروني",
-            price: 280,
-            oldPrice: 380,
+            name: "هوك 50 كيلو جرام ",
+            price: 220,
+            oldPrice: 320,
             discount: "26%",
             category: "موازين",
             subcategory: "موازين",
             rating: 4.5,
             reviews: 78,
-            images: ["https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/5HpQ8Jk.jpg"],
+            images: ["https://l.top4top.io/p_390544gxf1.jpeg"],
             freeShipping: true,
-            description: "ميزان مطبخ إلكتروني دقيق بسعة 5 كجم وشاشة LCD واضحة.",
-        }, {
+            description: "هوك 50 جرام ل وزن الشنط و الاغراض المنزليه "
+        },  
+        {
             id: 5,
+            name: "هوك جزارة ٢٠٠كيلو جرام",
+            price: 800,
+            oldPrice: 900,
+            discount: "26%",
+            category: "موازين",
+            subcategory: "موازين",
+            rating: 4.5,
+            reviews: 78,
+            images: ["https://g.top4top.io/p_3905ssa2n1.jpeg" ],
+            freeShipping: true,
+            description: "هوك 50 جرام ل وزن الشنط و الاغراض المنزليه "
+        },
+                {
+            id: 6,
+            name: "هوك ٣٠٠كيلو معدن ب الكامل تقيل",
+            price: 1250,
+            oldPrice: 1350,
+            discount:  "10%",
+            category: "موازين",
+            subcategory: "موازين",
+            rating: 4.5,
+            reviews: 78,
+            images: ["https://d.top4top.io/p_3905yymz42.jpeg" ,"https://c.top4top.io/p_3905fdar31.jpeg" ],
+            freeShipping: true,
+            description: "هوك ٣٠٠كيلو معدن ب الكامل تقيل"
+        },
+            {
+            id: 7,
+            name: "هوك 1 طن عموله ",
+            price: 3200,
+            oldPrice: 3300,
+            discount:  "10%",
+            category: "موازين",
+            subcategory: "موازين",
+            rating: 4.5,
+            reviews: 78,
+            images: ["https://b.top4top.io/p_3905x5qfx1.jpeg" ,"https://c.top4top.io/p_3905g4vur2.jpeg" ],
+            freeShipping: true,
+            description: "هوك 1 طن عموله ينفع فى وزن اللحمه و الشنط "
+        },
+      {
+            id: 8,
             name: "سماعة بلوتوث لاسلكية",
             price: 220,
             oldPrice: 310,
@@ -3000,23 +3000,31 @@
             images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/9KpQ8Mn.jpg"],
             freeShipping: true,
             description: "سماعة بلوتوث بتقنية عزل الضوضاء وجودة صوت عالية."
+        } ,
+         {
+            id: 9,
+            name: "هوك جزارة ٢٠٠كيلو جرام",
+            price: 800,
+            oldPrice: 900,
+            discount: "5%",
+            category: "سكاكين و ادوات جزاره",
+            subcategory: "سكاكين",
+            rating: 4.7,
+            reviews: 120,
+            images: ["https://g.top4top.io/p_3905ssa2n1.jpeg" ],
+            freeShipping: true,
+            description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
         }
      ];
 
-        // ============================================================
-        // المتغيرات العامة
-        // ============================================================
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let currentCategory = 'موازين'; // تم تغيير القيمة الافتراضية إلى 'موازين'
+        let currentCategory = 'موازين';
         let currentDetailProductId = null;
         let uploadedImageBase64 = null;
         let uploadedImageName = null;
         let selectedSizes = {};
         let selectedColors = {};
 
-        // ============================================================
-        // دوال تسجيل الدخول
-        // ============================================================
         function showLogin() {
             document.getElementById('registerScreen').classList.remove('show');
             document.getElementById('registerScreen').style.display = 'none';
@@ -3120,7 +3128,6 @@
             }
         }
 
-        // ===== مراقبة حالة المستخدم =====
         auth.onAuthStateChanged((user) => {
             if (user) {
                 currentUser = user;
@@ -3159,7 +3166,6 @@
             }
         });
 
-        // ===== ربط الأزرار =====
         document.getElementById('googleLoginBtn').addEventListener('click', handleGoogleLogin);
         document.getElementById('googleRegisterBtn').addEventListener('click', function() {
             document.getElementById('registerScreen').classList.remove('show');
@@ -3270,9 +3276,6 @@
             showNotification('⏭️ يمكنك إدخال البيانات لاحقاً عند إتمام الطلب');
         });
 
-        // ============================================================
-        // دالة getColorName
-        // ============================================================
         function getColorName(hex) {
             const colorMap = {
                 '#000000': 'أسود',
@@ -3304,9 +3307,6 @@
             return colorMap[hex] || hex || 'غير محدد';
         }
 
-        // ============================================================
-        // دوال السلايدر
-        // ============================================================
         let currentSlideIndex = 0;
         const slides = document.querySelectorAll('.hero-slider .slide');
         const slideInterval = 7000;
@@ -3332,9 +3332,6 @@
             startAutoSlide();
         }
 
-        // ============================================================
-        // دوال عرض الصورة/الفيديو
-        // ============================================================
         function openMediaModal(src, isVideo = false, label = '') {
             const modal = document.getElementById('mediaModal');
             const img = document.getElementById('modalImage');
@@ -3376,9 +3373,6 @@
             document.body.style.overflow = '';
         }
 
-        // ============================================================
-        // دوال المتجر - عرض المنتجات
-        // ============================================================
         function displayProducts(products) {
             const container = document.getElementById('productsContainer');
             const spinner = document.getElementById('loadingSpinner');
@@ -3467,7 +3461,7 @@
                                 </div>
                                 ${freeShipping}
                                 ${primeBadge}
-                                <button class="add-to-cart-btn" onclick="event.stopPropagation(); openProductDetails(${product.id})">🛒 اختيار المقاس</button>
+                                <button class="add-to-cart-btn" onclick="event.stopPropagation(); openProductDetails(${product.id})">🛒اضافه للعربه </button>
                             </div>
                         </div>`;
                 });
@@ -3481,7 +3475,6 @@
             }, 300);
         }
 
-        // ===== تصفية المنتجات =====
         function filterProducts(category) {
             currentCategory = category;
 
@@ -3551,9 +3544,6 @@
             displayProducts(filtered);
         }
 
-        // ============================================================
-        // سلة التسوق
-        // ============================================================
         function toggleCart() {
             const sidebar = document.getElementById('cartSidebar');
             const overlay = document.getElementById('overlay');
@@ -3690,9 +3680,6 @@
             document.body.removeChild(textarea);
         }
 
-        // ============================================================
-        // معاينة الصورة وتحويلها إلى Base64
-        // ============================================================
         function previewImage(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -3718,9 +3705,6 @@
             showNotification('✅ تم رفع صورة الإيصال: ' + file.name, 'success');
         }
 
-        // ============================================================
-        // تحديث ملخص الطلب
-        // ============================================================
         function updateOrderSummary() {
             const container = document.getElementById('orderMessage');
             const hiddenInput = document.getElementById('hiddenOrderMessage');
@@ -3785,9 +3769,6 @@
             }
         }
 
-        // ============================================================
-        // دوال الدفع والنماذج
-        // ============================================================
         function checkout() {
             if (cart.length === 0) {
                 showNotification("⚠️ عربتك فارغة!");
@@ -3923,12 +3904,8 @@
             document.getElementById('aboutModal').classList.remove('open');
         }
 
-        // ============================================================
-        // إرسال الطلب عبر EmailJS و Forminit
-        // ============================================================
         async function submitOrderWithForminit(formData) {
             try {
-                // التحقق من وجود forminit
                 if (forminitReady && forminit && typeof forminit.submit === 'function') {
                     const result = await forminit.submit(FORM_ID, formData, {
                         redirect: REDIRECT_URL
@@ -3992,9 +3969,6 @@
             });
         }
 
-        // ============================================================
-        // ربط نموذج Forminit
-        // ============================================================
         const contactForm = document.getElementById('contactForm');
         const contactStatus = document.getElementById('contactStatus');
         const contactSubmitBtn = document.getElementById('contactSubmitBtn');
@@ -4068,7 +4042,6 @@
                 });
 
                 try {
-                    // محاولة الإرسال عبر Forminit أولاً
                     const result = await submitOrderWithForminit(formData);
 
                     if (!result.success) {
@@ -4077,7 +4050,6 @@
                         console.log('✅ تم الإرسال عبر Forminit بنجاح');
                     }
 
-                    // إرسال البريد الإلكتروني عبر EmailJS (دائماً)
                     try {
                         await sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems,
                             imageBase64, imageName, governorate);
@@ -4113,7 +4085,6 @@
                 } catch (error) {
                     console.error('❌ Error:', error);
 
-                    // محاولة الإرسال عبر EmailJS فقط في حالة الفشل
                     try {
                         await sendOrderEmail(fullName, email, phone, address, total, productsList, totalItems,
                             imageBase64, imageName, governorate);
@@ -4151,9 +4122,6 @@
             });
         }
 
-        // ============================================================
-        // دوال تفاصيل المنتج
-        // ============================================================
         function openProductDetails(productId) {
             const product = allProducts.find(p => p.id === productId);
             if (!product) {
@@ -4488,9 +4456,6 @@
             currentDetailProductId = null;
         }
 
-        // ============================================================
-        // أحداث DOM
-        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             startAutoSlide();
 
@@ -4519,7 +4484,6 @@
                 }
             });
 
-            // عرض منتجات الموازين فقط عند التحميل
             filterProducts('موازين');
 
             setTimeout(() => {
@@ -4529,15 +4493,11 @@
             }, 1000);
         });
 
-        // ============================================================
-        // عرض المنتجات فوراً
-        // ============================================================
         (function() {
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(function() {
                         if (typeof displayProducts === 'function' && allProducts) {
-                            // عرض منتجات الموازين فقط عند التحميل
                             const filtered = allProducts.filter(p => p.category === 'موازين' || p.subcategory === 'موازين');
                             displayProducts(filtered);
                             console.log('✅ تم عرض منتجات الموازين بنجاح، عددها:', filtered.length);
