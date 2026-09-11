@@ -17,9 +17,6 @@
     <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- Forminit -->
-    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
-
     <style>
         /* ===== BASES ===== */
         * {
@@ -598,9 +595,7 @@
             box-shadow: 0 2px 10px rgba(5, 150, 105, 0.3);
         }
 
-        /* ============================================================ */
-        /* ===== الهيرو - صورة كاملة مستطيلة ===== */
-        /* ============================================================ */
+        /* ===== الهيرو ===== */
         .hero-slider {
             width: 100%;
             height: auto;
@@ -630,7 +625,6 @@
             object-fit: contain;
         }
 
-        /* ✅ الطبقة الداكنة خفيفة جداً */
         .hero-slider .slide .overlay {
             position: absolute;
             inset: 0;
@@ -650,22 +644,6 @@
             padding: 0 20px;
             color: #fff;
             text-align: center;
-        }
-
-        .hero-slider .slide h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .hero-slider .slide h1 span {
-            color: #34d399;
-        }
-
-        .hero-slider .slide p {
-            font-size: 20px;
-            color: #cbd5e1;
-            font-weight: 300;
         }
 
         .hero-slider .slider-btn {
@@ -1438,7 +1416,6 @@
             display: block !important;
         }
 
-        /* ===== قسم الدفع ===== */
         .instapay-section {
             background: linear-gradient(135deg, #f0fdf4, #dcfce7);
             border: 2px solid #059669;
@@ -1475,11 +1452,6 @@
             border: 2px dashed #059669;
             direction: ltr;
             letter-spacing: 2px;
-        }
-
-        .instapay-section .instapay-number i {
-            margin: 0 8px;
-            color: #059669;
         }
 
         .instapay-section .copy-btn {
@@ -1672,7 +1644,6 @@
             color: #dc2626;
         }
 
-        /* ===== عرض الصورة في الرسالة ===== */
         .order-message-container {
             background: #f1f5f9;
             border-radius: 10px;
@@ -1716,7 +1687,6 @@
             box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.15);
         }
 
-        /* ===== زر العودة ===== */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -2017,12 +1987,6 @@
             .hero-slider {
                 height: auto;
             }
-            .hero-slider .slide h1 {
-                font-size: 24px;
-            }
-            .hero-slider .slide p {
-                font-size: 14px;
-            }
             .hero-slider .slider-btn {
                 font-size: 20px;
                 padding: 8px 12px;
@@ -2153,9 +2117,6 @@
             .product-card .discount-badge {
                 font-size: 9px;
                 padding: 2px 6px;
-            }
-            .hero-slider .slide h1 {
-                font-size: 20px;
             }
             .order-message-container {
                 min-height: 180px !important;
@@ -2433,7 +2394,7 @@
             <button class="cat-btn" onclick="filterProducts('اكسسوارات')">اكسسوارات</button>
         </div>
 
-        <!-- ===== الهيرو - صور كاملة مستطيلة ===== -->
+        <!-- ===== الهيرو ===== -->
         <section class="hero-slider" id="heroSlider">
             <div class="slide active">
                 <img src="https://i.imgpeek.com/SEoLgXTzK2PD" alt="Sun Store Slide 1">
@@ -2796,7 +2757,7 @@
     <!-- ============================================================ -->
     <script>
         // ============================================================
-        // جافاسكريبت - متجر sun Store
+        // جافاسكريبت - متجر sun Store (مع Formcarry + حساب الخصم تلقائياً)
         // ============================================================
 
         (function fixEnvironment() {
@@ -2840,7 +2801,10 @@
         const TEMPLATE_ID = "template_iq9pnen";
         const STORE_EMAIL = "sunstore1969@gmail.com";
 
-        let forminitReady = false;
+        // ===== Formcarry Configuration =====
+        const FORMCARRY_ENDPOINT = "https://formcarry.com/s/6-lES4NRyqA";
+        let formcarryReady = true;
+        console.log('✅ Formcarry ready:', FORMCARRY_ENDPOINT);
 
         try {
             emailjs.init({ publicKey: PUBLIC_KEY });
@@ -2849,173 +2813,158 @@
             console.warn('⚠️ EmailJS initialization failed:', e);
         }
 
-        let forminit = null;
-        const FORM_ID = "xxdqj8abktj";
-        const REDIRECT_URL = "https://forminit.com/thank-you";
-
-        try {
-            if (typeof window.forminit !== 'undefined') {
-                forminit = window.forminit;
-                forminitReady = true;
-                console.log('✅ Forminit ready (window.forminit)');
-            } else if (typeof Forminit !== 'undefined') {
-                forminit = new Forminit();
-                forminitReady = true;
-                console.log('✅ Forminit initialized with new Forminit()');
-            } else {
-                console.warn('⚠️ Forminit not found, will use fallback');
-                forminit = {
-                    submit: function(formId, formData, options) {
-                        console.log('⚠️ Forminit fallback - would submit:', formId, formData);
-                        return Promise.resolve({ success: true, message: 'Fallback submission' });
-                    }
-                };
-                forminitReady = false;
-            }
-        } catch (e) {
-            console.warn('⚠️ Forminit initialization error:', e);
-            forminit = {
-                submit: function(formId, formData, options) {
-                    console.log('⚠️ Forminit fallback - would submit:', formId, formData);
-                    return Promise.resolve({ success: true, message: 'Fallback submission' });
-                }
-            };
-            forminitReady = false;
-        }
-
         let currentUser = null;
         let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {};
 
- const allProducts = [
-     {
-            id: 1,
-            name: "هوك جزارة ٢٠٠كيلو جرام",
-            price: 800,
-            oldPrice: 900,
-            discount: "5%",
-            category: "سكاكين و ادوات جزاره",
-            subcategory: "سكاكين",
-            rating: 4.7,
-            reviews: 120,
-            images: ["https://g.top4top.io/p_3905ssa2n1.jpeg" ],
-            freeShipping: true,
-            description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
-        },
-    {
-            id: 2,
-            name: "توكة رجالي كلاسيك",
-            price: 200,
-            oldPrice: 280,
-            discount: "28%",
-            category: "اكسسوارات",
-            subcategory: "توكه",
-            rating: 4.5,
-            reviews: 95,
-            images: ["https://i.imgpeek.com/sCYts4cTeWgc", "https://i.imgur.com/8M7Nq2l.jpg"],
-            video: "https://savedly.net/f/csrsjmmu",
-            freeShipping: true,
-            description: "توكة جلدية كلاسيكية تناسب جميع المناسبات.",
-            colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"]
-        }, {
-            id: 3,
-            name: "تيشيرت قطني رياضي",
-            price: 300,
-            oldPrice: 420,
-            discount: "29%",
-            category: "منتجات قطنيه",
-            subcategory: "تيشيرتات",
-            rating: 4.6,
-            reviews: 85,
-            images: ["https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/8M7Nq2l.jpg"],
-            freeShipping: true,
-            description: "تيشيرت قطني مريح مناسب للرياضة والاستخدام اليومي.",
-            sizes: ["S", "M", "L", "XL", "XXL"],
-            colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"]
-        }, {
-            id: 4,
-            name: "هوك 50 كيلو جرام ",
-            price: 220,
-            oldPrice: 320,
-            discount: "26%",
-            category: "موازين",
-            subcategory: "موازين",
-            rating: 4.5,
-            reviews: 78,
-            images: ["https://l.top4top.io/p_390544gxf1.jpeg"],
-            freeShipping: true,
-            description: "هوك 50 جرام ل وزن الشنط و الاغراض المنزليه "
-        },  
-        {
-            id: 5,
-            name: "هوك جزارة ٢٠٠كيلو جرام",
-            price: 800,
-            oldPrice: 900,
-            discount: "26%",
-            category: "موازين",
-            subcategory: "موازين",
-            rating: 4.5,
-            reviews: 78,
-            images: ["https://g.top4top.io/p_3905ssa2n1.jpeg" ],
-            freeShipping: true,
-            description: "هوك 50 جرام ل وزن الشنط و الاغراض المنزليه "
-        },
-                {
-            id: 6,
-            name: "هوك ٣٠٠كيلو معدن ب الكامل تقيل",
-            price: 1250,
-            oldPrice: 1350,
-            discount:  "10%",
-            category: "موازين",
-            subcategory: "موازين",
-            rating: 4.5,
-            reviews: 78,
-            images: ["https://d.top4top.io/p_3905yymz42.jpeg" ,"https://c.top4top.io/p_3905fdar31.jpeg" ],
-            freeShipping: true,
-            description: "هوك ٣٠٠كيلو معدن ب الكامل تقيل"
-        },
-            {
-            id: 7,
-            name: "هوك 1 طن عموله ",
-            price: 3200,
-            oldPrice: 3300,
-            discount:  "10%",
-            category: "موازين",
-            subcategory: "موازين",
-            rating: 4.5,
-            reviews: 78,
-            images: ["https://b.top4top.io/p_3905x5qfx1.jpeg" ,"https://c.top4top.io/p_3905g4vur2.jpeg" ],
-            freeShipping: true,
-            description: "هوك 1 طن عموله ينفع فى وزن اللحمه و الشنط "
-        },
-      {
-            id: 8,
-            name: "سماعة بلوتوث لاسلكية",
-            price: 220,
-            oldPrice: 310,
-            discount: "29%",
-            category: "إلكترونيات",
-            subcategory: "موبايل",
-            rating: 4.4,
-            reviews: 68,
-            images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/9KpQ8Mn.jpg"],
-            freeShipping: true,
-            description: "سماعة بلوتوث بتقنية عزل الضوضاء وجودة صوت عالية."
-        } ,
-         {
-            id: 9,
-            name: "هوك جزارة ٢٠٠كيلو جرام",
-            price: 800,
-            oldPrice: 900,
-            discount: "5%",
-            category: "سكاكين و ادوات جزاره",
-            subcategory: "سكاكين",
-            rating: 4.7,
-            reviews: 120,
-            images: ["https://g.top4top.io/p_3905ssa2n1.jpeg" ],
-            freeShipping: true,
-            description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
+        // ============================================================
+        // ✅ دالة حساب نسبة الخصم تلقائياً من السعر القديم والجديد
+        // ============================================================
+        function calculateDiscount(product) {
+            // لو مفيش سعر قديم أو السعر القديم أقل من أو يساوي الجديد → مفيش خصم
+            if (!product.oldPrice || product.oldPrice <= product.price) {
+                return null;
+            }
+
+            // حساب نسبة الخصم
+            const discountAmount = product.oldPrice - product.price;
+            const discountPercent = Math.round((discountAmount / product.oldPrice) * 100);
+
+            // لو الخصم أقل من 1% → مفيش خصم
+            if (discountPercent < 1) return null;
+
+            return {
+                percent: discountPercent,
+                text: `${discountPercent}%`,
+                amount: discountAmount
+            };
         }
-     ];
+
+        // ============================================================
+        // المنتجات - بدون حقل discount (هيتحسب تلقائياً)
+        // ============================================================
+        const allProducts = [
+            {
+                id: 1,
+                name: "هوك جزارة ٢٠٠كيلو جرام",
+                price: 800,
+                oldPrice: 900,
+                category: "سكاكين و ادوات جزاره",
+                subcategory: "سكاكين",
+                rating: 4.7,
+                reviews: 120,
+                images: ["https://g.top4top.io/p_3905ssa2n1.jpeg"],
+                freeShipping: true,
+                description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
+            },
+            {
+                id: 2,
+                name: "توكة رجالي كلاسيك",
+                price: 200,
+                oldPrice: 280,
+                category: "اكسسوارات",
+                subcategory: "توكه",
+                rating: 4.5,
+                reviews: 95,
+                images: ["https://i.imgpeek.com/sCYts4cTeWgc", "https://i.imgur.com/8M7Nq2l.jpg"],
+                video: "https://savedly.net/f/csrsjmmu",
+                freeShipping: true,
+                description: "توكة جلدية كلاسيكية تناسب جميع المناسبات.",
+                colors: ["#2c3e50", "#e74c3c", "#2ecc71", "#f39c12"]
+            },
+            {
+                id: 3,
+                name: "تيشيرت قطني رياضي",
+                price: 300,
+                oldPrice: 420,
+                category: "منتجات قطنيه",
+                subcategory: "تيشيرتات",
+                rating: 4.6,
+                reviews: 85,
+                images: ["https://i.imgur.com/5HpQ8Jk.jpg", "https://i.imgur.com/4GvH3Wq.jpg", "https://i.imgur.com/8M7Nq2l.jpg"],
+                freeShipping: true,
+                description: "تيشيرت قطني مريح مناسب للرياضة والاستخدام اليومي.",
+                sizes: ["S", "M", "L", "XL", "XXL"],
+                colors: ["#1a1a2e", "#2c3e50", "#e74c3c", "#3498db"]
+            },
+            {
+                id: 4,
+                name: "هوك 50 كيلو جرام ",
+                price: 220,
+                oldPrice: 320,
+                category: "موازين",
+                subcategory: "موازين",
+                rating: 4.5,
+                reviews: 78,
+                images: ["https://l.top4top.io/p_390544gxf1.jpeg"],
+                freeShipping: true,
+                description: "هوك 50 جرام ل وزن الشنط و الاغراض المنزليه "
+            },
+            {
+                id: 5,
+                name: "هوك جزارة ٢٠٠كيلو جرام",
+                price: 800,
+                oldPrice: 900,
+                category: "موازين",
+                subcategory: "موازين",
+                rating: 4.5,
+                reviews: 78,
+                images: ["https://g.top4top.io/p_3905ssa2n1.jpeg"],
+                freeShipping: true,
+                description: "هوك 50 جرام ل وزن الشنط و الاغراض المنزليه "
+            },
+            {
+                id: 6,
+                name: "هوك ٣٠٠كيلو معدن ب الكامل تقيل",
+                price: 1250,
+                oldPrice: 1350,
+                category: "موازين",
+                subcategory: "موازين",
+                rating: 4.5,
+                reviews: 78,
+                images: ["https://d.top4top.io/p_3905yymz42.jpeg", "https://c.top4top.io/p_3905fdar31.jpeg"],
+                freeShipping: true,
+                description: "هوك ٣٠٠كيلو معدن ب الكامل تقيل"
+            },
+            {
+                id: 7,
+                name: "هوك 1 طن عموله ",
+                price: 3200,
+                oldPrice: 3300,
+                category: "موازين",
+                subcategory: "موازين",
+                rating: 4.5,
+                reviews: 78,
+                images: ["https://b.top4top.io/p_3905x5qfx1.jpeg", "https://c.top4top.io/p_3905g4vur2.jpeg"],
+                freeShipping: true,
+                description: "هوك 1 طن عموله ينفع فى وزن اللحمه و الشنط "
+            },
+            {
+                id: 8,
+                name: "سماعة بلوتوث لاسلكية",
+                price: 220,
+                oldPrice: 310,
+                category: "إلكترونيات",
+                subcategory: "موبايل",
+                rating: 4.4,
+                reviews: 68,
+                images: ["https://i.imgur.com/8M7Nq2l.jpg", "https://i.imgur.com/9KpQ8Mn.jpg"],
+                freeShipping: true,
+                description: "سماعة بلوتوث بتقنية عزل الضوضاء وجودة صوت عالية."
+            },
+            {
+                id: 9,
+                name: "هوك جزارة ٢٠٠كيلو جرام",
+                price: 800,
+                oldPrice: 900,
+                category: "سكاكين و ادوات جزاره",
+                subcategory: "سكاكين",
+                rating: 4.7,
+                reviews: 120,
+                images: ["https://g.top4top.io/p_3905ssa2n1.jpeg"],
+                freeShipping: true,
+                description: "سكين جزارة احترافي مصنوع من أجود أنواع الفولاذ المقاوم للصدأ."
+            }
+        ];
 
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let currentCategory = 'موازين';
@@ -3373,6 +3322,9 @@
             document.body.style.overflow = '';
         }
 
+        // ============================================================
+        // ✅ displayProducts - مع حساب الخصم تلقائياً
+        // ============================================================
         function displayProducts(products) {
             const container = document.getElementById('productsContainer');
             const spinner = document.getElementById('loadingSpinner');
@@ -3391,8 +3343,12 @@
                 products.forEach(product => {
                     const stars = '⭐'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ?
                         '⭐' : '');
-                    const discountBadge = product.discount ?
-                        `<span class="discount-badge">${product.discount}</span>` : '';
+
+                    // ✅ حساب الخصم تلقائياً
+                    const discountInfo = calculateDiscount(product);
+                    const discountBadge = discountInfo ?
+                        `<span class="discount-badge">${discountInfo.text}</span>` : '';
+
                     const freeShipping = product.freeShipping ?
                         `<span class="free-shipping">🚚 التوصيل على حسب المحافظه</span>` : '';
                     const primeBadge = product.rating >= 4.8 ? `<span class="prime-badge">⭐ Prime</span>` :
@@ -3457,7 +3413,7 @@
                                 <div class="price-container">
                                     <span class="current-price">${product.price} ج.م</span>
                                     ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ج.م</span>` : ''}
-                                    ${product.discount ? `<span class="discount-percent">${product.discount}</span>` : ''}
+                                    ${discountInfo ? `<span class="discount-percent">${discountInfo.text}</span>` : ''}
                                 </div>
                                 ${freeShipping}
                                 ${primeBadge}
@@ -3904,24 +3860,30 @@
             document.getElementById('aboutModal').classList.remove('open');
         }
 
-        async function submitOrderWithForminit(formData) {
+        // ============================================================
+        // Formcarry - إرسال الطلب
+        // ============================================================
+        async function submitOrderWithFormcarry(formData) {
             try {
-                if (forminitReady && forminit && typeof forminit.submit === 'function') {
-                    const result = await forminit.submit(FORM_ID, formData, {
-                        redirect: REDIRECT_URL
-                    });
-                    if (result.error) {
-                        console.error('❌ خطأ في Forminit:', result.error);
-                        return { success: false, error: result.error };
+                const response = await fetch(FORMCARRY_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
                     }
-                    console.log('✅ تم إرسال الطلب بنجاح عبر Forminit!');
-                    return { success: true, data: result };
-                } else {
-                    console.warn('⚠️ Forminit غير متاح، استخدام EmailJS فقط');
-                    return { success: true, message: 'تم الإرسال عبر EmailJS فقط' };
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('❌ خطأ في Formcarry:', errorText);
+                    return { success: false, error: errorText };
                 }
+
+                const result = await response.json().catch(() => ({ success: true }));
+                console.log('✅ تم إرسال الطلب بنجاح عبر Formcarry!', result);
+                return { success: true, data: result };
             } catch (error) {
-                console.error('❌ فشل إرسال الطلب عبر Forminit:', error);
+                console.error('❌ فشل إرسال الطلب عبر Formcarry:', error);
                 return { success: false, error: error.message };
             }
         }
@@ -4042,12 +4004,12 @@
                 });
 
                 try {
-                    const result = await submitOrderWithForminit(formData);
+                    const result = await submitOrderWithFormcarry(formData);
 
                     if (!result.success) {
-                        console.warn('⚠️ فشل Forminit، سيتم الإرسال عبر EmailJS فقط');
+                        console.warn('⚠️ فشل Formcarry، سيتم الإرسال عبر EmailJS فقط');
                     } else {
-                        console.log('✅ تم الإرسال عبر Forminit بنجاح');
+                        console.log('✅ تم الإرسال عبر Formcarry بنجاح');
                     }
 
                     try {
@@ -4122,6 +4084,9 @@
             });
         }
 
+        // ============================================================
+        // ✅ openProductDetails - مع حساب الخصم تلقائياً
+        // ============================================================
         function openProductDetails(productId) {
             const product = allProducts.find(p => p.id === productId);
             if (!product) {
@@ -4141,6 +4106,9 @@
             }
 
             const stars = '⭐'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ? '⭐' : '');
+
+            // ✅ حساب الخصم تلقائياً
+            const discountInfo = calculateDiscount(product);
 
             let sizeOptionsHTML = '';
             if (product.sizes && product.sizes.length > 0) {
@@ -4271,6 +4239,8 @@
                                 const hasVideoRel = p.video && p.video.trim() !== '';
                                 const relImage = p.images && p.images.length > 0 ? p.images[0] : null;
                                 const hasImageRel = relImage && relImage.trim() !== '';
+                                // ✅ حساب الخصم تلقائياً للمنتجات ذات الصلة
+                                const relDiscount = calculateDiscount(p);
                                 let mediaRelated = '';
                                 if (hasVideoRel) {
                                     mediaRelated = `
@@ -4292,6 +4262,7 @@
                                         <div class="related-img">
                                             ${mediaRelated}
                                             ${p.images && p.images.length > 1 ? `<span style="position:absolute;top:4px;right:4px;background:rgba(5,150,105,0.85);color:#fff;padding:1px 8px;border-radius:10px;font-size:9px;z-index:5;"><i class="fas fa-images"></i> ${p.images.length}</span>` : ''}
+                                            ${relDiscount ? `<span style="position:absolute;top:4px;left:4px;background:#dc2626;color:#fff;padding:1px 8px;border-radius:10px;font-size:9px;z-index:5;">${relDiscount.text}</span>` : ''}
                                         </div>
                                         <div class="related-info">
                                             <h4>${p.name}</h4>
@@ -4330,7 +4301,7 @@
                         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 12px;">
                             <span style="font-size:28px;font-weight:800;color:#1a1a2e;">${product.price} ج.م</span>
                             ${product.oldPrice ? `<span style="font-size:18px;color:#94a3b8;text-decoration:line-through;">${product.oldPrice} ج.م</span>` : ''}
-                            ${product.discount ? `<span style="font-size:14px;color:#059669;font-weight:700;background:rgba(5,150,105,0.1);padding:2px 12px;border-radius:20px;">${product.discount}</span>` : ''}
+                            ${discountInfo ? `<span style="font-size:14px;color:#059669;font-weight:700;background:rgba(5,150,105,0.1);padding:2px 12px;border-radius:20px;">${discountInfo.text} خصم</span>` : ''}
                         </div>
                         ${product.freeShipping ? `<span style="color:#059669;font-weight:700;font-size:14px;display:block;margin-bottom:8px;">🚚 التوصيل على حسب المحافظه</span>` : ''}
                         ${optionsSection}
@@ -4515,10 +4486,10 @@
             }
         })();
 
-        console.log('✅ متجر sun Store يعمل مع الأقسام الجديدة وحقل المحافظة!');
+        console.log('✅ متجر sun Store يعمل مع حساب الخصم تلقائياً!');
         console.log('📦 عدد المنتجات:', allProducts.length);
-        console.log('✅ متجر sun Store يعمل مع نظام تسجيل الدخول الجديد!');
-        console.log('🔵 Forminit جاهز:', forminitReady);
+        console.log('🔵 Formcarry جاهز:', formcarryReady);
+        console.log('📮 Formcarry Endpoint:', FORMCARRY_ENDPOINT);
     </script>
 </body>
 
