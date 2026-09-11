@@ -2757,7 +2757,9 @@
     <!-- ============================================================ -->
     <script>
         // ============================================================
-        // جافاسكريبت - متجر sun Store (مع Formcarry + حساب الخصم تلقائياً)
+        // جافاسكريبت - متجر sun Store
+        // ✅ التعديل الجديد: إدخال السعر قبل الخصم + نسبة الخصم
+        //    والسعر النهائي يُحسب تلقائياً
         // ============================================================
 
         (function fixEnvironment() {
@@ -2817,37 +2819,57 @@
         let userProfile = JSON.parse(localStorage.getItem('userProfile')) || {};
 
         // ============================================================
-        // ✅ دالة حساب نسبة الخصم تلقائياً من السعر القديم والجديد
+        // ✅ دالة حساب السعر النهائي ونسبة الخصم تلقائياً
+        // المستخدم يدخل: oldPrice (السعر قبل الخصم) + discountPercent (نسبة الخصم)
+        // الكود يحسب: price (السعر النهائي) + discountInfo
         // ============================================================
-        function calculateDiscount(product) {
-            // لو مفيش سعر قديم أو السعر القديم أقل من أو يساوي الجديد → مفيش خصم
-            if (!product.oldPrice || product.oldPrice <= product.price) {
-                return null;
+        function getProductPriceInfo(product) {
+            const oldPrice = Number(product.oldPrice) || 0;
+            const discountPercent = Number(product.discountPercent) || 0;
+
+            // لو مفيش سعر قديم → السعر النهائي هو السعر اللي مكتوب في price
+            if (!oldPrice || oldPrice <= 0) {
+                return {
+                    price: Number(product.price) || 0,
+                    oldPrice: null,
+                    discount: null
+                };
             }
 
-            // حساب نسبة الخصم
-            const discountAmount = product.oldPrice - product.price;
-            const discountPercent = Math.round((discountAmount / product.oldPrice) * 100);
+            // لو مفيش نسبة خصم → السعر النهائي = السعر القديم
+            if (!discountPercent || discountPercent <= 0) {
+                return {
+                    price: oldPrice,
+                    oldPrice: null,
+                    discount: null
+                };
+            }
 
-            // لو الخصم أقل من 1% → مفيش خصم
-            if (discountPercent < 1) return null;
+            // حساب السعر النهائي بعد الخصم
+            const discountAmount = (oldPrice * discountPercent) / 100;
+            const finalPrice = Math.round((oldPrice - discountAmount) * 100) / 100;
 
             return {
-                percent: discountPercent,
-                text: `${discountPercent}%`,
-                amount: discountAmount
+                price: finalPrice,
+                oldPrice: oldPrice,
+                discount: {
+                    percent: discountPercent,
+                    text: `${discountPercent}%`,
+                    amount: discountAmount
+                }
             };
         }
 
         // ============================================================
-        // المنتجات - بدون حقل discount (هيتحسب تلقائياً)
+        // ✅ المنتجات - الآن تعتمد على oldPrice + discountPercent
+        //    والسعر النهائي يُحسب تلقائياً
         // ============================================================
         const allProducts = [
             {
                 id: 1,
                 name: "هوك جزارة ٢٠٠كيلو جرام",
-                price: 800,
-                oldPrice: 900,
+                oldPrice: 1000,
+                discountPercent: 10,
                 category: "سكاكين و ادوات جزاره",
                 subcategory: "سكاكين",
                 rating: 4.7,
@@ -2859,8 +2881,8 @@
             {
                 id: 2,
                 name: "توكة رجالي كلاسيك",
-                price: 200,
                 oldPrice: 280,
+                discountPercent: 29,
                 category: "اكسسوارات",
                 subcategory: "توكه",
                 rating: 4.5,
@@ -2874,8 +2896,8 @@
             {
                 id: 3,
                 name: "تيشيرت قطني رياضي",
-                price: 300,
                 oldPrice: 420,
+                discountPercent: 29,
                 category: "منتجات قطنيه",
                 subcategory: "تيشيرتات",
                 rating: 4.6,
@@ -2889,8 +2911,8 @@
             {
                 id: 4,
                 name: "هوك 50 كيلو جرام ",
-                price: 220,
                 oldPrice: 320,
+                discountPercent: 31,
                 category: "موازين",
                 subcategory: "موازين",
                 rating: 4.5,
@@ -2902,8 +2924,8 @@
             {
                 id: 5,
                 name: "هوك جزارة ٢٠٠كيلو جرام",
-                price: 800,
                 oldPrice: 900,
+                discountPercent: 11,
                 category: "موازين",
                 subcategory: "موازين",
                 rating: 4.5,
@@ -2915,8 +2937,8 @@
             {
                 id: 6,
                 name: "هوك ٣٠٠كيلو معدن ب الكامل تقيل",
-                price: 1250,
                 oldPrice: 1350,
+                discountPercent: 7,
                 category: "موازين",
                 subcategory: "موازين",
                 rating: 4.5,
@@ -2928,8 +2950,8 @@
             {
                 id: 7,
                 name: "هوك 1 طن عموله ",
-                price: 3200,
                 oldPrice: 3300,
+                discountPercent: 3,
                 category: "موازين",
                 subcategory: "موازين",
                 rating: 4.5,
@@ -2941,8 +2963,8 @@
             {
                 id: 8,
                 name: "سماعة بلوتوث لاسلكية",
-                price: 220,
                 oldPrice: 310,
+                discountPercent: 29,
                 category: "إلكترونيات",
                 subcategory: "موبايل",
                 rating: 4.4,
@@ -2954,8 +2976,8 @@
             {
                 id: 9,
                 name: "هوك جزارة ٢٠٠كيلو جرام",
-                price: 800,
-                oldPrice: 900,
+                oldPrice: 1000,
+                discountPercent: 10,
                 category: "سكاكين و ادوات جزاره",
                 subcategory: "سكاكين",
                 rating: 4.7,
@@ -3323,7 +3345,7 @@
         }
 
         // ============================================================
-        // ✅ displayProducts - مع حساب الخصم تلقائياً
+        // ✅ displayProducts - مع حساب السعر النهائي تلقائياً
         // ============================================================
         function displayProducts(products) {
             const container = document.getElementById('productsContainer');
@@ -3344,8 +3366,12 @@
                     const stars = '⭐'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ?
                         '⭐' : '');
 
-                    // ✅ حساب الخصم تلقائياً
-                    const discountInfo = calculateDiscount(product);
+                    // ✅ حساب السعر النهائي والخصم تلقائياً
+                    const priceInfo = getProductPriceInfo(product);
+                    const finalPrice = priceInfo.price;
+                    const oldPrice = priceInfo.oldPrice;
+                    const discountInfo = priceInfo.discount;
+
                     const discountBadge = discountInfo ?
                         `<span class="discount-badge">${discountInfo.text}</span>` : '';
 
@@ -3411,8 +3437,8 @@
                                 <h3>${product.name}</h3>
                                 <div class="rating"><span class="stars">${stars}</span><span class="count">(${product.reviews || 0})</span></div>
                                 <div class="price-container">
-                                    <span class="current-price">${product.price} ج.م</span>
-                                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ج.م</span>` : ''}
+                                    <span class="current-price">${finalPrice} ج.م</span>
+                                    ${oldPrice ? `<span class="old-price">${oldPrice} ج.م</span>` : ''}
                                     ${discountInfo ? `<span class="discount-percent">${discountInfo.text}</span>` : ''}
                                 </div>
                                 ${freeShipping}
@@ -4085,7 +4111,7 @@
         }
 
         // ============================================================
-        // ✅ openProductDetails - مع حساب الخصم تلقائياً
+        // ✅ openProductDetails - مع حساب السعر النهائي تلقائياً
         // ============================================================
         function openProductDetails(productId) {
             const product = allProducts.find(p => p.id === productId);
@@ -4107,8 +4133,11 @@
 
             const stars = '⭐'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ? '⭐' : '');
 
-            // ✅ حساب الخصم تلقائياً
-            const discountInfo = calculateDiscount(product);
+            // ✅ حساب السعر النهائي والخصم تلقائياً
+            const priceInfo = getProductPriceInfo(product);
+            const finalPrice = priceInfo.price;
+            const oldPrice = priceInfo.oldPrice;
+            const discountInfo = priceInfo.discount;
 
             let sizeOptionsHTML = '';
             if (product.sizes && product.sizes.length > 0) {
@@ -4239,8 +4268,11 @@
                                 const hasVideoRel = p.video && p.video.trim() !== '';
                                 const relImage = p.images && p.images.length > 0 ? p.images[0] : null;
                                 const hasImageRel = relImage && relImage.trim() !== '';
-                                // ✅ حساب الخصم تلقائياً للمنتجات ذات الصلة
-                                const relDiscount = calculateDiscount(p);
+                                // ✅ حساب السعر النهائي والخصم تلقائياً للمنتجات ذات الصلة
+                                const relPriceInfo = getProductPriceInfo(p);
+                                const relDiscount = relPriceInfo.discount;
+                                const relFinalPrice = relPriceInfo.price;
+                                const relOldPrice = relPriceInfo.oldPrice;
                                 let mediaRelated = '';
                                 if (hasVideoRel) {
                                     mediaRelated = `
@@ -4267,8 +4299,8 @@
                                         <div class="related-info">
                                             <h4>${p.name}</h4>
                                             <div class="related-price">
-                                                ${p.price} ج.م
-                                                ${p.oldPrice ? `<span class="old">${p.oldPrice} ج.م</span>` : ''}
+                                                ${relFinalPrice} ج.م
+                                                ${relOldPrice ? `<span class="old">${relOldPrice} ج.م</span>` : ''}
                                             </div>
                                             <button class="add-small-btn" onclick="event.stopPropagation(); openProductDetails(${p.id})">🛒 اختيار</button>
                                         </div>
@@ -4299,8 +4331,8 @@
                             <span style="color:#64748b;font-size:14px;">(${product.reviews || 0} تقييم)</span>
                         </div>
                         <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 12px;">
-                            <span style="font-size:28px;font-weight:800;color:#1a1a2e;">${product.price} ج.م</span>
-                            ${product.oldPrice ? `<span style="font-size:18px;color:#94a3b8;text-decoration:line-through;">${product.oldPrice} ج.م</span>` : ''}
+                            <span style="font-size:28px;font-weight:800;color:#1a1a2e;">${finalPrice} ج.م</span>
+                            ${oldPrice ? `<span style="font-size:18px;color:#94a3b8;text-decoration:line-through;">${oldPrice} ج.م</span>` : ''}
                             ${discountInfo ? `<span style="font-size:14px;color:#059669;font-weight:700;background:rgba(5,150,105,0.1);padding:2px 12px;border-radius:20px;">${discountInfo.text} خصم</span>` : ''}
                         </div>
                         ${product.freeShipping ? `<span style="color:#059669;font-weight:700;font-size:14px;display:block;margin-bottom:8px;">🚚 التوصيل على حسب المحافظه</span>` : ''}
@@ -4396,6 +4428,11 @@
             const colorName = selectedColor ? getColorName(selectedColor) : 'غير محدد';
             const size = selectedSize || 'غير محدد';
 
+            // ✅ حساب السعر النهائي والخصم تلقائياً
+            const priceInfo = getProductPriceInfo(product);
+            const finalPrice = priceInfo.price;
+            const oldPrice = priceInfo.oldPrice;
+
             const existingIndex = cart.findIndex(item => item.id === productId && item.selectedSize === size && item
                 .selectedColor === colorName);
             if (existingIndex !== -1) {
@@ -4403,6 +4440,8 @@
             } else {
                 cart.push({
                     ...product,
+                    price: finalPrice,        // ← السعر النهائي المحسوب
+                    oldPrice: oldPrice,        // ← السعر قبل الخصم
                     quantity: 1,
                     selectedSize: size,
                     selectedColor: colorName,
@@ -4486,7 +4525,7 @@
             }
         })();
 
-        console.log('✅ متجر sun Store يعمل مع حساب الخصم تلقائياً!');
+        console.log('✅ متجر sun Store يعمل مع حساب السعر النهائي تلقائياً!');
         console.log('📦 عدد المنتجات:', allProducts.length);
         console.log('🔵 Formcarry جاهز:', formcarryReady);
         console.log('📮 Formcarry Endpoint:', FORMCARRY_ENDPOINT);
